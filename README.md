@@ -42,7 +42,7 @@ You can launch the app either by running that `frogger.Main.main()` method insid
 
 ### Javadoc
 
-- Javadoc for this project is published via [Gitlab Pages](https://docs.gitlab.com/ee/user/project/pages/) on https://gitlab.com/tianyigao/frogger
+- Javadoc for this project is published via [Gitlab Pages](https://docs.gitlab.com/ee/user/project/pages/) on https://tianyigao.gitlab.io/frogger/
 - complied Javadoc is also provided inside [`docs`](docs) directory of repository
 
 ### Souce File Structure
