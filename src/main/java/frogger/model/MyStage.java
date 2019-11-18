@@ -1,4 +1,4 @@
-package frogger;
+package frogger.model;
 
 import java.io.File;
 
@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.Objects;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 public class MyStage extends World{
 	MediaPlayer mediaPlayer;

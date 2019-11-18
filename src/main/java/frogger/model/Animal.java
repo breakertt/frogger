@@ -1,4 +1,4 @@
-package frogger;
+package frogger.model;
 
 import java.util.ArrayList;
 
@@ -204,7 +204,7 @@ public class Animal extends Actor {
 		if (getX()>600) {
 			move(-movement*2, 0);
 		}
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+		if (getIntersectingObjects(Car.class).size() >= 1) {
 			carDeath = true;
 		}
 		if (getX() == 240 && getY() == 82) {
