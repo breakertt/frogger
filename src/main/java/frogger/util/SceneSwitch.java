@@ -48,7 +48,9 @@ public enum SceneSwitch {
       map.draw(mapPane);
 
       GameController gameController = fxmlLoader.getController();
-      GameManager.INSTANCE.init(map, gameController);
+
+      ScoreManager.INSTANCE.init();
+      GameManager.INSTANCE.init(map, gameController, gameScene);
 
       gameScene.addEventHandler(
           KeyEvent.KEY_PRESSED, event -> GameManager.INSTANCE.handleKeyPressed(event));
