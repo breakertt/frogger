@@ -94,7 +94,7 @@ public class Map {
 
   public void load() {
     MapLoader mapLoader = new MapLoader(fileName, this);
-    mapLoader.loadFileForMap();
+    mapLoader.loadMap();
 
     logs = mapLoader.getLogs();
     turtles = mapLoader.getTurtles();

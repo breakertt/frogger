@@ -58,7 +58,7 @@ public class MapLoader {
     this.frog = null;
   }
 
-  public void loadFileForMap() {
+  public void loadMap() {
     logs.add(new Log("/frogger/image/water/log3.png", 150, 0, 166, 0.75));
     logs.add(new Log("/frogger/image/water/log3.png", 150, 220, 166, 0.75));
     logs.add(new Log("/frogger/image/water/log3.png", 150, 440, 166, 0.75));
