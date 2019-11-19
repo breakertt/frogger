@@ -1,4 +1,4 @@
-package frogger.model;
+package frogger.model.info;
 
 public class Life {
 

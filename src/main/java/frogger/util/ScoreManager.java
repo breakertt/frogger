@@ -1,6 +1,6 @@
 package frogger.util;
 
-import frogger.model.Score;
+import frogger.model.info.Score;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,15 +1,15 @@
-package frogger.model;
+package frogger.model.movable;
 
+import frogger.model.World;
+import frogger.model.info.End;
 import java.util.ArrayList;
-
-import javafx.event.EventHandler;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 
-public class Frog extends Actor {
+public class Frog extends Movable {
 
   Image imgW1;
   Image imgA1;
@@ -117,6 +117,20 @@ public class Frog extends Actor {
         second = false;
       }
     }
+  }
+
+  public World getWorld() {
+    return (World) getParent().getParent();
+  }
+
+  public <A extends Movable> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
+    ArrayList<A> someArray = new ArrayList<A>();
+    for (A actor : getWorld().getObjects(cls)) {
+      if (actor != this && actor.intersects(this.getBoundsInLocal())) {
+        someArray.add(actor);
+      }
+    }
+    return someArray;
   }
 
   @Override

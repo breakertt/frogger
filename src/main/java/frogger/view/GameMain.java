@@ -1,13 +1,13 @@
 package frogger.view;
 
-import frogger.model.Frog;
-import frogger.model.Digit;
-import frogger.model.End;
-import frogger.model.Log;
+import frogger.model.movable.Frog;
+import frogger.model.info.Digit;
+import frogger.model.info.End;
+import frogger.model.movable.Log;
 import frogger.model.MyStage;
-import frogger.model.Car;
-import frogger.model.Turtle;
-import frogger.model.WetTurtle;
+import frogger.model.movable.Car;
+import frogger.model.movable.Turtle;
+import frogger.model.movable.WetTurtle;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;

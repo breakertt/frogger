@@ -35,7 +35,7 @@ public enum SceneSwitch {
       fxmlLoader.setRoot(root);
       fxmlLoader.setController(new GameController());
 
-      Scene gameScene = new Scene(root);
+      Scene gameScene = new Scene(root, 600, 800);
       setScene(gameScene);
 
       ImageView bg = new ImageView();

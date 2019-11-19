@@ -2,17 +2,12 @@ package frogger.util;
 
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
-import frogger.model.Actor;
-import frogger.model.Frog;
 import frogger.model.MyStage;
-import java.util.List;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import frogger.model.Life;
+import frogger.model.info.Life;
 import frogger.model.Map;
-import frogger.model.Score;
-import javafx.scene.layout.Pane;
+import frogger.model.info.Score;
 
 
 public enum GameManager {

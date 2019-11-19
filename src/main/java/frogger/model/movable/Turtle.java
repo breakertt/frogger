@@ -1,8 +1,8 @@
-package frogger.model;
+package frogger.model.movable;
 
 import javafx.scene.image.Image;
 
-public class Turtle extends Actor{
+public class Turtle extends Movable {
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
