@@ -95,8 +95,10 @@ public abstract class World extends Pane {
     }
 
     public <A extends Actor> List<A> getObjects(Class<A> cls) {
+        Pane mapPane = (Pane) getScene().lookup("#map");
+//        System.out.println(mapPane.getChildren());
         ArrayList<A> someArray = new ArrayList<A>();
-        for (Node n: getChildren()) {
+        for (Node n: mapPane.getChildren()) {
             if (cls.isInstance(n)) {
                 someArray.add((A)n);
             }

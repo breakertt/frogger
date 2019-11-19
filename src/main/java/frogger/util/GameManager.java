@@ -4,6 +4,7 @@ import frogger.constant.GameStatus;
 import frogger.controller.GameController;
 import frogger.model.Actor;
 import frogger.model.Frog;
+import frogger.model.MyStage;
 import java.util.List;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -40,6 +41,9 @@ public enum GameManager {
     this.currentScore = new Score();
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
+
+    MyStage bg = (MyStage) gameScene.getRoot();
+    bg.start();
   }
 
   private void updateScore() {

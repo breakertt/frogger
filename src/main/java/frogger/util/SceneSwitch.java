@@ -44,6 +44,8 @@ public enum SceneSwitch {
 
       Map map = new Map();
       Pane mapPane = new Pane();
+      mapPane.setId("map");
+      System.out.println(mapPane.getId());
       root.getChildren().add(mapPane);
       map.draw(mapPane);
 

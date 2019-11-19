@@ -14,7 +14,7 @@ public abstract class Actor extends ImageView {
   }
 
   public World getWorld() {
-    return (World) getParent();
+    return (World) getParent().getParent();
   }
 
   public double getWidth() {
