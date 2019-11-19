@@ -17,7 +17,7 @@ public class MyStage extends World{
 	
 	public MyStage() {
 	}
-	
+
 	public void playMusic() {
 		String musicFile = "frogger/music/theme_main.mp3";
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -33,7 +33,7 @@ public class MyStage extends World{
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	    mediaPlayer.play();
 	}
-	
+
 	public void stopMusic() {
 		mediaPlayer.stop();
 	}

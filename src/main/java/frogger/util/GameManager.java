@@ -2,11 +2,16 @@ package frogger.util;
 
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
+import frogger.model.Actor;
+import frogger.model.Frog;
+import java.util.List;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import frogger.model.Life;
 import frogger.model.Map;
 import frogger.model.Score;
+import javafx.scene.layout.Pane;
 
 
 public enum GameManager {
@@ -48,10 +53,10 @@ public enum GameManager {
   }
 
   public void handleKeyPressed(KeyEvent event) {
-
+    map.getFrog().handleKeyPressed(event);
   }
 
   public void handleKeyReleased(KeyEvent event) {
-
+    map.getFrog().handleKeyReleased(event);
   }
 }

@@ -49,6 +49,14 @@ public class Map {
     this.level = level;
   }
 
+  public Frog getFrog() {
+    return frog;
+  }
+
+  public void setFrog(Frog frog) {
+    this.frog = frog;
+  }
+
   public Set<Log> getLogs() {
     return logs;
   }
