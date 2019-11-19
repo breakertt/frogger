@@ -17,7 +17,7 @@ public class WetTurtle extends Actor{
 				if (now/900000000  % 4 ==0) {
 					setImage(turtle2);
 					sunk = false;
-					
+
 				}
 				else if (now/900000000 % 4 == 1) {
 					setImage(turtle1);

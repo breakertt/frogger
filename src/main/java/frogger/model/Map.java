@@ -13,9 +13,13 @@ public class Map {
 
   private int level;
 
+  private Frog frog;
+
   private Set<Log> logs;
 
   private Set<Turtle> turtles;
+
+  private Set<WetTurtle> wetTurtles;
 
   private Set<Car> cars;
 
@@ -61,6 +65,14 @@ public class Map {
     this.turtles = turtles;
   }
 
+  public Set<WetTurtle> getWetTurtles() {
+    return wetTurtles;
+  }
+
+  public void setWetTurtles(Set<WetTurtle> wetTurtles) {
+    this.wetTurtles = wetTurtles;
+  }
+
   public Set<Car> getCars() {
     return cars;
   }
@@ -82,11 +94,14 @@ public class Map {
 
   public void load() {
     MapLoader mapLoader = new MapLoader(fileName, this);
+    mapLoader.loadFileForMap();
+
     logs = mapLoader.getLogs();
     turtles = mapLoader.getTurtles();
+    wetTurtles = mapLoader.getWetTurtles();
     cars = mapLoader.getCars();
     trucks = mapLoader.getTrucks();
-    //mapConfigLoader.
+    frog = mapLoader.getFrog();
   }
 
   public void draw(Pane root) {
@@ -96,9 +111,10 @@ public class Map {
     MapRender mapRender = new MapRender(root);
     mapRender.drawLogs(logs);
     mapRender.drawTurtles(turtles);
+    mapRender.drawWetTurtles(wetTurtles);
     mapRender.drawCars(cars);
     mapRender.drawTrucks(trucks);
-
+    mapRender.drawFrog(frog);
   }
 
 

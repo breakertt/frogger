@@ -1,6 +1,7 @@
 package frogger.util;
 
 import frogger.Main;
+import frogger.model.BackgroundImage;
 import frogger.model.Map;
 import frogger.model.MyStage;
 import frogger.view.GameMain;
@@ -30,14 +31,16 @@ public enum SceneSwitch {
       Scene gameScene = new Scene(root);
       setScene(gameScene);
 
+      root.getChildren().add(new BackgroundImage("/frogger/image/background/gamebg.png"));
+
       Map map = new Map();
       Pane mapPane = new Pane();
 
       root.getChildren().add(mapPane);
       map.draw(mapPane);
       
-      Scene scene = new GameMain();
-      setScene(scene);
+//      Scene scene = new GameMain();
+//      setScene(scene);
       showStage();
     } catch (Exception e) {
       e.printStackTrace();

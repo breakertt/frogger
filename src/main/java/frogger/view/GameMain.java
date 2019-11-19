@@ -1,6 +1,6 @@
 package frogger.view;
 
-import frogger.model.Animal;
+import frogger.model.Frog;
 import frogger.model.BackgroundImage;
 import frogger.model.Digit;
 import frogger.model.End;
@@ -18,7 +18,7 @@ public class GameMain extends Scene {
 
   private MyStage background;
   private AnimationTimer timer;
-  private Animal animal;
+  private Frog frog;
 
   public GameMain() {
     super(new MyStage(), 600, 800);
@@ -51,8 +51,8 @@ public class GameMain extends Scene {
     background.add(new End(141 + 141-13+141-13+1,96));
     background.add(new End(141 + 141-13+141-13+141-13+3,96));
 
-    animal = new Animal("/frogger/image/frogger/froggerUp.png");
-    background.add(animal);
+    frog = new Frog("/frogger/image/frogger/froggerUp.png");
+    background.add(frog);
 
     background.add(new Car("/frogger/image/ground/truck1Right.png", 0, 649, 1, 120, 120));
     background.add(new Car("/frogger/image/ground/truck1Right.png", 300, 649, 1, 120, 120));
@@ -74,17 +74,17 @@ public class GameMain extends Scene {
     timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
-        if (animal.changeScore()) {
-          setNumber(animal.getPoints());
+        if (frog.changeScore()) {
+          setNumber(frog.getPoints());
         }
-        if (animal.getStop()) {
+        if (frog.getStop()) {
           System.out.print("STOPP:");
           background.stopMusic();
           stop();
           background.stop();
           Alert alert = new Alert(AlertType.INFORMATION);
           alert.setTitle("You Have Won The Game!");
-          alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");
+          alert.setHeaderText("Your High Score: "+ frog.getPoints()+"!");
           alert.setContentText("Highest Possible Score: 800");
           alert.show();
         }
