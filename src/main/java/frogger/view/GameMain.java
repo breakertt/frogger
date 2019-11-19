@@ -1,7 +1,6 @@
 package frogger.view;
 
 import frogger.model.Frog;
-import frogger.model.BackgroundImage;
 import frogger.model.Digit;
 import frogger.model.End;
 import frogger.model.Log;
@@ -24,9 +23,6 @@ public class GameMain extends Scene {
     super(new MyStage(), 600, 800);
 
     this.background = (MyStage) super.getRoot();
-
-    BackgroundImage froggerback = new BackgroundImage("/frogger/image/background/gamebg.png");
-    background.add(froggerback);
 
 
     background.add(new Log("/frogger/image/water/log3.png", 150, 0, 166, 0.75));
