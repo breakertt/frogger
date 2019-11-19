@@ -15,29 +15,29 @@ public abstract class World extends Pane {
     
     public World() {}
 
-    public void createTimer() {
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                act(now);
-                List<Movable> movables = getObjects(Movable.class);
-                
-                for (Movable anMovable : movables) {
-                	anMovable.act(now);
-                }
-      
-            }
-        };
-    }
+//    public void createTimer() {
+//        timer = new AnimationTimer() {
+//            @Override
+//            public void handle(long now) {
+//                act(now);
+//                List<Movable> movables = getObjects(Movable.class);
+//
+//                for (Movable anMovable : movables) {
+//                	anMovable.act(now);
+//                }
+//
+//            }
+//        };
+//    }
+//
+//    public void start() {
+//    	createTimer();
+//        timer.start();
+//    }
 
-    public void start() {
-    	createTimer();
-        timer.start();
-    }
-
-    public void stop() {
-        timer.stop();
-    }
+//    public void stop() {
+//        timer.stop();
+//    }
 
     public void add(Movable movable) {
         getChildren().add(movable);

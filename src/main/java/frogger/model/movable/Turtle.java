@@ -1,5 +1,6 @@
 package frogger.model.movable;
 
+import frogger.constant.Direction;
 import javafx.scene.image.Image;
 
 public class Turtle extends Movable {
@@ -31,6 +32,7 @@ public class Turtle extends Movable {
 		if (getX() < -75 && speed<0)
 			setX(600);
 	}
+
 	public Turtle(int xpos, int ypos, int s, int w, int h) {
 		turtle1 = new Image("/frogger/image/water/TurtleAnimation1.png", w, h, true, true);
 		turtle2 = new Image("/frogger/image/water/TurtleAnimation2.png", w, h, true, true);

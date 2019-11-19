@@ -62,7 +62,7 @@ public class GameMain extends Scene {
     background.add(new Car("/frogger/image/ground/car1Left.png", 500, 490, -5, 50, 50));
     background.add(new Digit(0, 30, 360, 25));
 
-    background.start();
+//    background.start();
     start();
   }
 
@@ -77,7 +77,7 @@ public class GameMain extends Scene {
           System.out.print("STOPP:");
           background.stopMusic();
           stop();
-          background.stop();
+//          background.stop();
           Alert alert = new Alert(AlertType.INFORMATION);
           alert.setTitle("You Have Won The Game!");
           alert.setHeaderText("Your High Score: "+ frog.getPoints()+"!");

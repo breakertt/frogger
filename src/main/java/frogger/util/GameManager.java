@@ -3,6 +3,9 @@ package frogger.util;
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
 import frogger.model.MyStage;
+import frogger.model.movable.Car;
+import frogger.model.movable.Movable;
+import java.util.Set;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import frogger.model.info.Life;
@@ -36,14 +39,24 @@ public enum GameManager {
     this.currentScore = new Score();
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
-
-    MyStage bg = (MyStage) gameScene.getRoot();
-    bg.start();
+    this.runSelfMovables();
+//    MyStage bg = (MyStage) gameScene.getRoot();
+//    bg.start();
   }
 
   private void updateScore() {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
+    }
+  }
+
+  private void runSelfMovables() {
+    runSelfMovableSet((Set<Movable>) (Set<?>) map.getCars());
+  }
+
+  private void runSelfMovableSet(Set<Movable> movables) {
+    for (Movable movable : movables) {
+      movable.run();
     }
   }
 
