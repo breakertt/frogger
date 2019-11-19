@@ -2,11 +2,11 @@ package frogger.util;
 
 import frogger.Main;
 import frogger.controller.GameController;
-import frogger.model.BackgroundImage;
 import frogger.model.Map;
 import frogger.model.MyStage;
-import frogger.view.GameMain;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -38,11 +38,12 @@ public enum SceneSwitch {
       Scene gameScene = new Scene(root);
       setScene(gameScene);
 
-      root.getChildren().add(new BackgroundImage("/frogger/image/background/gamebg.png"));
+      ImageView bg = new ImageView();
+      bg.setImage(new Image("/frogger/image/background/gamebg.png", 600, 800, true, true));
+      root.getChildren().add(bg);
 
       Map map = new Map();
       Pane mapPane = new Pane();
-
       root.getChildren().add(mapPane);
       map.draw(mapPane);
 
