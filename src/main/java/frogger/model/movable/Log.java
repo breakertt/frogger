@@ -6,7 +6,7 @@ public class Log extends Movable {
 
 	private double speed;
 	@Override
-	public void act(long now) {
+	public void move(long now) {
 		move(speed , 0);
 		if (getX()>600 && speed>0)
 			setX(-180);

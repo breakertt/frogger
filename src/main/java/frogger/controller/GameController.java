@@ -1,15 +1,25 @@
 package frogger.controller;
 
-import javafx.scene.layout.Pane;
+import frogger.model.info.Score;
+import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 public class GameController {
 
-//  @FXML private Pane map;
+  @FXML private Text currentScoreValue;
 
-  private Pane map;
+  @FXML private Text highestScoreValue;
 
-  public GameController(Pane map) {
-    this.map = map;
+  @FXML private HBox lifeBox;
+
+  @FXML private HBox levelBox;
+
+  @FXML public void updateScore(Score currentScore, Score highestScore) {
+    String currentScoreValueString = String.format("%05d", (currentScore.getValue() % 99990));
+    this.currentScoreValue.setText(currentScoreValueString);
+
+    String highestScoreValueString = String.format("%05d", (highestScore.getValue() % 99990));
+    this.highestScoreValue.setText(highestScoreValueString);
   }
-
 }

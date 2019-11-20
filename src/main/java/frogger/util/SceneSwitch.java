@@ -3,10 +3,7 @@ package frogger.util;
 import frogger.Main;
 import frogger.controller.GameController;
 import frogger.model.Map;
-import frogger.model.World;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -42,7 +39,7 @@ public enum SceneSwitch {
       map.draw(mapPane);
 
       GameController gameController = loader.getController();
-//      ScoreManager.INSTANCE.init();
+      ScoreManager.INSTANCE.init();
       GameManager.INSTANCE.init(map, gameController, gameScene);
 
       gameScene.addEventHandler(

@@ -11,7 +11,7 @@ public class Turtle extends Movable {
 	int i = 1;
 	boolean bool = true;
 	@Override
-	public void act(long now) {
+	public void move(long now) {
 
 				if (now/900000000  % 3 ==0) {
 					setImage(turtle2);

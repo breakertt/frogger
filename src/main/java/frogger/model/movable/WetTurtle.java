@@ -12,7 +12,7 @@ public class WetTurtle extends Movable {
 	boolean bool = true;
 	boolean sunk = false;
 	@Override
-	public void act(long now) {
+	public void move(long now) {
 
 				if (now/900000000  % 4 ==0) {
 					setImage(turtle2);

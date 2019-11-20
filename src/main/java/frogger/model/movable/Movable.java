@@ -1,11 +1,7 @@
 package frogger.model.movable;
 
-import frogger.model.World;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputEvent;
-
-import java.util.ArrayList;
 
 
 public abstract class Movable extends ImageView {
@@ -29,7 +25,7 @@ public abstract class Movable extends ImageView {
     return new AnimationTimer() {
       @Override
       public void handle(long now) {
-        act(now);
+        move(now);
       }
     };
   }
@@ -47,10 +43,6 @@ public abstract class Movable extends ImageView {
     };
   }
 
-  public void manageInput(InputEvent e) {
-
-  }
-
-  public abstract void act(long now);
+  public abstract void move(long now);
 
 }

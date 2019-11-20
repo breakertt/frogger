@@ -1,7 +1,6 @@
 package frogger.model.movable;
 
 import frogger.constant.Death;
-import frogger.model.World;
 import frogger.model.info.End;
 import frogger.util.GameManager;
 import java.util.ArrayList;
@@ -281,7 +280,7 @@ public class Frog extends Movable {
   }
 
   @Override
-  public void act(long now) {
+  public void move(long now) {
     Check(now);
 
     if (this.isScoreChanged()) {
