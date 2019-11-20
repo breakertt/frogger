@@ -2,8 +2,6 @@ package frogger.util;
 
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
-import frogger.model.MyStage;
-import frogger.model.movable.Car;
 import frogger.model.movable.Movable;
 import java.util.Set;
 import javafx.scene.Scene;
@@ -34,27 +32,35 @@ public enum GameManager {
     this.map = map;
     this.gameController = gameController;
     this.gameScene = gameScene;
-    this.gameStauts = GameStatus.PAUSE;
+    this.gameStauts = GameStatus.START;
     this.life = new Life();
     this.currentScore = new Score();
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
-    this.runSelfMovables();
-//    MyStage bg = (MyStage) gameScene.getRoot();
-//    bg.start();
+    this.run();
   }
 
   private void updateScore() {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
     }
+    gameController.setScoreCount(this.currentScore.getValue());
   }
 
-  private void runSelfMovables() {
-    runSelfMovableSet((Set<Movable>) (Set<?>) map.getCars());
+  private void run() {
+    runSelfMovable((Set<Movable>) (Set<?>) map.getCars());
+    runSelfMovable((Set<Movable>) (Set<?>) map.getTrucks());
+    runSelfMovable((Set<Movable>) (Set<?>) map.getLogs());
+    runSelfMovable((Set<Movable>) (Set<?>) map.getTurtles());
+    runSelfMovable((Set<Movable>) (Set<?>) map.getWetTurtles());
+    runSelfMovable(map.getFrog());
   }
 
-  private void runSelfMovableSet(Set<Movable> movables) {
+  private void runSelfMovable(Movable movable) {
+    movable.run();
+  }
+
+  private void runSelfMovable(Set<Movable> movables) {
     for (Movable movable : movables) {
       movable.run();
     }
@@ -70,5 +76,10 @@ public enum GameManager {
 
   public void handleKeyReleased(KeyEvent event) {
     map.getFrog().handleKeyReleased(event);
+  }
+
+  public void setScoreValue(int value) {
+    currentScore.Increase(value - currentScore.getValue());
+    updateScore();
   }
 }

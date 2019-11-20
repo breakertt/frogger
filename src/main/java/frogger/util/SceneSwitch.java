@@ -3,7 +3,7 @@ package frogger.util;
 import frogger.Main;
 import frogger.controller.GameController;
 import frogger.model.Map;
-import frogger.model.MyStage;
+import frogger.model.World;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,11 +29,11 @@ public enum SceneSwitch {
   public void switchToGame() {
     try {
       hideStage();
-      FXMLLoader fxmlLoader = new FXMLLoader();
-      Pane root = new MyStage();
 
-      fxmlLoader.setRoot(root);
-      fxmlLoader.setController(new GameController());
+      MusicPlayer.INSTANCE.playMusic();
+
+      FXMLLoader fxmlLoader = new FXMLLoader();
+      Pane root = new World();
 
       Scene gameScene = new Scene(root, 600, 800);
       setScene(gameScene);
@@ -49,8 +49,9 @@ public enum SceneSwitch {
       root.getChildren().add(mapPane);
       map.draw(mapPane);
 
+      fxmlLoader.setRoot(root);
+      fxmlLoader.setController(new GameController(mapPane));
       GameController gameController = fxmlLoader.getController();
-
       ScoreManager.INSTANCE.init();
       GameManager.INSTANCE.init(map, gameController, gameScene);
 
@@ -58,8 +59,7 @@ public enum SceneSwitch {
           KeyEvent.KEY_PRESSED, event -> GameManager.INSTANCE.handleKeyPressed(event));
       gameScene.addEventHandler(
           KeyEvent.KEY_RELEASED, event -> GameManager.INSTANCE.handleKeyReleased(event));
-//      Scene scene = new GameMain();
-//      setScene(scene);
+
       showStage();
     } catch (Exception e) {
       e.printStackTrace();

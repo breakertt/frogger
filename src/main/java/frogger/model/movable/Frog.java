@@ -1,7 +1,9 @@
 package frogger.model.movable;
 
+import frogger.constant.Death;
 import frogger.model.World;
 import frogger.model.info.End;
+import frogger.util.GameManager;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
@@ -29,7 +31,7 @@ public class Frog extends Movable {
   boolean carDeath = false;
   boolean waterDeath = false;
   boolean stop = false;
-  boolean changeScore = false;
+  boolean scoreChanged = false;
   int carD = 0;
   double w = 800;
   ArrayList<End> inter = new ArrayList<End>();
@@ -55,7 +57,7 @@ public class Frog extends Movable {
       if (second) {
         if (event.getCode() == KeyCode.W) {
           move(0, -movement);
-          changeScore = false;
+          scoreChanged = false;
           setImage(imgW1);
           second = false;
         } else if (event.getCode() == KeyCode.A) {
@@ -96,7 +98,7 @@ public class Frog extends Movable {
     } else {
       if (event.getCode() == KeyCode.W) {
         if (getY() < w) {
-          changeScore = true;
+          scoreChanged = true;
           w = getY();
           points += 10;
         }
@@ -133,9 +135,71 @@ public class Frog extends Movable {
     return someArray;
   }
 
-  @Override
-  public void act(long now) {
-    int bounds = 0;
+  public void deathTransform(long now, Death death) {
+    switch (death) {
+      case DROP:
+        noMove = true;
+        if ((now) % 11 == 0) {
+          carD++;
+        }
+        if (carD == 1) {
+          setImage(new Image("/frogger/image/water/waterdeath1.png", imgSize, imgSize, true, true));
+        }
+        if (carD == 2) {
+          setImage(new Image("/frogger/image/water/waterdeath2.png", imgSize, imgSize, true, true));
+        }
+        if (carD == 3) {
+          setImage(new Image("/frogger/image/water/waterdeath3.png", imgSize, imgSize, true, true));
+        }
+        if (carD == 4) {
+          setImage(new Image("/frogger/image/water/waterdeath4.png", imgSize, imgSize, true, true));
+        }
+        if (carD == 5) {
+          setX(300);
+          setY(679.8 + movement);
+          waterDeath = false;
+          carD = 0;
+          setImage(new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true));
+          noMove = false;
+          if (points > 50) {
+            points -= 50;
+            scoreChanged = true;
+          }
+        }
+        break;
+      case CRASH:
+        noMove = true;
+        if ((now) % 11 == 0) {
+          carD++;
+        }
+        if (carD == 1) {
+          setImage(new Image("/frogger/image/ground/cardeath1.png", imgSize, imgSize, true, true));
+        }
+        if (carD == 2) {
+          setImage(new Image("/frogger/image/ground/cardeath2.png", imgSize, imgSize, true, true));
+        }
+        if (carD == 3) {
+          setImage(new Image("/frogger/image/ground/cardeath3.png", imgSize, imgSize, true, true));
+        }
+        if (carD == 4) {
+          setX(300);
+          setY(679.8 + movement);
+          carDeath = false;
+          carD = 0;
+          setImage(new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true));
+          noMove = false;
+          if (points > 50) {
+            points -= 50;
+            scoreChanged = true;
+          }
+        }
+        break;
+      case EAT:
+        break;
+    }
+  }
+
+  public void Check(long now) {
     if (getY() < 0 || getY() > 734) {
       setX(300);
       setY(679.8 + movement);
@@ -143,89 +207,51 @@ public class Frog extends Movable {
     if (getX() < 0) {
       move(movement * 2, 0);
     }
-    if (carDeath) {
-      noMove = true;
-      if ((now) % 11 == 0) {
-        carD++;
-      }
-      if (carD == 1) {
-        setImage(new Image("/frogger/image/ground/cardeath1.png", imgSize, imgSize, true, true));
-      }
-      if (carD == 2) {
-        setImage(new Image("/frogger/image/ground/cardeath2.png", imgSize, imgSize, true, true));
-      }
-      if (carD == 3) {
-        setImage(new Image("/frogger/image/ground/cardeath3.png", imgSize, imgSize, true, true));
-      }
-      if (carD == 4) {
-        setX(300);
-        setY(679.8 + movement);
-        carDeath = false;
-        carD = 0;
-        setImage(new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true));
-        noMove = false;
-        if (points > 50) {
-          points -= 50;
-          changeScore = true;
-        }
-      }
 
+    // show death if possible
+    if (carDeath) {
+      deathTransform(now, Death.CRASH);
     }
     if (waterDeath) {
-      noMove = true;
-      if ((now) % 11 == 0) {
-        carD++;
-      }
-      if (carD == 1) {
-        setImage(new Image("/frogger/image/water/waterdeath1.png", imgSize, imgSize, true, true));
-      }
-      if (carD == 2) {
-        setImage(new Image("/frogger/image/water/waterdeath2.png", imgSize, imgSize, true, true));
-      }
-      if (carD == 3) {
-        setImage(new Image("/frogger/image/water/waterdeath3.png", imgSize, imgSize, true, true));
-      }
-      if (carD == 4) {
-        setImage(new Image("/frogger/image/water/waterdeath4.png", imgSize, imgSize, true, true));
-      }
-      if (carD == 5) {
-        setX(300);
-        setY(679.8 + movement);
-        waterDeath = false;
-        carD = 0;
-        setImage(new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true));
-        noMove = false;
-        if (points > 50) {
-          points -= 50;
-          changeScore = true;
-        }
-      }
-
+      deathTransform(now, Death.DROP);
     }
 
+    // unknown
     if (getX() > 600) {
       move(-movement * 2, 0);
     }
+
+    // check crash
     if (getIntersectingObjects(Car.class).size() >= 1) {
       carDeath = true;
     }
+    if (getIntersectingObjects(Truck.class).size() >= 1) {
+      carDeath = true;
+    }
+
+    // unknown
     if (getX() == 240 && getY() == 82) {
       stop = true;
     }
+
+    // check on log
     if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-			if (getIntersectingObjects(Log.class).get(0).getLeft()) {
-				move(-2, 0);
-			} else {
-				move(.75, 0);
-			}
+      if (getIntersectingObjects(Log.class).get(0).getLeft()) {
+        move(-2, 0);
+      } else {
+        move(.75, 0);
+      }
+      // check on log
     } else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
       move(-1, 0);
+      // check on wetturtle
     } else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
       if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
         waterDeath = true;
       } else {
         move(-1, 0);
       }
+      // check on end
     } else if (getIntersectingObjects(End.class).size() >= 1) {
       inter = (ArrayList<End>) getIntersectingObjects(End.class);
       if (getIntersectingObjects(End.class).get(0).isActivated()) {
@@ -233,7 +259,7 @@ public class Frog extends Movable {
         points -= 50;
       }
       points += 50;
-      changeScore = true;
+      scoreChanged = true;
       w = 800;
       getIntersectingObjects(End.class).get(0).setEnd();
       end++;
@@ -241,9 +267,18 @@ public class Frog extends Movable {
       setY(679.8 + movement);
     } else if (getY() < 413) {
       waterDeath = true;
-      //setX(300);
-      //setY(679.8+movement);
     }
+  }
+
+  @Override
+  public void act(long now) {
+    Check(now);
+
+    if (this.isScoreChanged()) {
+      GameManager.INSTANCE.setScoreValue(points);
+    }
+
+
   }
 
   public boolean getStop() {
@@ -254,13 +289,12 @@ public class Frog extends Movable {
     return points;
   }
 
-  public boolean changeScore() {
-    if (changeScore) {
-      changeScore = false;
+  public boolean isScoreChanged() {
+    if (scoreChanged) {
+      scoreChanged = false;
       return true;
     }
     return false;
-
   }
 
 
