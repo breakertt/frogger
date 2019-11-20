@@ -35,11 +35,11 @@ public enum SceneSwitch {
       FXMLLoader fxmlLoader = new FXMLLoader();
       Pane root = new World();
 
-      Scene gameScene = new Scene(root, 600, 800);
+      Scene gameScene = new Scene(root, 700, 800);
       setScene(gameScene);
 
       ImageView bg = new ImageView();
-      bg.setImage(new Image("/frogger/image/background/gamebg.png", 600, 800, true, true));
+      bg.setImage(new Image("/frogger/image/background/gamebg.png", 700, 800, true, true));
       root.getChildren().add(bg);
 
       Map map = new Map();
