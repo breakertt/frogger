@@ -6,9 +6,12 @@ import frogger.model.info.End;
 import frogger.util.GameManager;
 import java.util.ArrayList;
 
+import java.util.List;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 
 
 public class Frog extends Movable {
@@ -121,13 +124,20 @@ public class Frog extends Movable {
     }
   }
 
-  public World getWorld() {
-    return (World) getScene().getRoot();
+  public <A extends Movable> List<A> getObjects(Class<A> cls) {
+    Pane mapPane = (Pane) getScene().lookup("#map");
+    ArrayList<A> someArray = new ArrayList<A>();
+    for (Node n: mapPane.getChildren()) {
+      if (cls.isInstance(n)) {
+        someArray.add((A)n);
+      }
+    }
+    return someArray;
   }
 
   public <A extends Movable> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
     ArrayList<A> someArray = new ArrayList<A>();
-    for (A actor : getWorld().getObjects(cls)) {
+    for (A actor : getObjects(cls)) {
       if (actor != this && actor.intersects(this.getBoundsInLocal())) {
         someArray.add(actor);
       }
