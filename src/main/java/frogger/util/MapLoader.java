@@ -2,6 +2,12 @@ package frogger.util;
 
 import frogger.model.*;
 
+import frogger.model.movable.Car;
+import frogger.model.movable.Frog;
+import frogger.model.movable.Log;
+import frogger.model.movable.Truck;
+import frogger.model.movable.Turtle;
+import frogger.model.movable.WetTurtle;
 import java.util.HashSet;
 import java.util.Set;
 

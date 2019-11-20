@@ -1,8 +1,8 @@
-package frogger.model;
+package frogger.model.movable;
 
 import javafx.scene.image.Image;
 
-public class Truck extends Actor {
+public class Truck extends Movable {
 	private int speed;
 	@Override
 	public void act(long now) {
