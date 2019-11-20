@@ -65,22 +65,22 @@ public class MapLoader {
   }
 
   public void loadMap() {
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 0, 166, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 220, 166, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 440, 166, 0.75));
-    logs.add(new Log("/frogger/image/water/logs.png", 300, 0, 276, -2));
-    logs.add(new Log("/frogger/image/water/logs.png", 300, 400, 276, -2));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 50, 329, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 270, 329, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 490, 329, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 0, 116, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 220, 116, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 440, 116, 0.75));
+    logs.add(new Log("/frogger/image/water/logs.png", 300, 0, 226, -2));
+    logs.add(new Log("/frogger/image/water/logs.png", 300, 400, 226, -2));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 50, 279, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 270, 279, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 490, 279, 0.75));
 
-    turtles.add(new Turtle(500, 376, -1, 130, 130));
-    turtles.add(new Turtle(300, 376, -1, 130, 130));
+    turtles.add(new Turtle(500, 326, -1, 130, 130));
+    turtles.add(new Turtle(300, 326, -1, 130, 130));
 
-    wetTurtles.add(new WetTurtle(700, 376, -1, 130, 130));
-    wetTurtles.add(new WetTurtle(600, 217, -1, 130, 130));
-    wetTurtles.add(new WetTurtle(400, 217, -1, 130, 130));
-    wetTurtles.add(new WetTurtle(200, 217, -1, 130, 130));
+    wetTurtles.add(new WetTurtle(700, 326, -1, 130, 130));
+    wetTurtles.add(new WetTurtle(600, 167, -1, 130, 130));
+    wetTurtles.add(new WetTurtle(400, 167, -1, 130, 130));
+    wetTurtles.add(new WetTurtle(200, 167, -1, 130, 130));
 
 //    background.add(new End(13,96));
 //    background.add(new End(141,96));
@@ -90,16 +90,15 @@ public class MapLoader {
 
     frog = new Frog("/frogger/image/frogger/froggerUp.png");
 
-    trucks.add(new Truck("/frogger/image/ground/truck1Right.png", 0, 649, 1, 120, 120));
-    trucks.add(new Truck("/frogger/image/ground/truck1Right.png", 300, 649, 1, 120, 120));
-    trucks.add(new Truck("/frogger/image/ground/truck1Right.png", 600, 649, 1, 120, 120));
-    cars.add(new Car("/frogger/image/ground/car1Left.png", 100, 597, -1, 50, 50));
-    cars.add(new Car("/frogger/image/ground/car1Left.png", 250, 597, -1, 50, 50));
-    cars.add(new Car("/frogger/image/ground/car1Left.png", 400, 597, -1, 50, 50));
-    cars.add(new Car("/frogger/image/ground/car1Left.png", 550, 597, -1, 50, 50));
-    trucks.add(new Truck("/frogger/image/ground/truck2Right.png", 0, 540, 1, 200, 200));
-    trucks.add(new Truck("/frogger/image/ground/truck2Right.png", 500, 540, 1, 200, 200));
-    trucks.add(new Truck("/frogger/image/ground/car1Left.png", 500, 490, -5, 50, 50));
-//    background.add(new Digit(0, 30, 360, 25));
+    trucks.add(new Truck("/frogger/image/ground/truck1Right.png", 0, 599, 1, 120, 120));
+    trucks.add(new Truck("/frogger/image/ground/truck1Right.png", 300, 599, 1, 120, 120));
+    trucks.add(new Truck("/frogger/image/ground/truck1Right.png", 600, 599, 1, 120, 120));
+    cars.add(new Car("/frogger/image/ground/car1Left.png", 100, 547, -1, 50, 50));
+    cars.add(new Car("/frogger/image/ground/car1Left.png", 250, 547, -1, 50, 50));
+    cars.add(new Car("/frogger/image/ground/car1Left.png", 400, 547, -1, 50, 50));
+    cars.add(new Car("/frogger/image/ground/car1Left.png", 550, 547, -1, 50, 50));
+    trucks.add(new Truck("/frogger/image/ground/truck2Right.png", 0, 490, 1, 200, 200));
+    trucks.add(new Truck("/frogger/image/ground/truck2Right.png", 500, 490, 1, 200, 200));
+    trucks.add(new Truck("/frogger/image/ground/car1Left.png", 500, 440, -5, 50, 50));
   }
 }

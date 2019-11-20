@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("../font/PressStart2P.ttf");
+}
+
+.root {
+  -fx-font-family: "Press Start 2P";
+  -fx-background-image: url("../image/background/gamebg.png");
+}
+
+.scoreBoard {
+  -fx-font-family: "Press Start 2P";
+  -fx-font-size: 26px;
+}

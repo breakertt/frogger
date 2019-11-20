@@ -6,7 +6,7 @@ This file is for source list of asset from internet uesd.
 
 * [logo](https://www.pixilart.com/art/frogger-cce83b56af93229) - for repo
 
-
+* [frogger_sprites](https://github.com/natetarrh/frogger/blob/master/assets/frogger_sprites.png)
 
 ## Music (theme sound in .wav, effect sound in .mp3)
 
@@ -29,3 +29,7 @@ This file is for source list of asset from internet uesd.
 * [Squash](http://www.digitpress.com/dpsoundz/dp_frogger_squash.wav) - Under the truck, frog.
 
 * [Alert](http://www.digitpress.com/dpsoundz/dp_frogger_time.wav) - Panic time - the alarm you hear when you've only got a few seconds left.
+
+## Font
+
+* [Press Start 2P Font](https://www.fontspace.com/codeman38/press-start-2p)

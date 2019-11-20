@@ -6,9 +6,12 @@ import frogger.model.info.End;
 import frogger.util.GameManager;
 import java.util.ArrayList;
 
+import java.util.List;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 
 
 public class Frog extends Movable {
@@ -39,7 +42,7 @@ public class Frog extends Movable {
   public Frog(String imageLink) {
     setImage(new Image(imageLink, imgSize, imgSize, true, true));
     setX(300);
-    setY(679.8 + movement);
+    setY(629.8 + movement);
     imgW1 = new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true);
     imgA1 = new Image("/frogger/image/frogger/froggerLeft.png", imgSize, imgSize, true, true);
     imgS1 = new Image("/frogger/image/frogger/froggerDown.png", imgSize, imgSize, true, true);
@@ -121,13 +124,20 @@ public class Frog extends Movable {
     }
   }
 
-  public World getWorld() {
-    return (World) getParent().getParent();
+  public <A extends Movable> List<A> getObjects(Class<A> cls) {
+    Pane mapPane = (Pane) getScene().lookup("#map");
+    ArrayList<A> someArray = new ArrayList<A>();
+    for (Node n: mapPane.getChildren()) {
+      if (cls.isInstance(n)) {
+        someArray.add((A)n);
+      }
+    }
+    return someArray;
   }
 
   public <A extends Movable> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
     ArrayList<A> someArray = new ArrayList<A>();
-    for (A actor : getWorld().getObjects(cls)) {
+    for (A actor : getObjects(cls)) {
       if (actor != this && actor.intersects(this.getBoundsInLocal())) {
         someArray.add(actor);
       }
@@ -156,7 +166,7 @@ public class Frog extends Movable {
         }
         if (carD == 5) {
           setX(300);
-          setY(679.8 + movement);
+          setY(629.8 + movement);
           waterDeath = false;
           carD = 0;
           setImage(new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true));
@@ -183,7 +193,7 @@ public class Frog extends Movable {
         }
         if (carD == 4) {
           setX(300);
-          setY(679.8 + movement);
+          setY(629.8 + movement);
           carDeath = false;
           carD = 0;
           setImage(new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true));
@@ -202,7 +212,7 @@ public class Frog extends Movable {
   public void Check(long now) {
     if (getY() < 0 || getY() > 734) {
       setX(300);
-      setY(679.8 + movement);
+      setY(629.8 + movement);
     }
     if (getX() < 0) {
       move(movement * 2, 0);
@@ -264,7 +274,7 @@ public class Frog extends Movable {
       getIntersectingObjects(End.class).get(0).setEnd();
       end++;
       setX(300);
-      setY(679.8 + movement);
+      setY(629.8 + movement);
     } else if (getY() < 413) {
       waterDeath = true;
     }
