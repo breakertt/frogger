@@ -7,8 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="800.0" prefWidth="700.0"  styleClass="root" xmlns="http://javafx.com/javafx/10.0.2-internal"
-  xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="800.0" prefWidth="700.0" styleClass="root" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
   <stylesheets>
     <URL value="@../css/game.css" />
   </stylesheets>
@@ -230,7 +229,10 @@
          </children>
       </GridPane>
    </bottom>
-  <right>
-    <Pane id="map" prefHeight="0.0" prefWidth="700.0" BorderPane.alignment="CENTER" />
-  </right>
+   <center>
+    <Pane id="map" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></Pane>
+   </center>
 </BorderPane>
