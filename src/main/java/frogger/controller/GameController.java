@@ -1,7 +1,5 @@
 package frogger.controller;
 
-import frogger.model.info.Digit;
-import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 public class GameController {
