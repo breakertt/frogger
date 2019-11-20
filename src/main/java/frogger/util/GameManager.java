@@ -35,8 +35,9 @@ public enum GameManager {
     this.gameStauts = GameStatus.START;
     this.life = new Life();
     this.currentScore = new Score();
-    ScoreManager.INSTANCE.add(this.currentScore);
-    this.highestScore = ScoreManager.INSTANCE.getHighestScore();
+//    ScoreManager.INSTANCE.add(this.currentScore);
+//    this.highestScore = ScoreManager.INSTANCE.getHighestScore();
+    this.highestScore = this.currentScore;
     this.run();
   }
 
@@ -44,7 +45,6 @@ public enum GameManager {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
     }
-    gameController.setScoreCount(this.currentScore.getValue());
   }
 
   private void run() {

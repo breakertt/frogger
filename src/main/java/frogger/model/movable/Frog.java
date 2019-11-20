@@ -122,7 +122,7 @@ public class Frog extends Movable {
   }
 
   public World getWorld() {
-    return (World) getParent().getParent();
+    return (World) getScene().getRoot();
   }
 
   public <A extends Movable> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {

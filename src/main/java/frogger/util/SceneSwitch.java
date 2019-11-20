@@ -32,27 +32,17 @@ public enum SceneSwitch {
 
       MusicPlayer.INSTANCE.playMusic();
 
-      FXMLLoader fxmlLoader = new FXMLLoader();
-      Pane root = new World();
-
-      Scene gameScene = new Scene(root, 700, 800);
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/game.fxml"));
+      Pane root = loader.load();
+      Scene gameScene = new Scene(root);
       setScene(gameScene);
 
-      ImageView bg = new ImageView();
-      bg.setImage(new Image("/frogger/image/background/gamebg.png", 700, 800, true, true));
-      root.getChildren().add(bg);
-
       Map map = new Map();
-      Pane mapPane = new Pane();
-      mapPane.setId("map");
-      System.out.println(mapPane.getId());
-      root.getChildren().add(mapPane);
+      Pane mapPane = (Pane) gameScene.lookup("#map");
       map.draw(mapPane);
 
-      fxmlLoader.setRoot(root);
-      fxmlLoader.setController(new GameController(mapPane));
-      GameController gameController = fxmlLoader.getController();
-      ScoreManager.INSTANCE.init();
+      GameController gameController = loader.getController();
+//      ScoreManager.INSTANCE.init();
       GameManager.INSTANCE.init(map, gameController, gameScene);
 
       gameScene.addEventHandler(

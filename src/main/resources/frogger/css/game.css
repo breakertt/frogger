@@ -5,8 +5,10 @@
 
 .root {
   -fx-font-family: "Press Start 2P";
+  -fx-background-image: url("../image/background/gamebg.png");
 }
 
-.label {
+.scoreBoard {
   -fx-font-family: "Press Start 2P";
+  -fx-font-size: 26px;
 }
