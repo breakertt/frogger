@@ -1,8 +1,8 @@
-package frogger.model.movable;
+package frogger.model.selfMovable;
 
 import javafx.scene.image.Image;
 
-public class WetTurtle extends Movable {
+public class WetTurtle extends SelfMovable {
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
@@ -32,12 +32,13 @@ public class WetTurtle extends Movable {
 				}
 			
 		move(speed , 0);
-		if (getX() > 600 && speed>0)
+		if (getX() > 700 && speed>0)
 			setX(-200);
 		if (getX() < -75 && speed<0)
-			setX(600);
+			setX(700);
 	}
 	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
+		super(s);
 		turtle1 = new Image("/frogger/image/water/TurtleAnimation1.png", w, h, true, true);
 		turtle2 = new Image("/frogger/image/water/TurtleAnimation2Wet.png", w, h, true, true);
 		turtle3 = new Image("/frogger/image/water/TurtleAnimation3Wet.png", w, h, true, true);

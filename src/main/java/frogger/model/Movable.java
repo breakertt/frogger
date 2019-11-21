@@ -1,4 +1,4 @@
-package frogger.model.movable;
+package frogger.model;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;

@@ -231,8 +231,9 @@
    </bottom>
    <center>
     <Pane id="map" prefWidth="700.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin></Pane>
+       <BorderPane.margin>
+          <Insets />
+       </BorderPane.margin>
+    </Pane>
    </center>
 </BorderPane>

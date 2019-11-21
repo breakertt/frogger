@@ -1,11 +1,10 @@
 package frogger.model;
 
-import frogger.model.movable.Car;
-import frogger.model.movable.Frog;
-import frogger.model.movable.Log;
-import frogger.model.movable.Truck;
-import frogger.model.movable.Turtle;
-import frogger.model.movable.WetTurtle;
+import frogger.model.selfMovable.Car;
+import frogger.model.selfMovable.Log;
+import frogger.model.selfMovable.Truck;
+import frogger.model.selfMovable.Turtle;
+import frogger.model.selfMovable.WetTurtle;
 import frogger.util.MapLoader;
 import frogger.util.MapRender;
 import java.util.Set;

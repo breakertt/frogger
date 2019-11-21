@@ -1,6 +1,6 @@
 package frogger.model.info;
 
-import frogger.model.movable.Movable;
+import frogger.model.Movable;
 import javafx.scene.image.Image;
 
 public class End extends Movable {

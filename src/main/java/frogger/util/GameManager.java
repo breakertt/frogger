@@ -2,7 +2,7 @@ package frogger.util;
 
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
-import frogger.model.movable.Movable;
+import frogger.model.Movable;
 import java.util.Set;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -37,7 +37,6 @@ public enum GameManager {
     this.currentScore = new Score();
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
-//    this.highestScore = this.currentScore;
     this.run();
   }
 
@@ -65,10 +64,6 @@ public enum GameManager {
     for (Movable movable : movables) {
       movable.run();
     }
-  }
-
-  private void updateUi() {
-
   }
 
   public void handleKeyPressed(KeyEvent event) {
