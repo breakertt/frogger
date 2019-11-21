@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 public class End extends Movable {
 	boolean activated = false;
 	@Override
-	public void move(long now) {
+	public void moveAct(long now) {
 		// TODO Auto-generated method st
 	}
 	

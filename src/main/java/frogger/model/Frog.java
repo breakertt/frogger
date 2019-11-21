@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
@@ -88,22 +87,22 @@ public class Frog extends Movable {
     switch (event.getCode()) {
       case UP:
       case W:
-        move(0, -movement);
+        movePos(0, -movement);
         setImage(jumpImg[0][1]);
         break;
       case LEFT:
       case A:
-        move(-movementX, 0);
+        movePos(-movementX, 0);
         setImage(jumpImg[1][1]);
         break;
       case DOWN:
       case S:
-        move(0, movement);
+        movePos(0, movement);
         setImage(jumpImg[2][1]);
         break;
       case RIGHT:
       case D:
-        move(movementX, 0);
+        movePos(movementX, 0);
         setImage(jumpImg[3][1]);
         break;
     }
@@ -121,22 +120,22 @@ public class Frog extends Movable {
           yPosSmallest = getY();
           points += 10;
         }
-        move(0, -movement);
+        movePos(0, -movement);
         setImage(jumpImg[0][0]);
         break;
       case DOWN:
       case S:
-        move(0, movement);
+        movePos(0, movement);
         setImage(jumpImg[2][0]);
         break;
       case LEFT:
       case A:
-        move(-movementX, 0);
+        movePos(-movementX, 0);
         setImage(jumpImg[1][0]);
         break;
       case RIGHT:
       case D:
-        move(movementX, 0);
+        movePos(movementX, 0);
         setImage(jumpImg[3][0]);
         break;
     }
@@ -233,7 +232,7 @@ public class Frog extends Movable {
       setY(629.8 + movement);
     }
     if (getX() < 0) {
-      move(movement * 2, 0);
+      movePos(movement * 2, 0);
     }
 
     // show death if possible
@@ -246,7 +245,7 @@ public class Frog extends Movable {
 
     // unknown
     if (getX() > 700) {
-      move(-movement * 2, 0);
+      movePos(-movement * 2, 0);
     }
 
     // check crash
@@ -265,19 +264,19 @@ public class Frog extends Movable {
     // check on log
     if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
       if (getIntersectingObjects(Log.class).get(0).getLeft()) {
-        move(-2, 0);
+        movePos(-2, 0);
       } else {
-        move(.75, 0);
+        movePos(.75, 0);
       }
       // check on log
     } else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-      move(-1, 0);
+      movePos(-1, 0);
       // check on wetturtle
     } else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
       if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
         waterDeath = true;
       } else {
-        move(-1, 0);
+        movePos(-1, 0);
       }
       // check on end
     } else if (getIntersectingObjects(End.class).size() >= 1) {
@@ -299,7 +298,7 @@ public class Frog extends Movable {
   }
 
   @Override
-  public void move(long now) {
+  public void moveAct(long now) {
     Check(now);
 
     if (this.isScoreChanged()) {

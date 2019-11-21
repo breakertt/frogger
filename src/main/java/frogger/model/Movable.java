@@ -6,9 +6,7 @@ import javafx.scene.image.ImageView;
 
 public abstract class Movable extends ImageView {
 
-  private double step;
-
-  public void move(double dx, double dy) {
+  public void movePos(double dx, double dy) {
     setX(getX() + dx);
     setY(getY() + dy);
   }
@@ -21,28 +19,23 @@ public abstract class Movable extends ImageView {
     return this.getBoundsInLocal().getHeight();
   }
 
-  private AnimationTimer moveTimer() {
+  private AnimationTimer Timer() {
     return new AnimationTimer() {
       @Override
       public void handle(long now) {
-        move(now);
+        moveAct(now);
+        transformAct(now);
       }
     };
   }
 
   public void run() {
-    moveTimer().start();
+    Timer().start();
   }
 
-  private AnimationTimer transfromTimer() {
-    return new AnimationTimer() {
-      @Override
-      public void handle(long now) {
-        // todo
-      }
-    };
+  public void transformAct(long now) {
+
   }
 
-  public abstract void move(long now);
-
+  public abstract void moveAct(long now);
 }

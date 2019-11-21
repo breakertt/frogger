@@ -12,7 +12,7 @@ public class WetTurtle extends SelfMovable {
 	boolean bool = true;
 	boolean sunk = false;
 	@Override
-	public void move(long now) {
+	public void moveAct(long now) {
 
 				if (now/900000000  % 4 ==0) {
 					setImage(turtle2);
@@ -31,7 +31,7 @@ public class WetTurtle extends SelfMovable {
 					sunk = true;
 				}
 			
-		move(speed , 0);
+		movePos(speed , 0);
 		if (getX() > 700 && speed>0)
 			setX(-200);
 		if (getX() < -75 && speed<0)

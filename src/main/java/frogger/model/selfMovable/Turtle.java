@@ -10,7 +10,7 @@ public class Turtle extends SelfMovable {
 	int i = 1;
 	boolean bool = true;
 	@Override
-	public void move(long now) {
+	public void moveAct(long now) {
 
 				if (now/900000000  % 3 ==0) {
 					setImage(turtle2);
@@ -25,7 +25,7 @@ public class Turtle extends SelfMovable {
 
 				}
 
-		move(speed , 0);
+		movePos(speed , 0);
 		if (getX() > 700 && speed>0)
 			setX(-200);
 		if (getX() < -75 && speed<0)

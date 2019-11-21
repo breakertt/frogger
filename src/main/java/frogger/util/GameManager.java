@@ -2,7 +2,9 @@ package frogger.util;
 
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
+import frogger.model.Lane;
 import frogger.model.Movable;
+import java.util.ArrayList;
 import java.util.Set;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -48,12 +50,21 @@ public enum GameManager {
   }
 
   private void run() {
+    runSelfMovable((ArrayList<Lane>)  map.getLaneArrayList());
     runSelfMovable((Set<Movable>) (Set<?>) map.getCars());
     runSelfMovable((Set<Movable>) (Set<?>) map.getTrucks());
     runSelfMovable((Set<Movable>) (Set<?>) map.getLogs());
     runSelfMovable((Set<Movable>) (Set<?>) map.getTurtles());
     runSelfMovable((Set<Movable>) (Set<?>) map.getWetTurtles());
     runSelfMovable(map.getFrog());
+  }
+
+  private void runSelfMovable(ArrayList<Lane> laneArrayList) {
+    for (Lane lane: laneArrayList) {
+      for (Movable movable: lane.getMovables()) {
+        movable.run();
+      }
+    }
   }
 
   private void runSelfMovable(Movable movable) {

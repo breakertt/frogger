@@ -5,9 +5,12 @@ import frogger.model.*;
 import frogger.model.selfMovable.Car;
 import frogger.model.Frog;
 import frogger.model.selfMovable.Log;
+import frogger.model.selfMovable.LogTest;
 import frogger.model.selfMovable.Truck;
 import frogger.model.selfMovable.Turtle;
 import frogger.model.selfMovable.WetTurtle;
+import java.awt.image.AreaAveragingScaleFilter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +19,12 @@ public class MapLoader {
   private String fileName;
 
   private Map map;
+
+  private ArrayList<Lane> laneArrayList;
+
+  public ArrayList<Lane> getLaneArrayList() {
+    return laneArrayList;
+  }
 
   private Set<Log> logs;
 
@@ -56,6 +65,10 @@ public class MapLoader {
   public MapLoader(String fileName, Map map) {
     this.fileName = fileName;
     this.map = map;
+    this.laneArrayList = new ArrayList<Lane>(12);
+    for (int i = 0; i < 12; i++) {
+      laneArrayList.add(new Lane());
+    }
     this.logs = new HashSet<>();
     this.turtles = new HashSet<>();
     this.wetTurtles = new HashSet<>();
@@ -65,22 +78,24 @@ public class MapLoader {
   }
 
   public void loadMap() {
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 0, 116, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 220, 116, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 440, 116, 0.75));
-    logs.add(new Log("/frogger/image/water/logs.png", 300, 0, 226, -2));
-    logs.add(new Log("/frogger/image/water/logs.png", 300, 400, 226, -2));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 50, 279, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 270, 279, 0.75));
-    logs.add(new Log("/frogger/image/water/log3.png", 150, 490, 279, 0.75));
+    laneArrayList.get(3).add(new LogTest("/frogger/image/water/logs.png", 300, 0, 0, -2));
+    laneArrayList.get(3).add(new LogTest("/frogger/image/water/logs.png", 300, 400, 0, -2));
 
-    turtles.add(new Turtle(500, 326, -1, 130, 130));
-    turtles.add(new Turtle(300, 326, -1, 130, 130));
 
-    wetTurtles.add(new WetTurtle(700, 326, -1, 130, 130));
-    wetTurtles.add(new WetTurtle(600, 167, -1, 130, 130));
-    wetTurtles.add(new WetTurtle(400, 167, -1, 130, 130));
-    wetTurtles.add(new WetTurtle(200, 167, -1, 130, 130));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 0, 100, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 220, 100, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 440, 100, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 50, 250, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 270, 250, 0.75));
+    logs.add(new Log("/frogger/image/water/log3.png", 150, 490, 250, 0.75));
+
+    turtles.add(new Turtle(500, 300, -1, 130, 130));
+    turtles.add(new Turtle(300, 300, -1, 130, 130));
+
+    wetTurtles.add(new WetTurtle(700, 300, -1, 130, 130));
+    wetTurtles.add(new WetTurtle(600, 150, -1, 130, 130));
+    wetTurtles.add(new WetTurtle(400, 150, -1, 130, 130));
+    wetTurtles.add(new WetTurtle(200, 150, -1, 130, 130));
 
 //    background.add(new End(13,96));
 //    background.add(new End(141,96));
