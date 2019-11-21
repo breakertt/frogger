@@ -50,7 +50,7 @@ public enum GameManager {
   }
 
   private void run() {
-    runSelfMovable((ArrayList<Lane>)  map.getLaneArrayList());
+    runSelfMovable((ArrayList<Lane>)  map.getLaneListElement());
     runSelfMovable((Set<Movable>) (Set<?>) map.getCars());
     runSelfMovable((Set<Movable>) (Set<?>) map.getTrucks());
     runSelfMovable((Set<Movable>) (Set<?>) map.getLogs());

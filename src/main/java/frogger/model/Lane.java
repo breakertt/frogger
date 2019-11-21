@@ -8,7 +8,6 @@ public class Lane {
   private Set<Movable> movables;
 
   public Lane() {
-    System.out.println("111");
     movables = new HashSet<Movable>();
   }
 

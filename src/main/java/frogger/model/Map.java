@@ -31,14 +31,14 @@ public class Map {
 
   private Set<Truck> trucks;
 
-  private ArrayList<Lane> laneArrayList;
+  private ArrayList<Lane> laneListElement;
 
-  public ArrayList<Lane> getLaneArrayList() {
-    return laneArrayList;
+  public ArrayList<Lane> getLaneListElement() {
+    return laneListElement;
   }
 
-  public void setLaneArrayList(ArrayList<Lane> laneArrayList) {
-    this.laneArrayList = laneArrayList;
+  public void setLaneListElement(ArrayList<Lane> laneListElement) {
+    this.laneListElement = laneListElement;
   }
 
   public String getFileName() {
@@ -126,21 +126,26 @@ public class Map {
     cars = mapLoader.getCars();
     trucks = mapLoader.getTrucks();
     frog = mapLoader.getFrog();
-    laneArrayList = mapLoader.getLaneArrayList();
+    laneListElement = mapLoader.getLaneListElement();
   }
 
-  public void draw(Pane root) {
+  public void draw(Pane root, ArrayList<Pane> laneListPane) {
 
     load();
 
-    MapRender mapRender = new MapRender(root);
+    MapRender mapRender = new MapRender(root, laneListPane); // root to be deleted
     mapRender.drawLogs(logs);
     mapRender.drawTurtles(turtles);
     mapRender.drawWetTurtles(wetTurtles);
     mapRender.drawCars(cars);
     mapRender.drawTrucks(trucks);
     mapRender.drawFrog(frog);
-    mapRender.drawLanes(laneArrayList);
+    try {
+      mapRender.drawLanes(laneListElement);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 

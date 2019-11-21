@@ -19,7 +19,7 @@ public class GameController {
 
   @FXML private HBox levelBox;
 
-  @FXML private ArrayList<Pane> lanePaneList;
+  @FXML private ArrayList<Pane> laneListPane;
 
   @FXML
   public void initialize() {
@@ -33,8 +33,8 @@ public class GameController {
     this.highestScoreValue.setText(highestScoreValueString);
   }
 
-  public ArrayList<Pane> getLanePaneList() {
-    return lanePaneList;
+  public ArrayList<Pane> getLaneListPane() {
+    return laneListPane;
   }
 
 }

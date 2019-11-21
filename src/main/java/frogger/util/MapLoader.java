@@ -5,11 +5,9 @@ import frogger.model.*;
 import frogger.model.selfMovable.Car;
 import frogger.model.Frog;
 import frogger.model.selfMovable.Log;
-import frogger.model.selfMovable.LogTest;
 import frogger.model.selfMovable.Truck;
 import frogger.model.selfMovable.Turtle;
 import frogger.model.selfMovable.WetTurtle;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,10 +18,10 @@ public class MapLoader {
 
   private Map map;
 
-  private ArrayList<Lane> laneArrayList;
+  private ArrayList<Lane> laneListElement;
 
-  public ArrayList<Lane> getLaneArrayList() {
-    return laneArrayList;
+  public ArrayList<Lane> getLaneListElement() {
+    return laneListElement;
   }
 
   private Set<Log> logs;
@@ -65,9 +63,9 @@ public class MapLoader {
   public MapLoader(String fileName, Map map) {
     this.fileName = fileName;
     this.map = map;
-    this.laneArrayList = new ArrayList<Lane>(12);
+    this.laneListElement = new ArrayList<Lane>(12);
     for (int i = 0; i < 12; i++) {
-      laneArrayList.add(new Lane());
+      laneListElement.add(new Lane());
     }
     this.logs = new HashSet<>();
     this.turtles = new HashSet<>();
@@ -77,10 +75,14 @@ public class MapLoader {
     this.frog = null;
   }
 
-  public void loadMap() {
-    laneArrayList.get(3).add(new LogTest("/frogger/image/water/logs.png", 300, 0, 0, -2));
-    laneArrayList.get(3).add(new LogTest("/frogger/image/water/logs.png", 300, 400, 0, -2));
+  public void laneAdd(int index, Movable movable) {
+    this.laneListElement.get(index).add(movable);
+  }
 
+  public void loadMap() {
+
+    laneAdd(3, new Log("/frogger/image/water/logs.png", 300, 0, 0, -2));
+    laneAdd(3, new Log("/frogger/image/water/logs.png", 300, 400, 0, -2));
 
     logs.add(new Log("/frogger/image/water/log3.png", 150, 0, 100, 0.75));
     logs.add(new Log("/frogger/image/water/log3.png", 150, 220, 100, 0.75));

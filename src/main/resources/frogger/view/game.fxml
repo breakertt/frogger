@@ -270,7 +270,8 @@
   </center>
 
   <fx:define>
-    <ArrayList fx:id="lanePaneList">
+    <ArrayList fx:id="laneListPane">
+      <fx:reference source="lane0" />
       <fx:reference source="lane1" />
       <fx:reference source="lane2" />
       <fx:reference source="lane3" />
