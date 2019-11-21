@@ -11,6 +11,7 @@ import frogger.util.GameManager;
 import java.util.ArrayList;
 
 import java.util.List;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -27,7 +28,7 @@ public class Frog extends Movable {
   int end = 0;
   private boolean jumpLock = false;
   boolean noMove = false;
-  double movement = 13.3333333 * 2;
+  double movement = 25;
   double movementX = 10.666666 * 2;
   int imgSize = 40;
   Death death;
@@ -42,7 +43,7 @@ public class Frog extends Movable {
   public Frog(String imageLink) {
     setImage(new Image(imageLink, imgSize, imgSize, true, true));
     setX(300);
-    setY(629.8 + movement);
+    setY(600);
     ImgFactory();
   }
 
@@ -144,9 +145,12 @@ public class Frog extends Movable {
   public <A extends Movable> List<A> getObjects(Class<A> cls) {
     Pane mapPane = (Pane) getScene().lookup("#map");
     ArrayList<A> someArray = new ArrayList<A>();
-    for (Node n : mapPane.getChildren()) {
-      if (cls.isInstance(n)) {
-        someArray.add((A) n);
+    for (Node nNode : mapPane.getChildren()) {
+      Pane pNode = (Pane) nNode;
+      for (Node m : pNode.getChildren()) {
+        if (cls.isInstance(m)) {
+          someArray.add((A) m);
+        }
       }
     }
     return someArray;
@@ -155,7 +159,9 @@ public class Frog extends Movable {
   public <A extends Movable> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
     ArrayList<A> someArray = new ArrayList<A>();
     for (A actor : getObjects(cls)) {
-      if (actor != this && actor.intersects(this.getBoundsInLocal())) {
+      Bounds actorBoundsInScene = actor.localToScene(actor.getBoundsInLocal());
+      Bounds thisBoundsInScene = this.localToScene(this.getBoundsInLocal());
+      if (actor != this && actorBoundsInScene.intersects(thisBoundsInScene)) {
         someArray.add(actor);
       }
     }

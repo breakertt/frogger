@@ -231,7 +231,7 @@
     </GridPane>
   </bottom>
   <center>
-    <GridPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+    <GridPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" BorderPane.alignment="CENTER">
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="700.0" />
       </columnConstraints>
@@ -248,6 +248,7 @@
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints />
       </rowConstraints>
       <children>
         <Pane fx:id="lane0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="0" />
@@ -262,9 +263,11 @@
         <Pane fx:id="lane9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="9" />
         <Pane fx:id="lane10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="10" />
         <Pane fx:id="lane11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="11" />
+        <Pane fx:id="lane12" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="12" />
+        <Pane fx:id="jumpBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" GridPane.rowSpan="13" />
       </children>
       <BorderPane.margin>
-        <Insets top="-5.0" />
+        <Insets top="50.0" />
       </BorderPane.margin>
     </GridPane>
   </center>
@@ -283,6 +286,7 @@
       <fx:reference source="lane9" />
       <fx:reference source="lane10" />
       <fx:reference source="lane11" />
+      <fx:reference source="lane12" />
     </ArrayList>
   </fx:define>
 </BorderPane>

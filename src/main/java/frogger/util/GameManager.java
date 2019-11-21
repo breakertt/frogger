@@ -40,6 +40,7 @@ public enum GameManager {
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
     this.run();
+    MusicPlayer.INSTANCE.playMusic();
   }
 
   private void updateScore() {

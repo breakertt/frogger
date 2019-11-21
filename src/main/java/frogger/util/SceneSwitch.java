@@ -29,12 +29,8 @@ public enum SceneSwitch {
     try {
       hideStage();
 
-//      MusicPlayer.INSTANCE.playMusic();
-
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/game.fxml"));
       Pane root = loader.load();
-
-//      ObservableMap<String,Object> namespace = loader.getNamespace();
 
       Scene gameScene = new Scene(root);
       setScene(gameScene);

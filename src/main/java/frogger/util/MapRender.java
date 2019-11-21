@@ -56,7 +56,8 @@ public class MapRender {
   }
 
   public void drawFrog(Frog frog) {
-    root.getChildren().add(frog);
+    Pane jumpBoard = (Pane) root.lookup("#jumpBoard");
+    jumpBoard.getChildren().add(frog);
   }
 
 
