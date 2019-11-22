@@ -3,6 +3,8 @@ package frogger.util;
 import frogger.Main;
 import frogger.controller.GameController;
 import frogger.model.Map;
+import java.util.ArrayList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -27,16 +29,16 @@ public enum SceneSwitch {
     try {
       hideStage();
 
-//      MusicPlayer.INSTANCE.playMusic();
-
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/game.fxml"));
       Pane root = loader.load();
+
       Scene gameScene = new Scene(root);
       setScene(gameScene);
 
       Map map = new Map();
-      Pane mapPane = (Pane) gameScene.lookup("#map");
-      map.draw(mapPane);
+      Pane mapPane = (Pane) loader.getNamespace().get("map");
+      ArrayList<Pane> laneListPane = (ArrayList<Pane>) loader.getNamespace().get("laneListPane");
+      map.draw(mapPane, laneListPane);
 
       GameController gameController = loader.getController();
       ScoreManager.INSTANCE.init();

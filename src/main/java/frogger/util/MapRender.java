@@ -1,21 +1,38 @@
 package frogger.util;
 
+import frogger.model.Lane;
+import frogger.model.Movable;
 import frogger.model.selfMovable.Car;
 import frogger.model.Frog;
 import frogger.model.selfMovable.Log;
 import frogger.model.selfMovable.Truck;
 import frogger.model.selfMovable.Turtle;
 import frogger.model.selfMovable.WetTurtle;
+import java.util.ArrayList;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
 public class MapRender {
 
-  Pane root;
+  private Pane root;
+  private ArrayList<Pane> laneListPane;
 
-  public MapRender(Pane root) {
+  public MapRender(Pane root, ArrayList<Pane> laneListPane) {
     this.root = root;
+    this.laneListPane = laneListPane;
+  }
+  
+  public void drawLanes(ArrayList<Lane> laneListElement) throws Exception {
+    if (laneListElement.size() != laneListPane.size()) {
+      throw new Exception("Number of lane in view and config inconsistent");
+    }
+    for (int i = 0; i < laneListElement.size(); i++) {
+      Pane lanePane = laneListPane.get(i);
+      Set<Movable> laneElementSet = laneListElement.get(i).getMovables();
+      lanePane.getChildren().addAll(laneElementSet);
+    }
   }
 
   public void drawLogs(Set<Log> logs) {
@@ -39,6 +56,9 @@ public class MapRender {
   }
 
   public void drawFrog(Frog frog) {
-    root.getChildren().add(frog);
+    Pane jumpBoard = (Pane) root.lookup("#jumpBoard");
+    jumpBoard.getChildren().add(frog);
   }
+
+
 }

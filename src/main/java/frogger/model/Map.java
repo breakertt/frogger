@@ -7,6 +7,7 @@ import frogger.model.selfMovable.Turtle;
 import frogger.model.selfMovable.WetTurtle;
 import frogger.util.MapLoader;
 import frogger.util.MapRender;
+import java.util.ArrayList;
 import java.util.Set;
 import javafx.scene.layout.Pane;
 
@@ -29,6 +30,16 @@ public class Map {
   private Set<Car> cars;
 
   private Set<Truck> trucks;
+
+  private ArrayList<Lane> laneListElement;
+
+  public ArrayList<Lane> getLaneListElement() {
+    return laneListElement;
+  }
+
+  public void setLaneListElement(ArrayList<Lane> laneListElement) {
+    this.laneListElement = laneListElement;
+  }
 
   public String getFileName() {
     return fileName;
@@ -115,19 +126,26 @@ public class Map {
     cars = mapLoader.getCars();
     trucks = mapLoader.getTrucks();
     frog = mapLoader.getFrog();
+    laneListElement = mapLoader.getLaneListElement();
   }
 
-  public void draw(Pane root) {
+  public void draw(Pane root, ArrayList<Pane> laneListPane) {
 
     load();
 
-    MapRender mapRender = new MapRender(root);
+    MapRender mapRender = new MapRender(root, laneListPane); // root to be deleted
     mapRender.drawLogs(logs);
     mapRender.drawTurtles(turtles);
     mapRender.drawWetTurtles(wetTurtles);
     mapRender.drawCars(cars);
     mapRender.drawTrucks(trucks);
     mapRender.drawFrog(frog);
+    try {
+      mapRender.drawLanes(laneListElement);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 

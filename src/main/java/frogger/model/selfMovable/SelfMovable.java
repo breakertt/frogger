@@ -15,8 +15,8 @@ public class SelfMovable extends Movable {
   }
 
   @Override
-  public void move(long now) {
-    move(speed , 0);
+  public void moveAct(long now) {
+    movePos(speed , 0);
     if (getX() > 700 && speed>0)
       setX(-getWidth());
     if (getX() < -getWidth() && speed<0)
