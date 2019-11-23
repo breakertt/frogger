@@ -184,39 +184,31 @@ public class Frog extends Movable {
   }
 
   public void deathTransform(long now, Death death) {
-    int loopFrameNum  = 0;
-    int frameNumNow = 0;
+    Image deathImg[];
     switch (death) {
       case DROP:
-        noMove = true;
-        loopFrameNum = waterDeathImg.length;
-        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum + 1);
-        if (frameNumNow != loopFrameNum) {
-          setImage(waterDeathImg[frameNumNow]);
-        } else {
-          deathFrame.reset();
-          this.reset();
-          scoreChanged = true;
-          noMove = false;
-        }
+        deathImg = waterDeathImg;
         break;
       case CRASH:
-        noMove = true;
-        loopFrameNum = carDeathImg.length;
-        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum + 1);
-        if (frameNumNow != loopFrameNum) {
-          if (getImage() != carDeathImg[frameNumNow]) {
-            setImage(carDeathImg[frameNumNow]);
-            System.out.println(frameNumNow + "  " + loopFrameNum);
-          };
-        } else {
-          System.out.println("End!");
-          deathFrame.reset();
-          this.reset();
-          scoreChanged = true;
-          noMove = false;
-        }
+        deathImg = carDeathImg;
         break;
+      default:
+        return;
+    }
+    noMove = true;
+    int loopFrameNum = deathImg.length;
+    int frameNumNow = deathFrame.getFrameNum(now, loopFrameNum + 1);
+    if (frameNumNow != loopFrameNum) {
+      if (getImage() != deathImg[frameNumNow]) {
+        setImage(deathImg[frameNumNow]);
+        System.out.println(frameNumNow + "  " + loopFrameNum);
+      };
+    } else {
+      System.out.println("End!");
+      deathFrame.reset();
+      this.reset();
+      scoreChanged = true;
+      noMove = false;
     }
   }
 
@@ -245,7 +237,7 @@ public class Frog extends Movable {
 
     if (getY() < 300) {
 
-      death = Death.DROP;
+//      death = Death.DROP;
     }
 
     return;
@@ -298,7 +290,6 @@ public class Frog extends Movable {
 
   @Override
   public void moveAct(long now) {
-    check(now);
 
     if (this.isScoreChanged()) {
       GameManager.INSTANCE.setScoreValue(points);
@@ -309,7 +300,14 @@ public class Frog extends Movable {
 
   @Override
   public void checkAct(long now) {
+    check(now);
+    checkWater(now);
+  }
 
+  public void checkWater(long now) {
+    if (getY() < 300) {
+      GameManager.INSTANCE.handleFrogInWater();
+    }
   }
 
   public boolean getStop() {

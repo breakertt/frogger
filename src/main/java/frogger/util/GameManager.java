@@ -3,6 +3,7 @@ package frogger.util;
 import frogger.constant.Death;
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
+import frogger.model.Frog;
 import frogger.model.Lane;
 import frogger.model.Movable;
 import frogger.model.selfMovable.Car;
@@ -111,6 +112,19 @@ public enum GameManager {
     updateInfo();
   }
 
+  public void handleFrogInWater() {
+    boolean frogWaterDie = true;
+    for (int i = 1; i < 6; i++) {
+      Lane lane = map.getLaneListElement().get(i);
+      for (SelfMovable selfMovable : lane.getSelfMovables()) {
+        if (selfMovable.checkTouchFrog()) {
+          frogWaterDie = false;
+          break;
+        }
+      }
+    }
+    System.out.println(frogWaterDie);
+  }
   private void loseGame() {
   }
 }

@@ -40,4 +40,5 @@ public abstract class Movable extends ImageView {
   public abstract void moveAct(long now);
 
   public abstract void checkAct(long now);
+
 }
