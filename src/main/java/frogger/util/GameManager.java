@@ -6,8 +6,11 @@ import frogger.controller.GameController;
 import frogger.model.Frog;
 import frogger.model.Lane;
 import frogger.model.Movable;
+import frogger.model.info.End;
 import frogger.model.selfMovable.Car;
 import frogger.model.selfMovable.SelfMovable;
+import frogger.model.selfMovable.Turtle;
+import frogger.model.selfMovable.WetTurtle;
 import java.util.ArrayList;
 import java.util.Set;
 import javafx.scene.Scene;
@@ -98,20 +101,6 @@ public enum GameManager {
     return map;
   }
 
-  public void handleCarTouched(Car car) {
-    if (gameStatus == GameStatus.END) {
-      return;
-    }
-    map.getFrog().setDeath(Death.CRASH);
-    life.lose();
-    currentScore.lose(10);
-    updateScore();
-    if (life.getCurrent() <= 0) {
-      loseGame();
-    }
-    updateInfo();
-  }
-
   public void handleFrogInWater() {
     boolean frogWaterDie = true;
     for (int i = 1; i < 6; i++) {
@@ -124,7 +113,40 @@ public enum GameManager {
       }
     }
     System.out.println(frogWaterDie);
+    if (frogWaterDie) HandleFrogDie(Death.DROP);
   }
+
   private void loseGame() {
+  }
+
+  public void handleEndTouched(End end) {
+    end.setFrog();
+    map.getFrog().reset();
+  }
+
+  public void handleLogTurtleTouched(SelfMovable selfMovable) {
+    if (map.getFrog().getDeath() == Death.NONE) map.getFrog().movePos(selfMovable.getSpeed(), 0);
+  }
+
+  public void handleCarTouched() {
+    HandleFrogDie(Death.CRASH);
+  }
+
+  public void HandleSunkWetTurtleTouched() {
+    HandleFrogDie(Death.DROP);
+  }
+
+  public void HandleFrogDie(Death death) {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
+    map.getFrog().setDeath(death);
+    life.lose();
+    currentScore.lose(10);
+    updateScore();
+    if (life.getCurrent() <= 0) {
+      loseGame();
+    }
+    updateInfo();
   }
 }

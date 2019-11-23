@@ -2,6 +2,7 @@ package frogger.util;
 
 import frogger.model.Lane;
 import frogger.model.Map;
+import frogger.model.info.End;
 import frogger.model.selfMovable.Car;
 import frogger.model.Frog;
 import frogger.model.selfMovable.Log;
@@ -36,16 +37,20 @@ public class MapLoader {
       laneListElement.add(new Lane());
     }
     this.frog = null;
+    this.initEnd();
   }
 
-  public void laneAdd(int index, SelfMovable selfMovable) {
+  public void initEnd() {
+    for (int i = 0; i < 5; i++) {
+      laneAdd(0, new End(22 + 150 * i));
+    }
+  }
+
+   public void laneAdd(int index, SelfMovable selfMovable) {
     this.laneListElement.get(index).add(selfMovable);
   }
 
   public void loadMap() {
-
-
-
     laneAdd(1, new Log(0.75, 0, 2));
     laneAdd(1, new Log(0.75, 220, 2));
     laneAdd(1, new Log(0.75, 440, 2));

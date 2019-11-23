@@ -1,39 +1,35 @@
 package frogger.model.info;
 
 import frogger.model.Movable;
+import frogger.model.selfMovable.SelfMovable;
+import frogger.util.GameManager;
 import javafx.scene.image.Image;
 
-public class End extends Movable {
-	boolean activated = false;
+public class End extends SelfMovable {
 
-	@Override
-	public void transformAct(long now) {
-
-	}
+	boolean frogExist = false;
 
 	@Override
 	public void moveAct(long now) {
-		// TODO Auto-generated method st
 	}
 
 	@Override
 	public void checkAct(long now) {
-
+		if (checkTouchFrog()) GameManager.INSTANCE.handleEndTouched(this);
 	}
 
-	public End(int x, int y) {
-		setX(x);
-		setY(y);
-		setImage(new Image("/frogger/image/background/End.png", 60, 60, true, true));
+	public End(double xPos) {
+		setImage(new Image("/frogger/image/water/emptyEnd.png"));
+		setX(xPos);
 	}
-	
-	public void setEnd() {
-		setImage(new Image("/frogger/image/background/FrogEnd.png", 70, 70, true, true));
-		activated = true;
+
+	public void setFrog() {
+		setImage(new Image("/frogger/image/water/froggerEnd.png"));
+		frogExist = true;
 	}
-	
-	public boolean isActivated() {
-		return activated;
+
+	public boolean isFrogExist() {
+		return frogExist;
 	}
 	
 

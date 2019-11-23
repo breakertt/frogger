@@ -16,6 +16,10 @@ public abstract class SelfMovable extends Movable {
     this.speed = speed;
   }
 
+  public double getSpeed() {
+    return speed;
+  }
+
   @Override
   public void transformAct(long now) {}
 

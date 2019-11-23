@@ -11,6 +11,6 @@ public class Car extends SelfMovable {
 
 	@Override
 	public void checkAct(long now) {
-		if (checkTouchFrog()) GameManager.INSTANCE.handleCarTouched(this);
+		if (checkTouchFrog()) GameManager.INSTANCE.handleCarTouched();
 	}
 }

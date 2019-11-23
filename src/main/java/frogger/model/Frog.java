@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 import java.util.List;
 import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 
@@ -30,7 +32,6 @@ public class Frog extends Movable {
   int imgSize = 40;
   private Death death;
   boolean scoreChanged = false;
-  int carD = 0;
   double yPosSmallest = 700;
   DeathFrame deathFrame;
   ArrayList<End> inter = new ArrayList<End>();
@@ -38,7 +39,6 @@ public class Frog extends Movable {
 
   public Frog() {
     ImgFactory();
-    deathFrame = new DeathFrame();
     reset();
   }
 
@@ -46,7 +46,7 @@ public class Frog extends Movable {
     private int offset = 1;
 
     public int getFrameNum(long now, int loopFrameNum) {
-      int sec = (int) ((now / 900000000) % loopFrameNum);
+      int sec = (int) ((now / 300000000) % loopFrameNum);
       if (offset == 1) {
         this.offset = sec;
       }
@@ -209,17 +209,19 @@ public class Frog extends Movable {
       this.reset();
       scoreChanged = true;
       noMove = false;
+      jumpLock = false;
     }
   }
 
-  private void resetY() {setY(600);}
+  private void resetY() {setY(600 + (50 - getHeight()) / 2);}
 
   private void resetX() {setX(300);}
 
-  private void reset() {
+  public void reset() {
     resetX();
     resetY();
     this.death = Death.NONE;
+    deathFrame = new DeathFrame();
     setImage(jumpImg[0][0]);
   }
 
@@ -234,50 +236,7 @@ public class Frog extends Movable {
     // out of screen, game over
     if (getX() < 0 || getX() > 700) {
     }
-
-    if (getY() < 300) {
-
-//      death = Death.DROP;
-    }
-
     return;
-    // check crash
-/**
-    // check on log
-    if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-      if (getIntersectingObjects(Log.class).get(0).getLeft()) {
-        movePos(-2, 0);
-      } else {
-        movePos(.75, 0);
-      }
-      // check on log
-    } else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-      movePos(-1, 0);
-      // check on wetTurtle
-    } else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-      if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
-        death = Death.DROP;
-      } else {
-        movePos(-1, 0);
-      }
-      // check on end
-    } else if (getIntersectingObjects(End.class).size() >= 1) {
-      inter = (ArrayList<End>) getIntersectingObjects(End.class);
-      if (getIntersectingObjects(End.class).get(0).isActivated()) {
-        end--;
-        points -= 50;
-      }
-      points += 50;
-      scoreChanged = true;
-      yPosSmallest = 700;
-      getIntersectingObjects(End.class).get(0).setEnd();
-      end++;
-      setX(300);
-      setY(629.8 + movement);
-    } else if (getY() < 363) {
-      death = Death.DROP;
-    }
- **/
   }
 
   @Override
@@ -310,7 +269,7 @@ public class Frog extends Movable {
     }
   }
 
-  public boolean getStop() {
+  public boolean checkWinLevel() {
     return end == 5;
   }
 
