@@ -1,45 +1,44 @@
 package frogger.model.selfMovable;
 
+import frogger.constant.FileName;
+import frogger.util.GameManager;
+import java.util.ArrayList;
+import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 
 public class Turtle extends SelfMovable {
-	Image turtle1;
-	Image turtle2;
-	Image turtle3;
-	private int speed;
-	int i = 1;
-	boolean bool = true;
-	@Override
-	public void moveAct(long now) {
 
-				if (now/900000000  % 3 ==0) {
-					setImage(turtle2);
+  ArrayList<Image> turtleImages;
 
-				}
-				else if (now/900000000 % 3 == 1) {
-					setImage(turtle1);
+  public Turtle(double speed, int xPos) {
+    turtleImages = new ArrayList<>() {{
+      add(new Image(FileName.IMAGE_TURTLES.get(0)));
+      add(new Image(FileName.IMAGE_TURTLES.get(1)));
+      add(new Image(FileName.IMAGE_TURTLES.get(2)));
+    }};
+    initSelfMovable(FileName.IMAGE_TURTLES.get(0), xPos, speed);
+  }
 
-				}
-				else if (now/900000000 %3 == 2) {
-					setImage(turtle3);
 
-				}
+  @Override
+  public void transformAct(long now) {
+    int index = (int) ((now / 900000000) % 3);
+    setImage(turtleImages.get(index));
+  }
 
-		movePos(speed , 0);
-		if (getX() > 700 && speed>0)
-			setX(-200);
-		if (getX() < -75 && speed<0)
-			setX(700);
-	}
+  private AnimationTimer Timer() {
+    return new AnimationTimer() {
+      @Override
+      public void handle(long now) {
+        moveAct(now);
+        transformAct(now);
+      }
+    };
+  }
 
-	public Turtle(int xpos, int ypos, int s, int w, int h) {
-		super(s);
-		turtle1 = new Image("/frogger/image/water/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("/frogger/image/water/TurtleAnimation2.png", w, h, true, true);
-		turtle3 = new Image("/frogger/image/water/TurtleAnimation3.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		setImage(turtle2);
-	}
+  @Override
+  public void run() {
+    Timer().start();
+  }
+
 }

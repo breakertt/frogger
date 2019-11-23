@@ -1,54 +1,58 @@
 package frogger.model.selfMovable;
 
+import frogger.constant.FileName;
+import java.util.ArrayList;
+import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 
 public class WetTurtle extends SelfMovable {
-	Image turtle1;
-	Image turtle2;
-	Image turtle3;
-	Image turtle4;
-	private int speed;
-	int i = 1;
-	boolean bool = true;
-	boolean sunk = false;
-	@Override
-	public void moveAct(long now) {
 
-				if (now/900000000  % 4 ==0) {
-					setImage(turtle2);
-					sunk = false;
+  ArrayList<Image> wetTurtleImages;
+  private boolean sunk = false;
 
-				}
-				else if (now/900000000 % 4 == 1) {
-					setImage(turtle1);
-					sunk = false;
-				}
-				else if (now/900000000 %4 == 2) {
-					setImage(turtle3);
-					sunk = false;
-				} else if (now/900000000 %4 == 3) {
-					setImage(turtle4);
-					sunk = true;
-				}
-			
-		movePos(speed , 0);
-		if (getX() > 700 && speed>0)
-			setX(-200);
-		if (getX() < -75 && speed<0)
-			setX(700);
-	}
-	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
-		super(s);
-		turtle1 = new Image("/frogger/image/water/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("/frogger/image/water/TurtleAnimation2Wet.png", w, h, true, true);
-		turtle3 = new Image("/frogger/image/water/TurtleAnimation3Wet.png", w, h, true, true);
-		turtle4 = new Image("/frogger/image/water/TurtleAnimation4Wet.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		setImage(turtle2);
-	}
-	public boolean isSunk() {
-		return sunk;
-	}
+  public WetTurtle(double speed, int xPos) {
+    wetTurtleImages = new ArrayList<>() {{
+      add(new Image(FileName.IMAGE_WET_TURTLES.get(0)));
+      add(new Image(FileName.IMAGE_WET_TURTLES.get(1)));
+      add(new Image(FileName.IMAGE_WET_TURTLES.get(2)));
+      add(new Image(FileName.IMAGE_WET_TURTLES.get(3)));
+    }};
+    initSelfMovable(FileName.IMAGE_TURTLES.get(0), xPos, speed);
+  }
+
+
+  @Override
+  public void transformAct(long now) {
+    int index = (int) ((now / 900000000) % 4);
+    setImage(wetTurtleImages.get(index));
+    if (index == 3) {
+      setSunk(true);
+    }
+    else {
+      setSunk(false);
+    }
+  }
+
+  private AnimationTimer Timer() {
+    return new AnimationTimer() {
+      @Override
+      public void handle(long now) {
+        moveAct(now);
+        transformAct(now);
+      }
+    };
+  }
+
+  @Override
+  public void run() {
+    Timer().start();
+  }
+
+  public boolean isSunk() {
+    return sunk;
+  }
+
+  private void setSunk(boolean sunk) {
+    this.sunk = sunk;
+  }
 }

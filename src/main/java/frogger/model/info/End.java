@@ -5,11 +5,17 @@ import javafx.scene.image.Image;
 
 public class End extends Movable {
 	boolean activated = false;
+
+	@Override
+	public void transformAct(long now) {
+
+	}
+
 	@Override
 	public void moveAct(long now) {
 		// TODO Auto-generated method st
 	}
-	
+
 	public End(int x, int y) {
 		setX(x);
 		setY(y);

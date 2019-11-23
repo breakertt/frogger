@@ -1,21 +1,21 @@
 package frogger.model;
 
+import frogger.model.selfMovable.SelfMovable;
 import java.util.HashSet;
 import java.util.Set;
-import javafx.scene.image.ImageView;
 
 public class Lane {
-  private Set<Movable> movables;
+  private Set<SelfMovable> selfMovables;
 
   public Lane() {
-    movables = new HashSet<Movable>();
+    selfMovables = new HashSet<SelfMovable>();
   }
 
-  public void add(Movable movable) {
-    movables.add(movable);
+  public void add(SelfMovable selfMovable) {
+    selfMovables.add(selfMovable);
   }
 
-  public Set<Movable> getMovables() {
-    return movables;
+  public Set<SelfMovable> getSelfMovables() {
+    return selfMovables;
   }
 }

@@ -4,6 +4,7 @@ import frogger.constant.GameStatus;
 import frogger.controller.GameController;
 import frogger.model.Lane;
 import frogger.model.Movable;
+import frogger.model.selfMovable.SelfMovable;
 import java.util.ArrayList;
 import java.util.Set;
 import javafx.scene.Scene;
@@ -16,13 +17,15 @@ import frogger.model.info.Score;
 public enum GameManager {
   INSTANCE;
 
+  private int frame;
+
   private Map map;
 
   private GameController gameController;
 
   private Scene gameScene;
 
-  private GameStatus gameStauts;
+  private GameStatus gameStatus;
 
   private Life life;
 
@@ -34,7 +37,8 @@ public enum GameManager {
     this.map = map;
     this.gameController = gameController;
     this.gameScene = gameScene;
-    this.gameStauts = GameStatus.START;
+    this.gameStatus = GameStatus.START;
+    this.frame = 0;
     this.life = new Life();
     this.currentScore = new Score();
     ScoreManager.INSTANCE.add(this.currentScore);
@@ -51,19 +55,14 @@ public enum GameManager {
   }
 
   private void run() {
-    runSelfMovable((ArrayList<Lane>)  map.getLaneListElement());
-    runSelfMovable((Set<Movable>) (Set<?>) map.getCars());
-    runSelfMovable((Set<Movable>) (Set<?>) map.getTrucks());
-    runSelfMovable((Set<Movable>) (Set<?>) map.getLogs());
-    runSelfMovable((Set<Movable>) (Set<?>) map.getTurtles());
-    runSelfMovable((Set<Movable>) (Set<?>) map.getWetTurtles());
+    runSelfMovable((ArrayList<Lane>) map.getLaneListElement());
     runSelfMovable(map.getFrog());
   }
 
   private void runSelfMovable(ArrayList<Lane> laneArrayList) {
-    for (Lane lane: laneArrayList) {
-      for (Movable movable: lane.getMovables()) {
-        movable.run();
+    for (Lane lane : laneArrayList) {
+      for (SelfMovable selfMovable : lane.getSelfMovables()) {
+        selfMovable.run();
       }
     }
   }
@@ -89,5 +88,13 @@ public enum GameManager {
   public void setScoreValue(int value) {
     currentScore.Increase(value - currentScore.getValue());
     updateScore();
+  }
+
+  public int getFrame() {
+    return frame;
+  }
+
+  public void addOne() {
+    this.frame++;
   }
 }

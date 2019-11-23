@@ -1,5 +1,6 @@
 package frogger.model;
 
+import frogger.util.GameManager;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 
@@ -23,6 +24,9 @@ public abstract class Movable extends ImageView {
     return new AnimationTimer() {
       @Override
       public void handle(long now) {
+//        System.out.print(this);
+//        System.out.print(" ");
+//        System.out.println(now);
         moveAct(now);
         transformAct(now);
       }
@@ -33,9 +37,7 @@ public abstract class Movable extends ImageView {
     Timer().start();
   }
 
-  public void transformAct(long now) {
-
-  }
+  public abstract void transformAct(long now);
 
   public abstract void moveAct(long now);
 }

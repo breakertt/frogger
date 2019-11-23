@@ -4,7 +4,6 @@ import frogger.constant.Death;
 import frogger.model.info.End;
 import frogger.model.selfMovable.Car;
 import frogger.model.selfMovable.Log;
-import frogger.model.selfMovable.Truck;
 import frogger.model.selfMovable.Turtle;
 import frogger.model.selfMovable.WetTurtle;
 import frogger.util.GameManager;
@@ -258,9 +257,6 @@ public class Frog extends Movable {
     if (getIntersectingObjects(Car.class).size() >= 1) {
       carDeath = true;
     }
-    if (getIntersectingObjects(Truck.class).size() >= 1) {
-      carDeath = true;
-    }
 
     // unknown
     if (getX() == 240 && getY() == 82) {
@@ -277,7 +273,7 @@ public class Frog extends Movable {
       // check on log
     } else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
       movePos(-1, 0);
-      // check on wetturtle
+      // check on wetTurtle
     } else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
       if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
         waterDeath = true;
@@ -301,6 +297,11 @@ public class Frog extends Movable {
     } else if (getY() < 363) {
       waterDeath = true;
     }
+  }
+
+  @Override
+  public void transformAct(long now) {
+
   }
 
   @Override
