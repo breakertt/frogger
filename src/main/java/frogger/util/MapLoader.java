@@ -72,6 +72,6 @@ public class MapLoader {
     laneAdd(11, new Car(1, 600, 1));
 
 
-    frog = new Frog("/frogger/image/frogger/froggerUp.png");
+    frog = new Frog();
   }
 }

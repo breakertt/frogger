@@ -2,10 +2,6 @@ package frogger.model;
 
 import frogger.constant.Death;
 import frogger.model.info.End;
-import frogger.model.selfMovable.Car;
-import frogger.model.selfMovable.Log;
-import frogger.model.selfMovable.Turtle;
-import frogger.model.selfMovable.WetTurtle;
 import frogger.util.GameManager;
 import java.util.ArrayList;
 
@@ -25,10 +21,12 @@ public class Frog extends Movable {
 
   int points = 0;
   int end = 0;
-  private boolean jumpLock = false;
   boolean noMove = false;
-  double movement = 50;
-  double movementX = 10.666666 * 2;
+
+  private double jumpX = 40;
+  private double jumpY = 50;
+  private boolean jumpLock = false;
+
   int imgSize = 40;
   private Death death;
   boolean scoreChanged = false;
@@ -38,26 +36,25 @@ public class Frog extends Movable {
   ArrayList<End> inter = new ArrayList<End>();
 
 
-  public Frog(String imageLink) {
-    setImage(new Image(imageLink, imgSize, imgSize, true, true));
-    setX(300);
-    setY(600);
+  public Frog() {
     ImgFactory();
     deathFrame = new DeathFrame();
-    this.death = Death.NONE;
+    reset();
   }
 
   public class DeathFrame {
     private int offset = 1;
-    private int loopFrameNum;
 
     public int getFrameNum(long now, int loopFrameNum) {
       int sec = (int) ((now / 900000000) % loopFrameNum);
       if (offset == 1) {
         this.offset = sec;
-        this.loopFrameNum = loopFrameNum;
       }
-      return (sec + this.loopFrameNum - this.offset) % this.loopFrameNum;
+      return (sec + loopFrameNum - this.offset) % loopFrameNum;
+    }
+
+    public void reset() {
+      offset = 1;
     }
   }
 
@@ -86,49 +83,48 @@ public class Frog extends Movable {
         true);
     jumpImg[3][1] = new Image("/frogger/image/frogger/froggerRightJump.png", imgSize, imgSize, true,
         true);
-    waterDeathImg = new Image[5];
-    waterDeathImg[0] = jumpImg[0][0];
-    waterDeathImg[1] = new Image("/frogger/image/water/waterdeath1.png", imgSize, imgSize, true,
+    waterDeathImg = new Image[4];
+    waterDeathImg[0] = new Image("/frogger/image/water/waterdeath1.png", imgSize, imgSize, true,
         true);
-    waterDeathImg[2] = new Image("/frogger/image/water/waterdeath2.png", imgSize, imgSize, true,
+    waterDeathImg[1] = new Image("/frogger/image/water/waterdeath2.png", imgSize, imgSize, true,
         true);
-    waterDeathImg[3] = new Image("/frogger/image/water/waterdeath3.png", imgSize, imgSize, true,
+    waterDeathImg[2] = new Image("/frogger/image/water/waterdeath3.png", imgSize, imgSize, true,
         true);
-    waterDeathImg[4] = new Image("/frogger/image/water/waterdeath4.png", imgSize, imgSize, true,
+    waterDeathImg[3] = new Image("/frogger/image/water/waterdeath4.png", imgSize, imgSize, true,
         true);
-    carDeathImg = new Image[4];
-    carDeathImg[0] = jumpImg[0][0];
-    carDeathImg[1] = new Image("/frogger/image/ground/cardeath1.png", imgSize, imgSize, true, true);
-    carDeathImg[2] = new Image("/frogger/image/ground/cardeath2.png", imgSize, imgSize, true, true);
-    carDeathImg[3] = new Image("/frogger/image/ground/cardeath3.png", imgSize, imgSize, true, true);
+    carDeathImg = new Image[3];
+    carDeathImg[0] = new Image("/frogger/image/ground/cardeath1.png", imgSize, imgSize, true, true);
+    carDeathImg[1] = new Image("/frogger/image/ground/cardeath2.png", imgSize, imgSize, true, true);
+    carDeathImg[2] = new Image("/frogger/image/ground/cardeath3.png", imgSize, imgSize, true, true);
   }
 
   public void handleKeyPressed(KeyEvent event) {
-    if (noMove) {
+    if (noMove || jumpLock) {
       return;
     }
     switch (event.getCode()) {
       case UP:
       case W:
-        movePos(0, -movement);
+        movePos(0, -jumpY);
         setImage(jumpImg[0][1]);
         break;
       case LEFT:
       case A:
-        movePos(-movementX, 0);
+        movePos(-jumpX, 0);
         setImage(jumpImg[1][1]);
         break;
       case DOWN:
       case S:
-        movePos(0, movement);
+        movePos(0, jumpY);
         setImage(jumpImg[2][1]);
         break;
       case RIGHT:
       case D:
-        movePos(movementX, 0);
+        movePos(jumpX, 0);
         setImage(jumpImg[3][1]);
         break;
     }
+    jumpLock = true;
   }
 
   public void handleKeyReleased(KeyEvent event) {
@@ -158,6 +154,7 @@ public class Frog extends Movable {
         setImage(jumpImg[3][0]);
         break;
     }
+    jumpLock = false;
   }
 
   public <A extends Movable> List<A> getObjects(Class<A> cls) {
@@ -192,11 +189,12 @@ public class Frog extends Movable {
     switch (death) {
       case DROP:
         noMove = true;
-        loopFrameNum = 5;
-        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum);
-        if (frameNumNow != loopFrameNum - 1) {
+        loopFrameNum = waterDeathImg.length;
+        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum + 1);
+        if (frameNumNow != loopFrameNum) {
           setImage(waterDeathImg[frameNumNow]);
         } else {
+          deathFrame.reset();
           this.reset();
           scoreChanged = true;
           noMove = false;
@@ -204,11 +202,16 @@ public class Frog extends Movable {
         break;
       case CRASH:
         noMove = true;
-        loopFrameNum = 4;
-        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum);
-        if (frameNumNow != loopFrameNum - 1) {
-          setImage(carDeathImg[frameNumNow]);
+        loopFrameNum = carDeathImg.length;
+        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum + 1);
+        if (frameNumNow != loopFrameNum) {
+          if (getImage() != carDeathImg[frameNumNow]) {
+            setImage(carDeathImg[frameNumNow]);
+            System.out.println(frameNumNow + "  " + loopFrameNum);
+          };
         } else {
+          System.out.println("End!");
+          deathFrame.reset();
           this.reset();
           scoreChanged = true;
           noMove = false;
@@ -225,22 +228,23 @@ public class Frog extends Movable {
     resetX();
     resetY();
     this.death = Death.NONE;
-    setImage(waterDeathImg[0]);
+    setImage(jumpImg[0][0]);
   }
 
   public void check(long now) {
 //    System.out.println(getY());
 
-    // lower bound
+    // jump lower, jump back
     if (getY() > 600) {
       resetY();
     }
 
+    // out of screen, game over
     if (getX() < 0 || getX() > 700) {
-      // game over
     }
 
     if (getY() < 300) {
+
       death = Death.DROP;
     }
 
