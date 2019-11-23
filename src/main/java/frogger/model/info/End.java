@@ -16,6 +16,11 @@ public class End extends Movable {
 		// TODO Auto-generated method st
 	}
 
+	@Override
+	public void checkAct(long now) {
+
+	}
+
 	public End(int x, int y) {
 		setX(x);
 		setY(y);

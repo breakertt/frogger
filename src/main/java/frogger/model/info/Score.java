@@ -17,9 +17,14 @@ public class Score {
     this("Unknown");
   }
 
-  public void Increase(int value) {
+  public void gain(int value) {
     this.value += value;
   }
+
+  public void lose(int value) {
+    this.value += value;
+  }
+
 
   public int getValue() {
     return value;

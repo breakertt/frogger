@@ -24,9 +24,7 @@ public abstract class Movable extends ImageView {
     return new AnimationTimer() {
       @Override
       public void handle(long now) {
-//        System.out.print(this);
-//        System.out.print(" ");
-//        System.out.println(now);
+        checkAct(now);
         moveAct(now);
         transformAct(now);
       }
@@ -40,4 +38,6 @@ public abstract class Movable extends ImageView {
   public abstract void transformAct(long now);
 
   public abstract void moveAct(long now);
+
+  public abstract void checkAct(long now);
 }

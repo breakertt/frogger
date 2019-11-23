@@ -1,9 +1,11 @@
 package frogger.util;
 
+import frogger.constant.Death;
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
 import frogger.model.Lane;
 import frogger.model.Movable;
+import frogger.model.selfMovable.Car;
 import frogger.model.selfMovable.SelfMovable;
 import java.util.ArrayList;
 import java.util.Set;
@@ -51,6 +53,13 @@ public enum GameManager {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
     }
+  }
+
+  private void initInfo() {
+
+  }
+
+  private void updateInfo() {
     gameController.updateScore(this.currentScore, this.highestScore);
   }
 
@@ -71,12 +80,6 @@ public enum GameManager {
     movable.run();
   }
 
-  private void runSelfMovable(Set<Movable> movables) {
-    for (Movable movable : movables) {
-      movable.run();
-    }
-  }
-
   public void handleKeyPressed(KeyEvent event) {
     map.getFrog().handleKeyPressed(event);
   }
@@ -86,15 +89,28 @@ public enum GameManager {
   }
 
   public void setScoreValue(int value) {
-    currentScore.Increase(value - currentScore.getValue());
+    currentScore.gain(value - currentScore.getValue());
     updateScore();
   }
 
-  public int getFrame() {
-    return frame;
+  public Map getMap() {
+    return map;
   }
 
-  public void addOne() {
-    this.frame++;
+  public void handleCarTouched(Car car) {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
+    map.getFrog().setDeath(Death.CRASH);
+    life.lose();
+    currentScore.lose(10);
+    updateScore();
+    if (life.getCurrent() <= 0) {
+      loseGame();
+    }
+    updateInfo();
+  }
+
+  private void loseGame() {
   }
 }

@@ -27,23 +27,46 @@ public class Frog extends Movable {
   int end = 0;
   private boolean jumpLock = false;
   boolean noMove = false;
-  double movement = 25;
+  double movement = 50;
   double movementX = 10.666666 * 2;
   int imgSize = 40;
-  Death death;
-  boolean carDeath = false;
-  boolean waterDeath = false;
-  boolean stop = false;
+  private Death death;
   boolean scoreChanged = false;
   int carD = 0;
   double yPosSmallest = 700;
+  DeathFrame deathFrame;
   ArrayList<End> inter = new ArrayList<End>();
+
 
   public Frog(String imageLink) {
     setImage(new Image(imageLink, imgSize, imgSize, true, true));
     setX(300);
     setY(600);
     ImgFactory();
+    deathFrame = new DeathFrame();
+    this.death = Death.NONE;
+  }
+
+  public class DeathFrame {
+    private int offset = 1;
+    private int loopFrameNum;
+
+    public int getFrameNum(long now, int loopFrameNum) {
+      int sec = (int) ((now / 900000000) % loopFrameNum);
+      if (offset == 1) {
+        this.offset = sec;
+        this.loopFrameNum = loopFrameNum;
+      }
+      return (sec + this.loopFrameNum - this.offset) % this.loopFrameNum;
+    }
+  }
+
+  public Death getDeath() {
+    return death;
+  }
+
+  public void setDeath(Death death) {
+    this.death = death;
   }
 
   public void ImgFactory() {
@@ -120,22 +143,18 @@ public class Frog extends Movable {
           yPosSmallest = getY();
           points += 10;
         }
-        movePos(0, -movement);
         setImage(jumpImg[0][0]);
         break;
       case DOWN:
       case S:
-        movePos(0, movement);
         setImage(jumpImg[2][0]);
         break;
       case LEFT:
       case A:
-        movePos(-movementX, 0);
         setImage(jumpImg[1][0]);
         break;
       case RIGHT:
       case D:
-        movePos(movementX, 0);
         setImage(jumpImg[3][0]);
         break;
     }
@@ -168,101 +187,66 @@ public class Frog extends Movable {
   }
 
   public void deathTransform(long now, Death death) {
+    int loopFrameNum  = 0;
+    int frameNumNow = 0;
     switch (death) {
       case DROP:
         noMove = true;
-        if ((now) % 11 == 0) {
-          carD++;
-        }
-        if (carD == 1) {
-          setImage(waterDeathImg[1]);
-        }
-        if (carD == 2) {
-          setImage(waterDeathImg[2]);
-        }
-        if (carD == 3) {
-          setImage(waterDeathImg[3]);
-        }
-        if (carD == 4) {
-          setImage(waterDeathImg[4]);
-        }
-        if (carD == 5) {
-          setX(300);
-          setY(629.8 + movement);
-          waterDeath = false;
-          carD = 0;
-          setImage(waterDeathImg[0]);
+        loopFrameNum = 5;
+        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum);
+        if (frameNumNow != loopFrameNum - 1) {
+          setImage(waterDeathImg[frameNumNow]);
+        } else {
+          this.reset();
+          scoreChanged = true;
           noMove = false;
-          if (points > 50) {
-            points -= 50;
-            scoreChanged = true;
-          }
         }
         break;
       case CRASH:
         noMove = true;
-        if ((now) % 11 == 0) {
-          carD++;
-        }
-        if (carD == 1) {
-          setImage(new Image("/frogger/image/ground/cardeath1.png", imgSize, imgSize, true, true));
-        }
-        if (carD == 2) {
-          setImage(new Image("/frogger/image/ground/cardeath2.png", imgSize, imgSize, true, true));
-        }
-        if (carD == 3) {
-          setImage(new Image("/frogger/image/ground/cardeath3.png", imgSize, imgSize, true, true));
-        }
-        if (carD == 4) {
-          setX(300);
-          setY(629.8 + movement);
-          carDeath = false;
-          carD = 0;
-          setImage(new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true));
+        loopFrameNum = 4;
+        frameNumNow = deathFrame.getFrameNum(now, loopFrameNum);
+        if (frameNumNow != loopFrameNum - 1) {
+          setImage(carDeathImg[frameNumNow]);
+        } else {
+          this.reset();
+          scoreChanged = true;
           noMove = false;
-          if (points > 50) {
-            points -= 50;
-            scoreChanged = true;
-          }
         }
-        break;
-      case EAT:
         break;
     }
   }
 
-  public void Check(long now) {
-    if (getY() < 0 || getY() > 734) {
-      setX(300);
-      setY(629.8 + movement);
-    }
-    if (getX() < 0) {
-      movePos(movement * 2, 0);
+  private void resetY() {setY(600);}
+
+  private void resetX() {setX(300);}
+
+  private void reset() {
+    resetX();
+    resetY();
+    this.death = Death.NONE;
+    setImage(waterDeathImg[0]);
+  }
+
+  public void check(long now) {
+//    System.out.println(getY());
+
+    // lower bound
+    if (getY() > 600) {
+      resetY();
     }
 
-    // show death if possible
-    if (carDeath) {
-      deathTransform(now, Death.CRASH);
-    }
-    if (waterDeath) {
-      deathTransform(now, Death.DROP);
+    if (getX() < 0 || getX() > 700) {
+      // game over
     }
 
-    // unknown
-    if (getX() > 700) {
-      movePos(-movement * 2, 0);
+    if (getY() < 300) {
+      death = Death.DROP;
     }
 
+    return;
     // check crash
-    if (getIntersectingObjects(Car.class).size() >= 1) {
-      carDeath = true;
-    }
-
-    // unknown
-    if (getX() == 240 && getY() == 82) {
-      stop = true;
-    }
-
+/**
     // check on log
     if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
       if (getIntersectingObjects(Log.class).get(0).getLeft()) {
@@ -276,7 +260,7 @@ public class Frog extends Movable {
       // check on wetTurtle
     } else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
       if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
-        waterDeath = true;
+        death = Death.DROP;
       } else {
         movePos(-1, 0);
       }
@@ -295,18 +279,22 @@ public class Frog extends Movable {
       setX(300);
       setY(629.8 + movement);
     } else if (getY() < 363) {
-      waterDeath = true;
+      death = Death.DROP;
     }
+ **/
   }
 
   @Override
   public void transformAct(long now) {
-
+    // show death if possible
+    if (this.death != Death.NONE) {
+      deathTransform(now, this.death);
+    }
   }
 
   @Override
   public void moveAct(long now) {
-    Check(now);
+    check(now);
 
     if (this.isScoreChanged()) {
       GameManager.INSTANCE.setScoreValue(points);
@@ -315,12 +303,13 @@ public class Frog extends Movable {
 
   }
 
-  public boolean getStop() {
-    return end == 5;
+  @Override
+  public void checkAct(long now) {
+
   }
 
-  public int getPoints() {
-    return points;
+  public boolean getStop() {
+    return end == 5;
   }
 
   public boolean isScoreChanged() {

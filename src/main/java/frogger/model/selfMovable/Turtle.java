@@ -23,7 +23,9 @@ public class Turtle extends SelfMovable {
   @Override
   public void transformAct(long now) {
     int index = (int) ((now / 900000000) % 3);
-    setImage(turtleImages.get(index));
+    if (getImage() != turtleImages.get(index)) {
+      setImage(turtleImages.get(index));
+    }
   }
 
   private AnimationTimer Timer() {
