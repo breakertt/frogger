@@ -44,7 +44,7 @@ public enum GameManager {
     this.gameStatus = GameStatus.START;
     this.run();
     this.initInfo();
-    ThemePlayer.INSTANCE.themeMusicFactory("START");
+    ThemePlayer.INSTANCE.themeMusicFactory("MAIN");
   }
 
   private void initInfo() {
@@ -135,6 +135,7 @@ public enum GameManager {
       winGame();
     } else {
       gameController.activateTimeIndicator(time.getSecondsLeft());
+      ThemePlayer.INSTANCE.themeMusicFactory("HOMED");
     }
     time.reset();
     map.getFrog().resetyPosSmallest();
@@ -142,10 +143,12 @@ public enum GameManager {
   }
 
   private void winGame() {
+    ThemePlayer.INSTANCE.themeMusicFactory("OVER");
     gameController.activateWinIndicator();
   }
 
   private void loseGame() {
+    ThemePlayer.INSTANCE.themeMusicFactory("OVER");
     gameController.activateLoseIndicator();
   }
 
@@ -199,6 +202,7 @@ public enum GameManager {
       System.out.println("Lose!");
     }
     updateInfo();
+    ThemePlayer.INSTANCE.themeMusicFactory("REBORN");
   }
 
   public void handleFrogJumpUp() {
