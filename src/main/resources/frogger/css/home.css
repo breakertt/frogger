@@ -1,0 +1,34 @@
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("../font/PressStart2P.ttf");
+}
+
+.root {
+  -fx-font-family: "Press Start 2P";
+  -fx-background-image: url("../image/background/home.png");
+}
+
+.scoreBoard {
+  -fx-font-family: "Press Start 2P";
+  -fx-font-size: 26px;
+}
+
+.homeBtn {
+  -fx-font-family: "Press Start 2P";
+  -fx-background-color: black;
+  -fx-text-fill: red;
+  -fx-font-size: 26px;
+}
+
+.homeBtn:pressed {
+  -fx-text-fill: #00ff0b;
+}
+
+.nameTextBox {
+  -fx-border-radius: 0 0 0 0;
+  -fx-background-radius: 0 0 0 0;
+  -fx-font-family: "Press Start 2P";
+  -fx-background-color: black;
+  -fx-text-fill: white;
+  -fx-font-size: 22px;
+}

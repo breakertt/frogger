@@ -25,8 +25,6 @@ public enum GameManager {
 
   private GameController gameController;
 
-  private Scene gameScene;
-
   private GameStatus gameStatus;
 
   private Life life;
@@ -37,10 +35,9 @@ public enum GameManager {
 
   private Score highestScore;
 
-  public void init(Map map, GameController gameController, Scene gameScene) {
+  public void init(Map map, GameController gameController) {
     this.map = map;
     this.gameController = gameController;
-    this.gameScene = gameScene;
     this.gameStatus = GameStatus.START;
     this.run();
     this.initInfo();
@@ -60,6 +57,7 @@ public enum GameManager {
   private void updateScore() {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
+      ScoreManager.INSTANCE.update(this.currentScore);
     }
   }
 
@@ -69,7 +67,7 @@ public enum GameManager {
   }
 
   private void run() {
-    runSelfMovable((ArrayList<Lane>) map.getLaneListElement());
+    runSelfMovable(map.getLaneListElement());
     runSelfMovable(map.getFrog());
   }
 
@@ -94,11 +92,6 @@ public enum GameManager {
 
   public void handleKeyReleased(KeyEvent event) {
     map.getFrog().handleKeyReleased(event);
-  }
-
-  public void setScoreValue(int value) {
-    currentScore.gain(value - currentScore.getValue());
-    updateScore();
   }
 
   public Map getMap() {
@@ -158,6 +151,7 @@ public enum GameManager {
     for (End end : ends) {
       if (!end.isFrogExist()) {
         isFrogAllExist = false;
+        break;
       }
     }
     return isFrogAllExist;

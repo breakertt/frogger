@@ -3,7 +3,9 @@ package frogger.util;
 import frogger.Main;
 import frogger.controller.GameController;
 import frogger.model.Map;
+import frogger.util.musicPlayer.ThemePlayer;
 import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,6 +27,23 @@ public enum SceneSwitch {
     Main.getPrimaryStage().setScene(scene);
   }
 
+  public void switchToHome() {
+    try {
+      ThemePlayer.INSTANCE.themeMusicFactory("START");
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/home.fxml"));
+      Pane root = loader.load();
+      Scene homeScene = new Scene(root);
+
+      hideStage();
+      setScene(homeScene);
+      showStage();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   public void switchToGame() {
     try {
       hideStage();
@@ -42,7 +61,7 @@ public enum SceneSwitch {
 
       GameController gameController = loader.getController();
       ScoreManager.INSTANCE.init();
-      GameManager.INSTANCE.init(map, gameController, gameScene);
+      GameManager.INSTANCE.init(map, gameController);
 
       gameScene.addEventHandler(
           KeyEvent.KEY_PRESSED, event -> GameManager.INSTANCE.handleKeyPressed(event));
@@ -53,5 +72,9 @@ public enum SceneSwitch {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public void exitGame() {
+    Platform.exit();
   }
 }

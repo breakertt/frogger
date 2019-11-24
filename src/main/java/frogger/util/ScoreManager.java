@@ -18,7 +18,12 @@ public enum ScoreManager {
   }
 
   public Score getHighestScore() {
-    return highestScore;
+    if (highestScore != null) {
+      return highestScore;
+    }
+    else {
+      return new Score();
+    }
   }
 
   public void add(Score score) {

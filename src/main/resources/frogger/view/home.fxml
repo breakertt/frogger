@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="800.0" prefWidth="700.0" styleClass="root" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frogger.controller.HomeController">
+  <stylesheets>
+    <URL value="@../css/home.css" />
+  </stylesheets>
+  <top>
+    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0" styleClass="scoreBoard" BorderPane.alignment="TOP_LEFT">
+      <children>
+        <Text fx:id="currentScoreValue" fill="RED" text="00000">
+          <HBox.margin>
+            <Insets left="75.0" />
+          </HBox.margin>
+        </Text>
+        <Text fx:id="highestScoreValue" fill="RED" text="00000">
+          <HBox.margin>
+            <Insets left="75.0" />
+          </HBox.margin>
+        </Text>
+      </children>
+      <BorderPane.margin>
+        <Insets top="26.0" />
+      </BorderPane.margin>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+    </HBox>
+  </top>
+
+  <bottom>
+  </bottom>
+  <center>
+  </center>
+
+  <fx:define>
+  </fx:define>
+   <bottom>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="nameTextBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" promptText="Enter Your Name Here" styleClass="nameTextBox">
+               <VBox.margin>
+                  <Insets bottom="40.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="startBtn" mnemonicParsing="false" styleClass="homeBtn" onAction="#handleClickStart" text="START GAME" />
+           <Button fx:id="exitBtn" mnemonicParsing="false" styleClass="homeBtn" onAction="#handleClickExit" text="EXIT GAME" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+</BorderPane>
