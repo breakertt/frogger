@@ -7,7 +7,6 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<?import frogger.model.info.End?>
 <?import java.util.ArrayList?>
 <BorderPane prefHeight="800.0" prefWidth="700.0" styleClass="root" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frogger.controller.GameController">
   <stylesheets>
@@ -48,7 +47,7 @@
       <children>
         <HBox fx:id="lifeBox">
           <children>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="life0" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../image/background/life.png" />
               </image>
@@ -56,7 +55,7 @@
                 <Insets left="3.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="life1" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../image/background/life.png" />
               </image>
@@ -64,7 +63,7 @@
                 <Insets left="3.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="life2" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../image/background/life.png" />
               </image>
@@ -72,7 +71,7 @@
                 <Insets left="3.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="life3" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/life.png" />
               </image>
@@ -80,7 +79,7 @@
                 <Insets left="3.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="life4" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/life.png" />
               </image>
@@ -95,7 +94,7 @@
         </HBox>
         <HBox fx:id="levelBox" nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1">
           <children>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="level0" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -103,7 +102,7 @@
                 <Insets />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level1" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -111,7 +110,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level2" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -119,7 +118,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level3" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -127,7 +126,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level4" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -135,7 +134,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level5" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -143,7 +142,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level6" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -151,7 +150,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level7" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -159,7 +158,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level8" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -167,7 +166,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level9" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -175,7 +174,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level10" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -183,7 +182,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level11" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -191,7 +190,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level12" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -199,7 +198,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level13" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -207,7 +206,7 @@
                 <Insets left="10.0" />
               </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="level14" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../image/background/level.png" />
               </image>
@@ -223,7 +222,7 @@
             <Insets left="27.0" />
           </padding>
         </HBox>
-        <Rectangle fill="#1bc200" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="325.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+        <Rectangle fx:id="timeBar" fill="#1bc200" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="325.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
           <GridPane.margin>
             <Insets right="100.0" />
           </GridPane.margin>
@@ -288,6 +287,30 @@
       <fx:reference source="lane10" />
       <fx:reference source="lane11" />
       <fx:reference source="lane12" />
+    </ArrayList>
+    <ArrayList fx:id="lifeList">
+      <fx:reference source="life0" />
+      <fx:reference source="life1" />
+      <fx:reference source="life2" />
+      <fx:reference source="life3" />
+      <fx:reference source="life4" />
+    </ArrayList>
+    <ArrayList fx:id="levelList">
+      <fx:reference source="level0" />
+      <fx:reference source="level1" />
+      <fx:reference source="level2" />
+      <fx:reference source="level3" />
+      <fx:reference source="level4" />
+      <fx:reference source="level5" />
+      <fx:reference source="level6" />
+      <fx:reference source="level7" />
+      <fx:reference source="level8" />
+      <fx:reference source="level9" />
+      <fx:reference source="level10" />
+      <fx:reference source="level11" />
+      <fx:reference source="level12" />
+      <fx:reference source="level13" />
+      <fx:reference source="level14" />
     </ArrayList>
   </fx:define>
 </BorderPane>

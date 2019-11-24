@@ -7,6 +7,7 @@ import frogger.model.Frog;
 import frogger.model.Lane;
 import frogger.model.Movable;
 import frogger.model.info.End;
+import frogger.model.info.Time;
 import frogger.model.selfMovable.Car;
 import frogger.model.selfMovable.SelfMovable;
 import frogger.model.selfMovable.Turtle;
@@ -35,6 +36,8 @@ public enum GameManager {
 
   private Life life;
 
+  private Time time;
+
   private Score currentScore;
 
   private Score highestScore;
@@ -46,10 +49,12 @@ public enum GameManager {
     this.gameStatus = GameStatus.START;
     this.frame = 0;
     this.life = new Life();
+    this.time = new Time();
     this.currentScore = new Score();
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
     this.run();
+    gameController.updateLevel(map.getLevel());
     MusicPlayer.INSTANCE.playMusic();
   }
 
@@ -65,6 +70,7 @@ public enum GameManager {
 
   private void updateInfo() {
     gameController.updateScore(this.currentScore, this.highestScore);
+    gameController.updateLife(this.life);
   }
 
   private void run() {
@@ -121,6 +127,11 @@ public enum GameManager {
 
   public void handleEndTouched(End end) {
     end.setFrog();
+    currentScore.gain(200);
+    updateScore();
+    updateInfo();
+    time.reset();
+    map.getFrog().resetyPosSmallest();
     map.getFrog().reset();
   }
 
@@ -137,16 +148,31 @@ public enum GameManager {
   }
 
   public void HandleFrogDie(Death death) {
-    if (gameStatus == GameStatus.END) {
+    if (gameStatus == GameStatus.END || map.getFrog().getDeath() != Death.NONE) {
       return;
     }
     map.getFrog().setDeath(death);
     life.lose();
-    currentScore.lose(10);
+
+    currentScore.lose(50);
     updateScore();
     if (life.getCurrent() <= 0) {
       loseGame();
     }
     updateInfo();
+  }
+
+  public void handleFrogJumpUp() {
+    if (map.getFrog().getY() > 300 && map.getFrog().getY() < 350) {return;}
+    if (map.getFrog().getY() < map.getFrog().getyPosSmallest()) {
+      map.getFrog().setyPosSmallest(map.getFrog().getY());
+      currentScore.gain(10);
+      updateScore();
+      updateInfo();
+    }
+  }
+
+  public void handleTimeUpdate(int secondsLeft) {
+    gameController.updateTime(secondsLeft);
   }
 }

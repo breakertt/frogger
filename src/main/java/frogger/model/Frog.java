@@ -21,7 +21,6 @@ public class Frog extends Movable {
   Image waterDeathImg[];
   Image carDeathImg[];
 
-  int points = 0;
   int end = 0;
   boolean noMove = false;
 
@@ -32,6 +31,7 @@ public class Frog extends Movable {
   int imgSize = 40;
   private Death death;
   boolean scoreChanged = false;
+
   double yPosSmallest = 700;
   DeathFrame deathFrame;
   ArrayList<End> inter = new ArrayList<End>();
@@ -134,12 +134,8 @@ public class Frog extends Movable {
     switch (event.getCode()) {
       case UP:
       case W:
-        if (getY() < yPosSmallest) {
-          scoreChanged = true;
-          yPosSmallest = getY();
-          points += 10;
-        }
         setImage(jumpImg[0][0]);
+        GameManager.INSTANCE.handleFrogJumpUp();
         break;
       case DOWN:
       case S:
@@ -249,12 +245,6 @@ public class Frog extends Movable {
 
   @Override
   public void moveAct(long now) {
-
-    if (this.isScoreChanged()) {
-      GameManager.INSTANCE.setScoreValue(points);
-    }
-
-
   }
 
   @Override
@@ -273,13 +263,16 @@ public class Frog extends Movable {
     return end == 5;
   }
 
-  public boolean isScoreChanged() {
-    if (scoreChanged) {
-      scoreChanged = false;
-      return true;
-    }
-    return false;
+  public double getyPosSmallest() {
+    return yPosSmallest;
   }
 
+  public void setyPosSmallest(double yPosSmallest) {
+    this.yPosSmallest = yPosSmallest;
+  }
+
+  public void resetyPosSmallest() {
+    this.yPosSmallest = 700;
+  }
 
 }

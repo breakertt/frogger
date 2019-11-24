@@ -63,7 +63,7 @@ public class Map {
   public void load() {
     MapLoader mapLoader = new MapLoader(fileName, this);
     mapLoader.loadMap();
-
+    level = mapLoader.getLevel();
     frog = mapLoader.getFrog();
     laneListElement = mapLoader.getLaneListElement();
   }

@@ -17,6 +17,16 @@ public class MapLoader {
 
   private Map map;
 
+  private int level;
+
+  public int getLevel() {
+    return level;
+  }
+
+  public void setLevel(int level) {
+    this.level = level;
+  }
+
   private ArrayList<Lane> laneListElement;
 
   public ArrayList<Lane> getLaneListElement() {
@@ -51,6 +61,7 @@ public class MapLoader {
   }
 
   public void loadMap() {
+    this.level = 1;
     laneAdd(1, new Log(0.75, 0, 2));
     laneAdd(1, new Log(0.75, 220, 2));
     laneAdd(1, new Log(0.75, 440, 2));

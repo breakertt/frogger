@@ -22,7 +22,10 @@ public class Score {
   }
 
   public void lose(int value) {
-    this.value += value;
+    this.value = this.value - value;
+    if (this.value < 0) {
+      this.value = 0;
+    }
   }
 
 
