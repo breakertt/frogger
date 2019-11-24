@@ -3,17 +3,14 @@ package frogger.util;
 import frogger.constant.Death;
 import frogger.constant.GameStatus;
 import frogger.controller.GameController;
-import frogger.model.Frog;
 import frogger.model.Lane;
 import frogger.model.Movable;
 import frogger.model.info.End;
 import frogger.model.info.Time;
-import frogger.model.selfMovable.Car;
 import frogger.model.selfMovable.SelfMovable;
-import frogger.model.selfMovable.Turtle;
-import frogger.model.selfMovable.WetTurtle;
+import frogger.util.musicPlayer.MusicPlayer;
+import frogger.util.musicPlayer.ThemePlayer;
 import java.util.ArrayList;
-import java.util.Set;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import frogger.model.info.Life;
@@ -47,7 +44,7 @@ public enum GameManager {
     this.gameStatus = GameStatus.START;
     this.run();
     this.initInfo();
-    MusicPlayer.INSTANCE.playMusic();
+    ThemePlayer.INSTANCE.themeMusicFactory("START");
   }
 
   private void initInfo() {
@@ -122,7 +119,6 @@ public enum GameManager {
         }
       }
     }
-    System.out.println(frogWaterDie);
     if (frogWaterDie) HandleFrogDie(Death.DROP);
   }
 
