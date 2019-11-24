@@ -1,5 +1,6 @@
 package frogger.model;
 
+import frogger.model.info.End;
 import frogger.util.MapLoader;
 import frogger.util.MapRender;
 import java.util.ArrayList;
@@ -15,10 +16,16 @@ public class Map {
 
   private Frog frog;
 
+  private ArrayList<End> ends;
+
   private ArrayList<Lane> laneListElement;
 
   public ArrayList<Lane> getLaneListElement() {
     return laneListElement;
+  }
+
+  public ArrayList<End> getEnds() {
+    return ends;
   }
 
   public void setLaneListElement(ArrayList<Lane> laneListElement) {
@@ -63,8 +70,9 @@ public class Map {
   public void load() {
     MapLoader mapLoader = new MapLoader(fileName, this);
     mapLoader.loadMap();
-
+    level = mapLoader.getLevel();
     frog = mapLoader.getFrog();
+    ends = mapLoader.getEnds();
     laneListElement = mapLoader.getLaneListElement();
   }
 

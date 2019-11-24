@@ -12,7 +12,7 @@ public class Life {
   public void lose() {
     current--;
     if (current < 0) {
-      current = 0;
+      current = -1;
     }
   }
 

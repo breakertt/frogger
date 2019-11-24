@@ -17,6 +17,7 @@ public class Turtle extends SelfMovable {
       add(new Image(FileName.IMAGE_TURTLES.get(2)));
     }};
     initSelfMovable(FileName.IMAGE_TURTLES.get(0), xPos, speed);
+    System.out.println(getHeight());
   }
 
 
@@ -28,19 +29,8 @@ public class Turtle extends SelfMovable {
     }
   }
 
-  private AnimationTimer Timer() {
-    return new AnimationTimer() {
-      @Override
-      public void handle(long now) {
-        moveAct(now);
-        transformAct(now);
-      }
-    };
-  }
-
   @Override
-  public void run() {
-    Timer().start();
+  public void checkAct(long now) {
+    if (checkTouchFrog()) GameManager.INSTANCE.handleLogTurtleTouched(this);
   }
-
 }

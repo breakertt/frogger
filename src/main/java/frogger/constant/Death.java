@@ -4,5 +4,6 @@ public enum Death {
   CRASH,
   DROP,
   EAT,
+  TIMEOUT,
   NONE;
 }

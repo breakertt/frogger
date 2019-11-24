@@ -29,4 +29,12 @@ public class FileName {
     put(2, "/frogger/image/water/WetTurtleAnimation2.png");
     put(3, "/frogger/image/water/WetTurtleAnimation3.png");
   }};
+
+  public static final Map<Integer, String> EFFECT_AUDIO = new HashMap<>() {{
+
+  }};
+
+  public static final Map<Integer, String> BG_AUDIO = new HashMap<>() {{
+
+  }};
 }
