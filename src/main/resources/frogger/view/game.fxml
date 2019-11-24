@@ -2,6 +2,7 @@
 
 <?import java.net.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -248,7 +249,7 @@
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints />
+        <RowConstraints />
       </rowConstraints>
       <children>
         <Pane fx:id="lane0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="0" />
@@ -257,8 +258,13 @@
         <Pane fx:id="lane3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="3" />
         <Pane fx:id="lane4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="4" />
         <Pane fx:id="lane5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="5" />
-        <Pane fx:id="lane6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="6" />
-        <Pane fx:id="lane7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="7" />
+        <Pane fx:id="lane6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="6">
+               <children>
+                   <Label fx:id="loseIndicator" alignment="CENTER" layoutX="250.0" styleClass="centerTextBoard" text="GAME OVER" textAlignment="CENTER" textFill="RED" visible="false" />
+                  <Label fx:id="winIndicator" alignment="CENTER" layoutX="250.0" styleClass="centerTextBoard" text="GAME WIN" textAlignment="CENTER" textFill="RED" visible="false" />
+                  <Label fx:id="timeIndicator" alignment="CENTER" layoutX="260.0" layoutY="25.0" styleClass="centerTextBoard" text="TIME 60" textAlignment="CENTER" textFill="RED" visible="false" />
+               </children></Pane>
+      <Pane fx:id="lane7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="7" />
         <Pane fx:id="lane8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="8" />
         <Pane fx:id="lane9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="9" />
         <Pane fx:id="lane10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" GridPane.rowIndex="10" />

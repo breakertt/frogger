@@ -31,9 +31,14 @@ public class Time {
     };
   }
 
+  public int getSecondsLeft() {
+    return secondsLeft;
+  }
+
   public void reset() {
     base = -1;
     secondsLeft = 60;
+    GameManager.INSTANCE.handleTimeUpdate(secondsLeft);
   };
 
 }

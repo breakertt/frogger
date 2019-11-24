@@ -12,3 +12,10 @@
   -fx-font-family: "Press Start 2P";
   -fx-font-size: 26px;
 }
+
+.centerTextBoard {
+  -fx-font-family: "Press Start 2P";
+  -fx-font-size: 22px;
+  -fx-background-color: black;
+  -fx-alignment: center;
+}

@@ -29,6 +29,8 @@ public class MapLoader {
 
   private ArrayList<Lane> laneListElement;
 
+  private ArrayList<End> ends;
+
   public ArrayList<Lane> getLaneListElement() {
     return laneListElement;
   }
@@ -39,9 +41,14 @@ public class MapLoader {
     return frog;
   }
 
+  public ArrayList<End> getEnds() {
+    return ends;
+  }
+
   public MapLoader(String fileName, Map map) {
     this.fileName = fileName;
     this.map = map;
+    this.ends = new ArrayList<>(5);
     this.laneListElement = new ArrayList<Lane>(12);
     for (int i = 0; i < 13; i++) {
       laneListElement.add(new Lane());
@@ -52,7 +59,9 @@ public class MapLoader {
 
   public void initEnd() {
     for (int i = 0; i < 5; i++) {
-      laneAdd(0, new End(22 + 150 * i));
+      End end = new End(22 + 150*i);
+      this.ends.add(end);
+      laneAdd(0, end);
     }
   }
 

@@ -24,8 +24,6 @@ import frogger.model.info.Score;
 public enum GameManager {
   INSTANCE;
 
-  private int frame;
-
   private Map map;
 
   private GameController gameController;
@@ -47,25 +45,25 @@ public enum GameManager {
     this.gameController = gameController;
     this.gameScene = gameScene;
     this.gameStatus = GameStatus.START;
-    this.frame = 0;
+    this.run();
+    this.initInfo();
+    MusicPlayer.INSTANCE.playMusic();
+  }
+
+  private void initInfo() {
     this.life = new Life();
     this.time = new Time();
     this.currentScore = new Score();
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
-    this.run();
     gameController.updateLevel(map.getLevel());
-    MusicPlayer.INSTANCE.playMusic();
+    updateInfo();
   }
 
   private void updateScore() {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
     }
-  }
-
-  private void initInfo() {
-
   }
 
   private void updateInfo() {
@@ -91,6 +89,9 @@ public enum GameManager {
   }
 
   public void handleKeyPressed(KeyEvent event) {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
     map.getFrog().handleKeyPressed(event);
   }
 
@@ -108,8 +109,11 @@ public enum GameManager {
   }
 
   public void handleFrogInWater() {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
     boolean frogWaterDie = true;
-    for (int i = 1; i < 6; i++) {
+    for (int i = 0; i < 6; i++) {
       Lane lane = map.getLaneListElement().get(i);
       for (SelfMovable selfMovable : lane.getSelfMovables()) {
         if (selfMovable.checkTouchFrog()) {
@@ -122,28 +126,62 @@ public enum GameManager {
     if (frogWaterDie) HandleFrogDie(Death.DROP);
   }
 
-  private void loseGame() {
-  }
-
   public void handleEndTouched(End end) {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
     end.setFrog();
     currentScore.gain(200);
     updateScore();
     updateInfo();
+    if (checkWin()) {
+      System.out.println("Win!");
+      winGame();
+    } else {
+      gameController.activateTimeIndicator(time.getSecondsLeft());
+    }
     time.reset();
     map.getFrog().resetyPosSmallest();
     map.getFrog().reset();
   }
 
+  private void winGame() {
+    gameController.activateWinIndicator();
+  }
+
+  private void loseGame() {
+    gameController.activateLoseIndicator();
+  }
+
+  private boolean checkWin() {
+    boolean isFrogAllExist = true;
+    ArrayList<End> ends = map.getEnds();
+    for (End end : ends) {
+      if (!end.isFrogExist()) {
+        isFrogAllExist = false;
+      }
+    }
+    return isFrogAllExist;
+  }
+
   public void handleLogTurtleTouched(SelfMovable selfMovable) {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
     if (map.getFrog().getDeath() == Death.NONE) map.getFrog().movePos(selfMovable.getSpeed(), 0);
   }
 
   public void handleCarTouched() {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
     HandleFrogDie(Death.CRASH);
   }
 
   public void HandleSunkWetTurtleTouched() {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
     HandleFrogDie(Death.DROP);
   }
 
@@ -151,18 +189,26 @@ public enum GameManager {
     if (gameStatus == GameStatus.END || map.getFrog().getDeath() != Death.NONE) {
       return;
     }
-    map.getFrog().setDeath(death);
+    if (death == Death.DROP || death == Death.CRASH) {
+      map.getFrog().setDeath(death);
+    } else if (death == Death.TIMEOUT) {
+      map.getFrog().resetyPosSmallest();
+      map.getFrog().reset();
+    }
     life.lose();
-
     currentScore.lose(50);
     updateScore();
-    if (life.getCurrent() <= 0) {
+    if (life.getCurrent() < 0) {
       loseGame();
+      System.out.println("Lose!");
     }
     updateInfo();
   }
 
   public void handleFrogJumpUp() {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
     if (map.getFrog().getY() > 300 && map.getFrog().getY() < 350) {return;}
     if (map.getFrog().getY() < map.getFrog().getyPosSmallest()) {
       map.getFrog().setyPosSmallest(map.getFrog().getY());
@@ -173,6 +219,16 @@ public enum GameManager {
   }
 
   public void handleTimeUpdate(int secondsLeft) {
+    if (secondsLeft <= 0) {
+      HandleFrogDie(Death.TIMEOUT);
+    }
+    if (secondsLeft == 57) {
+      gameController.deactivateTimeIndicator();
+    }
     gameController.updateTime(secondsLeft);
+  }
+
+  public Time getTime() {
+    return time;
   }
 }

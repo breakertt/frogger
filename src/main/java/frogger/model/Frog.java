@@ -153,32 +153,6 @@ public class Frog extends Movable {
     jumpLock = false;
   }
 
-  public <A extends Movable> List<A> getObjects(Class<A> cls) {
-    Pane mapPane = (Pane) getScene().lookup("#map");
-    ArrayList<A> someArray = new ArrayList<A>();
-    for (Node nNode : mapPane.getChildren()) {
-      Pane pNode = (Pane) nNode;
-      for (Node m : pNode.getChildren()) {
-        if (cls.isInstance(m)) {
-          someArray.add((A) m);
-        }
-      }
-    }
-    return someArray;
-  }
-
-  public <A extends Movable> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
-    ArrayList<A> someArray = new ArrayList<A>();
-    for (A actor : getObjects(cls)) {
-      Bounds actorBoundsInScene = actor.localToScene(actor.getBoundsInLocal());
-      Bounds thisBoundsInScene = this.localToScene(this.getBoundsInLocal());
-      if (actor != this && actorBoundsInScene.intersects(thisBoundsInScene)) {
-        someArray.add(actor);
-      }
-    }
-    return someArray;
-  }
-
   public void deathTransform(long now, Death death) {
     Image deathImg[];
     switch (death) {
@@ -197,15 +171,12 @@ public class Frog extends Movable {
     if (frameNumNow != loopFrameNum) {
       if (getImage() != deathImg[frameNumNow]) {
         setImage(deathImg[frameNumNow]);
-        System.out.println(frameNumNow + "  " + loopFrameNum);
+//        System.out.println(frameNumNow + "  " + loopFrameNum);
       };
     } else {
-      System.out.println("End!");
-      deathFrame.reset();
+//      System.out.println("End!");
       this.reset();
-      scoreChanged = true;
-      noMove = false;
-      jumpLock = false;
+      GameManager.INSTANCE.getTime().reset();
     }
   }
 
@@ -217,6 +188,8 @@ public class Frog extends Movable {
     resetX();
     resetY();
     this.death = Death.NONE;
+    noMove = false;
+    jumpLock = false;
     deathFrame = new DeathFrame();
     setImage(jumpImg[0][0]);
   }
