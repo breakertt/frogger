@@ -6,6 +6,7 @@ import frogger.util.GameManager;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Timer;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -17,32 +18,26 @@ import javafx.scene.layout.Pane;
 
 public class Frog extends Movable {
 
-  Image jumpImg[][];
-  Image waterDeathImg[];
-  Image carDeathImg[];
-
-  int end = 0;
-  boolean noMove = false;
+  private int imgSize = 40;
+  private Image jumpImg[][];
+  private Image waterDeathImg[];
+  private Image carDeathImg[];
 
   private double jumpX = 40;
   private double jumpY = 50;
+  private double yPosSmallest = 700;
   private boolean jumpLock = false;
+  private boolean noMove = false;
 
-  int imgSize = 40;
   private Death death;
-  boolean scoreChanged = false;
-
-  double yPosSmallest = 700;
-  DeathFrame deathFrame;
-  ArrayList<End> inter = new ArrayList<End>();
-
+  private DeathFrame deathFrame;
 
   public Frog() {
     ImgFactory();
     reset();
   }
 
-  public class DeathFrame {
+  private class DeathFrame {
     private int offset = 1;
 
     public int getFrameNum(long now, int loopFrameNum) {
@@ -53,9 +48,6 @@ public class Frog extends Movable {
       return (sec + loopFrameNum - this.offset) % loopFrameNum;
     }
 
-    public void reset() {
-      offset = 1;
-    }
   }
 
   public Death getDeath() {
@@ -66,7 +58,7 @@ public class Frog extends Movable {
     this.death = death;
   }
 
-  public void ImgFactory() {
+  private void ImgFactory() {
     jumpImg = new Image[4][2];
     jumpImg[0][0] = new Image("/frogger/image/frogger/froggerUp.png", imgSize, imgSize, true, true);
     jumpImg[1][0] = new Image("/frogger/image/frogger/froggerLeft.png", imgSize, imgSize, true,
@@ -153,8 +145,8 @@ public class Frog extends Movable {
     jumpLock = false;
   }
 
-  public void deathTransform(long now, Death death) {
-    Image deathImg[];
+  private void deathTransform(long now, Death death) {
+    Image[] deathImg;
     switch (death) {
       case DROP:
         deathImg = waterDeathImg;
@@ -171,10 +163,8 @@ public class Frog extends Movable {
     if (frameNumNow != loopFrameNum) {
       if (getImage() != deathImg[frameNumNow]) {
         setImage(deathImg[frameNumNow]);
-//        System.out.println(frameNumNow + "  " + loopFrameNum);
       };
     } else {
-//      System.out.println("End!");
       this.reset();
       GameManager.INSTANCE.getTime().reset();
     }
@@ -194,18 +184,15 @@ public class Frog extends Movable {
     setImage(jumpImg[0][0]);
   }
 
-  public void check(long now) {
-//    System.out.println(getY());
-
-    // jump lower, jump back
+  private void check(long now) {
     if (getY() > 600) {
       resetY();
     }
 
     // out of screen, game over
     if (getX() < 0 || getX() > 700) {
+      // todo
     }
-    return;
   }
 
   @Override
@@ -226,15 +213,18 @@ public class Frog extends Movable {
     checkWater(now);
   }
 
-  public void checkWater(long now) {
+  @Override
+  public void stop() {
+    reset();
+    super.stop();
+  }
+
+  private void checkWater(long now) {
     if (getY() < 300) {
       GameManager.INSTANCE.handleFrogInWater();
     }
   }
 
-  public boolean checkWinLevel() {
-    return end == 5;
-  }
 
   public double getyPosSmallest() {
     return yPosSmallest;

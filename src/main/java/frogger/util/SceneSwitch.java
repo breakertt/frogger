@@ -44,7 +44,7 @@ public enum SceneSwitch {
     }
   }
 
-  public void switchToGame() {
+  public void switchToGame(String playerName) {
     try {
       hideStage();
 
@@ -57,10 +57,10 @@ public enum SceneSwitch {
       Map map = new Map();
       Pane mapPane = (Pane) loader.getNamespace().get("map");
       ArrayList<Pane> laneListPane = (ArrayList<Pane>) loader.getNamespace().get("laneListPane");
+      map.setPlayerName(playerName);
       map.draw(mapPane, laneListPane);
 
       GameController gameController = loader.getController();
-      ScoreManager.INSTANCE.init();
       GameManager.INSTANCE.init(map, gameController);
 
       gameScene.addEventHandler(

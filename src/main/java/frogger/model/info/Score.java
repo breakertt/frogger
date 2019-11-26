@@ -28,6 +28,9 @@ public class Score {
     }
   }
 
+  public String getPlayerName() {
+    return playerName;
+  }
 
   public int getValue() {
     return value;

@@ -2,19 +2,27 @@ package frogger.util;
 
 import frogger.model.info.Score;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedMap;
 
 public enum ScoreManager {
   INSTANCE;
 
-  private Set<Score> scoreSet;
+  private ArrayList<Score> scoreList;
 
   private Score highestScore;
 
   public void init() {
-    this.scoreSet = new HashSet<>();
+    this.scoreList = new ArrayList<>();
     highestScore = null;
+    load();
+  }
+
+  private void load() {
   }
 
   public Score getHighestScore() {
@@ -27,15 +35,27 @@ public enum ScoreManager {
   }
 
   public void add(Score score) {
-    scoreSet.add(score);
+    scoreList.add(score);
     if (this.highestScore == null) {
       this.highestScore = score;
     }
   }
 
-  public void update(Score score) {
-    if (highestScore.getValue() < score.getValue()) {
-      this.highestScore = score;
+  public void sort() {
+    Collections.sort(scoreList, new Comparator<Score>() {
+      @Override
+      public int compare(Score s1, Score s2) {
+        if (s1.getValue() > s2.getValue()) {
+          return 1;
+        }
+        else {
+          return -1;
+        }
+      }
+    });
+    for (Score score : scoreList) {
+      System.out.println("Player: " + score.getPlayerName() + " Score: " + score.getValue());
     }
   }
+
 }

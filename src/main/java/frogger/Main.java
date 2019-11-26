@@ -24,6 +24,7 @@ public class Main extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("frogger");
 
+		ScoreManager.INSTANCE.init();
 		SceneSwitch.INSTANCE.switchToHome();
 
 	}

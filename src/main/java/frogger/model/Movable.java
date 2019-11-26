@@ -20,20 +20,24 @@ public abstract class Movable extends ImageView {
     return this.getBoundsInLocal().getHeight();
   }
 
-  private AnimationTimer Timer() {
-    return new AnimationTimer() {
-      @Override
-      public void handle(long now) {
-        checkAct(now);
-        moveAct(now);
-        transformAct(now);
-      }
-    };
-  }
+  private AnimationTimer Timer = new AnimationTimer() {
+    @Override
+    public void handle(long now) {
+      checkAct(now);
+      moveAct(now);
+      transformAct(now);
+    }
+  };
+
 
   public void run() {
-    Timer().start();
+    Timer.start();
   }
+
+  public void stop() {
+    Timer.stop();
+  }
+
 
   public abstract void transformAct(long now);
 

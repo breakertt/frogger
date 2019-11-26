@@ -11,30 +11,31 @@ public class Time {
   private long base = -1;
 
   public Time() {
-    Timer().start();
+    Timer.start();
   }
 
-  private AnimationTimer Timer() {
-    return new AnimationTimer() {
-      @Override
-      public void handle(long now) {
-        long secNow = now / 1000000000;
-        if (base == -1) {
-          base = secNow;
-        }
-        int secondsLeftNow = (int) (60 - (secNow - base));
-        if (secondsLeftNow != secondsLeft) {
-          secondsLeft = secondsLeftNow;
-          GameManager.INSTANCE.handleTimeUpdate(secondsLeft);
-        }
+  private AnimationTimer Timer = new AnimationTimer() {
+    @Override
+    public void handle(long now) {
+      long secNow = now / 1000000000;
+      if (base == -1) {
+        base = secNow;
       }
-    };
-  }
+      int secondsLeftNow = (int) (60 - (secNow - base));
+      if (secondsLeftNow != secondsLeft) {
+        secondsLeft = secondsLeftNow;
+        GameManager.INSTANCE.handleTimeUpdate(secondsLeft);
+      }
+    }
+  };
 
   public int getSecondsLeft() {
     return secondsLeft;
   }
 
+  public void stop() {
+    Timer.stop();
+  }
   public void reset() {
     base = -1;
     secondsLeft = 60;

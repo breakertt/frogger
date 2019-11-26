@@ -47,7 +47,7 @@ public enum GameManager {
   private void initInfo() {
     this.life = new Life();
     this.time = new Time();
-    this.currentScore = new Score();
+    this.currentScore = new Score(getMap().getPlayerName());
     ScoreManager.INSTANCE.add(this.currentScore);
     this.highestScore = ScoreManager.INSTANCE.getHighestScore();
     gameController.updateLevel(map.getLevel());
@@ -57,7 +57,6 @@ public enum GameManager {
   private void updateScore() {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
-      ScoreManager.INSTANCE.update(this.currentScore);
     }
   }
 
@@ -67,20 +66,39 @@ public enum GameManager {
   }
 
   private void run() {
-    runSelfMovable(map.getLaneListElement());
-    runSelfMovable(map.getFrog());
+    System.out.println("Run!");
+    runMovable(map.getLaneListElement());
+    runMovable(map.getFrog());
   }
 
-  private void runSelfMovable(ArrayList<Lane> laneArrayList) {
+  private void runMovable(ArrayList<Lane> laneArrayList) {
     for (Lane lane : laneArrayList) {
-      for (SelfMovable selfMovable : lane.getSelfMovables()) {
-        selfMovable.run();
+      for (Movable movable : lane.getSelfMovables()) {
+        movable.run();
       }
     }
   }
 
-  private void runSelfMovable(Movable movable) {
+  private void runMovable(Movable movable) {
     movable.run();
+  }
+
+  private void stop() {
+    time.stop();
+    stopMovable(map.getLaneListElement());
+    stopMovable(map.getFrog());
+  }
+
+  private void stopMovable(ArrayList<Lane> laneArrayList) {
+    for (Lane lane : laneArrayList) {
+      for (Movable movable : lane.getSelfMovables()) {
+        movable.stop();
+      }
+    }
+  }
+
+  private void stopMovable(Movable movable) {
+    movable.stop();
   }
 
   public void handleKeyPressed(KeyEvent event) {
@@ -136,13 +154,21 @@ public enum GameManager {
   }
 
   private void winGame() {
-    ThemePlayer.INSTANCE.themeMusicFactory("OVER");
     gameController.activateWinIndicator();
+    endGame();
   }
 
   private void loseGame() {
-    ThemePlayer.INSTANCE.themeMusicFactory("OVER");
     gameController.activateLoseIndicator();
+    endGame();
+  }
+
+  private void endGame() {
+    System.out.println("OVER");
+    ThemePlayer.INSTANCE.themeMusicFactory("OVER");
+    ScoreManager.INSTANCE.sort();
+    stop();
+    SceneSwitch.INSTANCE.switchToHome();
   }
 
   private boolean checkWin() {
@@ -194,6 +220,7 @@ public enum GameManager {
     if (life.getCurrent() < 0) {
       loseGame();
       System.out.println("Lose!");
+      return;
     }
     updateInfo();
     ThemePlayer.INSTANCE.themeMusicFactory("REBORN");

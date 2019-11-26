@@ -21,13 +21,17 @@ public class HomeController {
     highestScoreValue.setText(String.format("%05d", (ScoreManager.INSTANCE.getHighestScore().getValue() % 99990)));
     nameTextBox.setPromptText("Enter Your Name Here");
     Platform.runLater(() -> {
-      highestScoreValue.requestFocus();
+      nameTextBox.getParent().requestFocus();
     });
   }
 
   @FXML
   protected void handleClickStart() {
-    SceneSwitch.INSTANCE.switchToGame();
+    if (nameTextBox.getText().length() <= 0) {
+      SceneSwitch.INSTANCE.switchToGame("Unknown");
+    } else {
+      SceneSwitch.INSTANCE.switchToGame(nameTextBox.getText());
+    }
   }
 
   @FXML
