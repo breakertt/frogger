@@ -253,8 +253,13 @@ public enum GameManager {
     } else if (gameStatus == GameStatus.END) {
       if (secondsLeft == 53) {
         time.stop();
-        SceneSwitch.INSTANCE.switchToHome();
+        switchBack();
       }
     }
+  }
+
+  public void switchBack() {
+    SceneSwitch.INSTANCE.switchToHome();
+    SceneSwitch.INSTANCE.showScoreBoard();
   }
 }

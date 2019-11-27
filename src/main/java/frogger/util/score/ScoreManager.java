@@ -74,4 +74,7 @@ public enum ScoreManager {
     }
   }
 
+  public ArrayList<Score> getScoreList() {
+    return scoreList;
+  }
 }

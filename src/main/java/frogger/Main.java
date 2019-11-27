@@ -26,7 +26,7 @@ public class Main extends Application {
 
 		ScoreManager.INSTANCE.init();
 		SceneSwitch.INSTANCE.switchToHome();
-
+		SceneSwitch.INSTANCE.showScoreBoard();
 	}
 
 

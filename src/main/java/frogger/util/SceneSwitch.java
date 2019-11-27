@@ -2,6 +2,7 @@ package frogger.util;
 
 import frogger.Main;
 import frogger.controller.GameController;
+import frogger.controller.ScoreBoardController;
 import frogger.model.Map;
 import frogger.util.sound.ThemePlayer;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public enum SceneSwitch {
   INSTANCE;
@@ -73,7 +76,28 @@ public enum SceneSwitch {
     }
   }
 
+  public void showScoreBoard() {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/scoreboard.fxml"));
+      Pane root = loader.load();
+      Scene scoreBoardScene = new Scene(root);
+      Stage popup = new Stage();
+      popup.setScene(scoreBoardScene);
+      popup.initModality(Modality.WINDOW_MODAL);
+      popup.initOwner(Main.getPrimaryStage().getScene().getWindow());
+      popup.setResizable(false);
+      popup.setTitle("Score Board");
+
+      ScoreBoardController scoreBoardController = loader.getController();
+      scoreBoardController.initUi();
+      popup.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   public void exitGame() {
     Platform.exit();
   }
+
 }
