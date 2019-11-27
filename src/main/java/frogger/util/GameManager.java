@@ -112,6 +112,8 @@ public enum GameManager {
   }
 
   private void winGame() {
+    currentScore.gain(1000);
+    updateInfo();
     gameController.activateWinIndicator();
     endGame();
   }
@@ -199,7 +201,6 @@ public enum GameManager {
     }
     life.lose();
     currentScore.lose(50);
-    updateScore();
     if (life.getCurrent() < 0) {
       loseGame();
       System.out.println("Lose!");

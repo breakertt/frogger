@@ -14,7 +14,7 @@ public class ScoreBoardController {
 
   @FXML private ListView scoreBoardList;
 
-  private String colors[] = {"#FF9D8C",  "#B88AEB", "#9EEFFF", "#9FE884", "#FFE08F"};
+  String[] colors = {"#FF9D8C", "#B88AEB", "#9EEFFF", "#9FE884", "#FFE08F"};
   private int colorIndex = 0;
 
   public void initUi() {
@@ -32,7 +32,9 @@ public class ScoreBoardController {
       setText(null);
       if (score != null && !empty) {
         setText(score.getPlayerName() + ": " + score.getValue());
-        setStyle("-fx-text-fill: " + colors[(colorIndex++ % colors.length)]);
+        String color = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length;
+        setStyle("-fx-text-fill: " + color);
       }
     }
   }
