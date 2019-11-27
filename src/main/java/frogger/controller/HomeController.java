@@ -1,12 +1,9 @@
 package frogger.controller;
 
 import frogger.util.SceneSwitch;
-import frogger.util.ScoreManager;
+import frogger.util.score.ScoreManager;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 

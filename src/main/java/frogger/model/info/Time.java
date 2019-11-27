@@ -36,6 +36,7 @@ public class Time {
   public void stop() {
     Timer.stop();
   }
+
   public void reset() {
     base = -1;
     secondsLeft = 60;

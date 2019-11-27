@@ -8,10 +8,9 @@ import frogger.model.Movable;
 import frogger.model.info.End;
 import frogger.model.info.Time;
 import frogger.model.selfMovable.SelfMovable;
-import frogger.util.musicPlayer.MusicPlayer;
-import frogger.util.musicPlayer.ThemePlayer;
+import frogger.util.score.ScoreManager;
+import frogger.util.sound.ThemePlayer;
 import java.util.ArrayList;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import frogger.model.info.Life;
 import frogger.model.Map;
@@ -39,7 +38,7 @@ public enum GameManager {
     this.map = map;
     this.gameController = gameController;
     this.gameStatus = GameStatus.START;
-    this.run();
+    this.updateAnimationStatus();
     this.initInfo();
     ThemePlayer.INSTANCE.themeMusicFactory("MAIN");
   }
@@ -54,6 +53,14 @@ public enum GameManager {
     updateInfo();
   }
 
+  public Map getMap() {
+    return map;
+  }
+
+  public Time getTime() {
+    return time;
+  }
+
   private void updateScore() {
     if (this.highestScore.getValue() < this.currentScore.getValue()) {
       this.highestScore = this.currentScore;
@@ -61,96 +68,46 @@ public enum GameManager {
   }
 
   private void updateInfo() {
+    this.updateScore();
     gameController.updateScore(this.currentScore, this.highestScore);
     gameController.updateLife(this.life);
   }
 
-  private void run() {
-    System.out.println("Run!");
-    runMovable(map.getLaneListElement());
-    runMovable(map.getFrog());
+  private void updateAnimationStatus() {
+    updateMovableAnimationStatus(map.getLaneListElement());
+    updateMovableAnimationStatus(map.getFrog());
   }
 
-  private void runMovable(ArrayList<Lane> laneArrayList) {
+  private void updateMovableAnimationStatus(ArrayList<Lane> laneArrayList) {
     for (Lane lane : laneArrayList) {
       for (Movable movable : lane.getSelfMovables()) {
-        movable.run();
-      }
-    }
-  }
-
-  private void runMovable(Movable movable) {
-    movable.run();
-  }
-
-  private void stop() {
-    time.stop();
-    stopMovable(map.getLaneListElement());
-    stopMovable(map.getFrog());
-  }
-
-  private void stopMovable(ArrayList<Lane> laneArrayList) {
-    for (Lane lane : laneArrayList) {
-      for (Movable movable : lane.getSelfMovables()) {
-        movable.stop();
-      }
-    }
-  }
-
-  private void stopMovable(Movable movable) {
-    movable.stop();
-  }
-
-  public void handleKeyPressed(KeyEvent event) {
-    if (gameStatus == GameStatus.END) {
-      return;
-    }
-    map.getFrog().handleKeyPressed(event);
-  }
-
-  public void handleKeyReleased(KeyEvent event) {
-    map.getFrog().handleKeyReleased(event);
-  }
-
-  public Map getMap() {
-    return map;
-  }
-
-  public void handleFrogInWater() {
-    if (gameStatus == GameStatus.END) {
-      return;
-    }
-    boolean frogWaterDie = true;
-    for (int i = 0; i < 6; i++) {
-      Lane lane = map.getLaneListElement().get(i);
-      for (SelfMovable selfMovable : lane.getSelfMovables()) {
-        if (selfMovable.checkTouchFrog()) {
-          frogWaterDie = false;
-          break;
+        if (gameStatus == GameStatus.START) {
+          movable.run();
+        } else if (gameStatus == GameStatus.END) {
+          movable.stop();
         }
       }
     }
-    if (frogWaterDie) HandleFrogDie(Death.DROP);
   }
 
-  public void handleEndTouched(End end) {
-    if (gameStatus == GameStatus.END) {
-      return;
+  private void updateMovableAnimationStatus(Movable movable) {
+    if (gameStatus == GameStatus.START) {
+      movable.run();
+    } else if (gameStatus == GameStatus.END) {
+      movable.stop();
     }
-    end.setFrog();
-    currentScore.gain(200);
-    updateScore();
-    updateInfo();
-    if (checkWin()) {
-      System.out.println("Win!");
-      winGame();
-    } else {
-      gameController.activateTimeIndicator(time.getSecondsLeft());
-      ThemePlayer.INSTANCE.themeMusicFactory("HOMED");
+  }
+
+  private boolean checkWin() {
+    boolean isFrogAllExist = true;
+    ArrayList<End> ends = map.getEnds();
+    for (End end : ends) {
+      if (!end.isFrogExist()) {
+        isFrogAllExist = false;
+        break;
+      }
     }
-    time.reset();
-    map.getFrog().resetyPosSmallest();
-    map.getFrog().reset();
+    return isFrogAllExist;
   }
 
   private void winGame() {
@@ -166,21 +123,21 @@ public enum GameManager {
   private void endGame() {
     System.out.println("OVER");
     ThemePlayer.INSTANCE.themeMusicFactory("OVER");
-    ScoreManager.INSTANCE.sort();
-    stop();
-    SceneSwitch.INSTANCE.switchToHome();
+    gameStatus = GameStatus.END;
+    ScoreManager.INSTANCE.update();
+    updateInfo();
+    updateAnimationStatus();
   }
 
-  private boolean checkWin() {
-    boolean isFrogAllExist = true;
-    ArrayList<End> ends = map.getEnds();
-    for (End end : ends) {
-      if (!end.isFrogExist()) {
-        isFrogAllExist = false;
-        break;
-      }
+  public void handleKeyPressed(KeyEvent event) {
+    if (gameStatus == GameStatus.END) {
+      return;
     }
-    return isFrogAllExist;
+    map.getFrog().handleKeyPressed(event);
+  }
+
+  public void handleKeyReleased(KeyEvent event) {
+    map.getFrog().handleKeyReleased(event);
   }
 
   public void handleLogTurtleTouched(SelfMovable selfMovable) {
@@ -202,6 +159,25 @@ public enum GameManager {
       return;
     }
     HandleFrogDie(Death.DROP);
+  }
+
+  public void handleEndTouched(End end) {
+    if (gameStatus == GameStatus.END) {
+      return;
+    }
+    end.setFrog();
+    currentScore.gain(200);
+    updateInfo();
+    if (checkWin()) {
+      System.out.println("Win!");
+      winGame();
+    } else {
+      gameController.activateTimeIndicator(time.getSecondsLeft());
+      ThemePlayer.INSTANCE.themeMusicFactory("HOMED");
+    }
+    time.reset();
+    map.getFrog().resetyPosSmallest();
+    map.getFrog().reset();
   }
 
   public void HandleFrogDie(Death death) {
@@ -234,22 +210,40 @@ public enum GameManager {
     if (map.getFrog().getY() < map.getFrog().getyPosSmallest()) {
       map.getFrog().setyPosSmallest(map.getFrog().getY());
       currentScore.gain(10);
-      updateScore();
       updateInfo();
     }
   }
 
-  public void handleTimeUpdate(int secondsLeft) {
-    if (secondsLeft <= 0) {
-      HandleFrogDie(Death.TIMEOUT);
+  public void handleFrogInWater() {
+    if (gameStatus == GameStatus.END) {
+      return;
     }
-    if (secondsLeft == 57) {
-      gameController.deactivateTimeIndicator();
+    boolean frogWaterDie = true;
+    for (int i = 0; i < 6; i++) {
+      Lane lane = map.getLaneListElement().get(i);
+      for (SelfMovable selfMovable : lane.getSelfMovables()) {
+        if (selfMovable.checkTouchFrog()) {
+          frogWaterDie = false;
+          break;
+        }
+      }
     }
-    gameController.updateTime(secondsLeft);
+    if (frogWaterDie) HandleFrogDie(Death.DROP);
   }
 
-  public Time getTime() {
-    return time;
+  public void handleTimeUpdate(int secondsLeft) {
+    if (gameStatus == GameStatus.START) {
+      if (secondsLeft <= 0) {
+        HandleFrogDie(Death.TIMEOUT);
+      }
+      if (secondsLeft == 57) {
+        gameController.deactivateTimeIndicator();
+      }
+      gameController.updateTime(secondsLeft);
+    } else if (gameStatus == GameStatus.END) {
+      if (secondsLeft == 53) {
+         SceneSwitch.INSTANCE.switchToHome();
+      }
+    }
   }
 }

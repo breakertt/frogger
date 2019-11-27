@@ -1,4 +1,4 @@
-package frogger.util.musicPlayer;
+package frogger.util.sound;
 
 import java.io.File;
 import java.net.URISyntaxException;

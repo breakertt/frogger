@@ -1,4 +1,4 @@
-package frogger.util.musicPlayer;
+package frogger.util.sound;
 
 import frogger.constant.FileName;
 

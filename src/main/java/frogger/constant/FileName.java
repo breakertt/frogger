@@ -1,5 +1,6 @@
 package frogger.constant;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,4 +54,9 @@ public class FileName {
     add("frogger/music/theme_homed04.mp3");
     add("frogger/music/theme_homed05.mp3");
   }};
+
+  private static final String USER_PATH =
+      System.getProperty("user.home") + File.separator + ".frogger" + File.separator;
+
+  public static final String SCORE_PATH = USER_PATH + "score.csv";
 }

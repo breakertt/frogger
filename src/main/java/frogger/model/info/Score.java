@@ -1,16 +1,16 @@
 package frogger.model.info;
 
-import java.util.Date;
-
 public class Score {
   private int value;
   private String playerName;
-  private Date time;
+
+  public Score(String playerName, int value) {
+    this.playerName = playerName;
+    this.value = value;
+  }
 
   public Score(String playerName) {
-    this.playerName = playerName;
-    this.value = 0;
-    this.time = new Date();
+    this(playerName, 0);
   }
 
   public Score() {
@@ -34,5 +34,9 @@ public class Score {
 
   public int getValue() {
     return value;
+  }
+
+  public String toString() {
+    return this.playerName + "," + this.value;
   }
 }
