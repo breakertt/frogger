@@ -1,7 +1,7 @@
 package frogger;
 
 import frogger.util.SceneSwitch;
-import frogger.util.ScoreManager;
+import frogger.util.score.ScoreManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -24,8 +24,8 @@ public class Main extends Application {
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("frogger");
 
-		SceneSwitch.INSTANCE.switchToGame();
-
+		ScoreManager.INSTANCE.init();
+		SceneSwitch.INSTANCE.switchToHome();
 	}
 
 

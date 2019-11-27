@@ -33,3 +33,5 @@ This file is for source list of asset from internet uesd.
 ## Font
 
 * [Press Start 2P Font](https://www.fontspace.com/codeman38/press-start-2p)
+
+* [Pixel Miners Font](https://www.fontspace.com/heaven-castro/pixel-miners)

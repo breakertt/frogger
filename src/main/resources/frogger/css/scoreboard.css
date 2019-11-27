@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("../font/PressStart2P.ttf");
+}
+
+@font-face {
+  font-family: "Pixel Miners";
+  src: url("../font/PixelMiners-KKal.otf");
+}
+
+.root {
+  -fx-font-size: 30px;
+  -fx-font-family: "Press Start 2P";
+}
+
+.list-view {
+  -fx-font-family: "Pixel Miners";
+  -fx-font-size: 20px;
+}
+
+.list-view .list-cell {
+  -fx-background-color: #000000;
+  -fx-alignment: center;
+}
