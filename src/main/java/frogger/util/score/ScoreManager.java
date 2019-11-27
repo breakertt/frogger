@@ -29,7 +29,8 @@ public enum ScoreManager {
   }
 
   private void save() {
-    ScoreSaver scoreSaver = new ScoreSaver(scoreList);
+    ScoreSaver scoreSaver = new ScoreSaver();
+    scoreSaver.saveList(scoreList);
   }
 
 

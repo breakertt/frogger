@@ -13,13 +13,7 @@ import java.util.Base64;
 
 public class ScoreSaver {
 
-  public ScoreSaver(ArrayList<Score> scoreList) {
-    if (scoreList.size() > 0) {
-      saveList(scoreList);
-    }
-  }
-
-  private void saveList(ArrayList<Score> scoreList) {
+  public void saveList(ArrayList<Score> scoreList) {
     if (scoreList.size() <= 0) {
       return;
     }

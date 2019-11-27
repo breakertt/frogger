@@ -3,6 +3,7 @@ package frogger.model;
 import frogger.constant.Death;
 import frogger.model.info.End;
 import frogger.util.GameManager;
+import frogger.util.sound.EffectPlayer;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -99,21 +100,25 @@ public class Frog extends Movable {
       case W:
         movePos(0, -jumpY);
         setImage(jumpImg[0][1]);
+        EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
       case LEFT:
       case A:
         movePos(-jumpX, 0);
         setImage(jumpImg[1][1]);
+        EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
       case DOWN:
       case S:
         movePos(0, jumpY);
         setImage(jumpImg[2][1]);
+        EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
       case RIGHT:
       case D:
         movePos(jumpX, 0);
         setImage(jumpImg[3][1]);
+        EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
     }
     jumpLock = true;

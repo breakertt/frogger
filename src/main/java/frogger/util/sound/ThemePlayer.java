@@ -29,7 +29,7 @@ public enum ThemePlayer {
         break;
       case "HOMED":
         playNewThemeMusic(FileName.HOMED_AUDIO.get(homedIndex), true);
-        homedIndex = (homedIndex + 1) % 6;
+        homedIndex = (homedIndex + 1) % 5;
         break;
     }
   }

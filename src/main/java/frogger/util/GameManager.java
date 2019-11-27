@@ -9,6 +9,7 @@ import frogger.model.info.End;
 import frogger.model.info.Time;
 import frogger.model.selfMovable.SelfMovable;
 import frogger.util.score.ScoreManager;
+import frogger.util.sound.EffectPlayer;
 import frogger.util.sound.ThemePlayer;
 import java.util.ArrayList;
 import javafx.scene.input.KeyEvent;
@@ -124,6 +125,7 @@ public enum GameManager {
     System.out.println("OVER");
     ThemePlayer.INSTANCE.themeMusicFactory("OVER");
     gameStatus = GameStatus.END;
+    time.reset();
     ScoreManager.INSTANCE.update();
     updateInfo();
     updateAnimationStatus();
@@ -184,8 +186,13 @@ public enum GameManager {
     if (gameStatus == GameStatus.END || map.getFrog().getDeath() != Death.NONE) {
       return;
     }
-    if (death == Death.DROP || death == Death.CRASH) {
+    System.out.println(death);
+    if (death == Death.DROP) {
       map.getFrog().setDeath(death);
+      EffectPlayer.INSTANCE.effectMusicFactory("PLUNK");
+    } else if (death == Death.CRASH) {
+      map.getFrog().setDeath(death);
+      EffectPlayer.INSTANCE.effectMusicFactory("SQUASH");
     } else if (death == Death.TIMEOUT) {
       map.getFrog().resetyPosSmallest();
       map.getFrog().reset();
@@ -239,10 +246,14 @@ public enum GameManager {
       if (secondsLeft == 57) {
         gameController.deactivateTimeIndicator();
       }
+      if (secondsLeft == 10) {
+        EffectPlayer.INSTANCE.effectMusicFactory("TIME");
+      }
       gameController.updateTime(secondsLeft);
     } else if (gameStatus == GameStatus.END) {
       if (secondsLeft == 53) {
-         SceneSwitch.INSTANCE.switchToHome();
+        time.stop();
+        SceneSwitch.INSTANCE.switchToHome();
       }
     }
   }

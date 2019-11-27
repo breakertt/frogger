@@ -28,7 +28,7 @@ public class MusicPlayer {
   }
 
   public void switchMediaPlayer(MediaPlayer mediaPlayer) {
-    switchMediaPlayer(mediaPlayer, true);
+    switchMediaPlayer(mediaPlayer, false);
   }
 
   public void switchMediaPlayer(MediaPlayer mediaPlayer, boolean endBackToDefault) {
