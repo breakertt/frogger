@@ -3,7 +3,6 @@ package frogger.model.selfMovable;
 import frogger.constant.FileName;
 import frogger.util.GameManager;
 import java.util.ArrayList;
-import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 
 public class WetTurtle extends SelfMovable {
@@ -38,7 +37,7 @@ public class WetTurtle extends SelfMovable {
   public void checkAct(long now) {
     if (checkTouchFrog()) {
       if (isSunk()) {
-        GameManager.INSTANCE.HandleSunkWetTurtleTouched();
+        GameManager.INSTANCE.handleSunkWetTurtleTouched();
       } else {
         GameManager.INSTANCE.handleLogTurtleTouched(this);
       }

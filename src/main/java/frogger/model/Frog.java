@@ -98,25 +98,25 @@ public class Frog extends Movable {
     switch (event.getCode()) {
       case UP:
       case W:
-        movePos(0, -jumpY);
+        movePos(0, -jumpY / 2);
         setImage(jumpImg[0][1]);
         EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
       case LEFT:
       case A:
-        movePos(-jumpX, 0);
+        movePos(-jumpX / 2, 0);
         setImage(jumpImg[1][1]);
         EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
       case DOWN:
       case S:
-        movePos(0, jumpY);
+        movePos(0, jumpY / 2);
         setImage(jumpImg[2][1]);
         EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
       case RIGHT:
       case D:
-        movePos(jumpX, 0);
+        movePos(jumpX / 2, 0);
         setImage(jumpImg[3][1]);
         EffectPlayer.INSTANCE.effectMusicFactory("HOP");
         break;
@@ -125,25 +125,29 @@ public class Frog extends Movable {
   }
 
   public void handleKeyReleased(KeyEvent event) {
-    if (noMove) {
+    if (noMove || !jumpLock) {
       return;
     }
     switch (event.getCode()) {
       case UP:
       case W:
+        movePos(0, -jumpY / 2);
         setImage(jumpImg[0][0]);
         GameManager.INSTANCE.handleFrogJumpUp();
         break;
-      case DOWN:
-      case S:
-        setImage(jumpImg[2][0]);
-        break;
       case LEFT:
       case A:
+        movePos(-jumpX / 2, 0);
         setImage(jumpImg[1][0]);
+        break;
+      case DOWN:
+      case S:
+        movePos(0, jumpY / 2);
+        setImage(jumpImg[2][0]);
         break;
       case RIGHT:
       case D:
+        movePos(jumpX / 2, 0);
         setImage(jumpImg[3][0]);
         break;
     }

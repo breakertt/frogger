@@ -36,6 +36,7 @@ public class ScoreSaver {
   private void createFile() {
     File f = new File(FileName.SCORE_PATH);
     try {
+      f.getParentFile().mkdirs();
       f.createNewFile();
     } catch (IOException e) {
       e.printStackTrace();
