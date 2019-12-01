@@ -75,7 +75,7 @@ public enum SceneSwitch {
       ThemePlayer.INSTANCE.themeMusicFactory("START");
 
       // load home fxml view and create new scene for this view
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/home.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/home.fxml"));
       Pane root = loader.load();
       Scene homeScene = new Scene(root);
 
@@ -96,7 +96,7 @@ public enum SceneSwitch {
   public void switchToGame(String playerName) {
     try {
       // load game fxml view and create new scene for this view
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/game.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("/frogger/view/game.fxml"));
       Pane root = loader.load();
       Scene gameScene = new Scene(root);
 
@@ -113,9 +113,9 @@ public enum SceneSwitch {
 
       // set keyboard event handle to bind on game manager
       gameScene.addEventHandler(
-          KeyEvent.KEY_PRESSED, event -> GameManager.INSTANCE.handleKeyPressed(event));
+          KeyEvent.KEY_PRESSED, GameManager.INSTANCE::handleKeyPressed);
       gameScene.addEventHandler(
-          KeyEvent.KEY_RELEASED, event -> GameManager.INSTANCE.handleKeyReleased(event));
+          KeyEvent.KEY_RELEASED, GameManager.INSTANCE::handleKeyReleased);
 
       // change new scene to primary stage
       hideStage();
@@ -132,7 +132,7 @@ public enum SceneSwitch {
   public void showScoreBoard() {
     try {
       // load game fxml view and create new scene for this view, set a popup stage.
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/frogger/view/scoreboard.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("/frogger/view/scoreboard.fxml"));
       Pane root = loader.load();
       Scene scoreBoardScene = new Scene(root);
 
@@ -160,6 +160,7 @@ public enum SceneSwitch {
    */
   public void exitGame() {
     Platform.exit();
+    System.exit(0);
   }
 
 }
