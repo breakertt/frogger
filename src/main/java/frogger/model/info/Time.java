@@ -81,5 +81,4 @@ public class Time {
     secondsLeft = 60;
     GameManager.INSTANCE.handleTimeUpdate(secondsLeft);
   };
-
 }

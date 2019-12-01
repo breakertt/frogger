@@ -38,6 +38,7 @@ public class Score {
     this(playerName, 0);
   }
 
+
   /**
    * Create a new {@link Score} object with player name as "Unknown" and value of 0.
    *
