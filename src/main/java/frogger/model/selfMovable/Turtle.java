@@ -1,15 +1,36 @@
 package frogger.model.selfMovable;
 
 import frogger.constant.FileName;
+import frogger.model.Map;
 import frogger.util.GameManager;
 import java.util.ArrayList;
-import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 
+/**
+ *
+ *
+ * <h1>Turtle</h1>
+ *
+ * <p>A {@link Turtle} is a {@link SelfMovable} in water area of {@link Map}.
+ *
+ * <p>This class extends {@link SelfMovable}, when {@link frogger.model.Frog} touches a {@link Turtle}, where will be some checking action and make the frog move with turtle.
+ *
+ * @author Tianyi GAO
+ * @version 0.2
+ * @since 0.1
+ * @see SelfMovable
+ * @see GameManager#handleLogTurtleTouched(SelfMovable) ()
+ */
 public class Turtle extends SelfMovable {
-
+  /** ArrayList for images of turtle **/
   ArrayList<Image> turtleImages;
 
+  /**
+   * Creates a new turtle with speed, position on X axis.
+   *
+   * @param speed speed of this turtle.
+   * @param xPos position on x axis of this turtle.
+   */
   public Turtle(double speed, int xPos) {
     turtleImages = new ArrayList<>() {{
       add(new Image(FileName.IMAGE_TURTLES.get(0)));
@@ -20,7 +41,13 @@ public class Turtle extends SelfMovable {
     System.out.println(getHeight());
   }
 
-
+  /**
+   * Transform image of turtle to next one.
+   *
+   * @param now The timestamp of the current frame given in nanoseconds.
+   *
+   * @see #turtleImages
+   */
   @Override
   public void transformAct(long now) {
     int index = (int) ((now / 900000000) % 3);
@@ -29,6 +56,14 @@ public class Turtle extends SelfMovable {
     }
   }
 
+  /**
+   * Checks whether this car is touching a frog and call {@link GameManager#handleLogTurtleTouched(SelfMovable)}.
+   *
+   * @param now The timestamp of the current frame given in nanoseconds.
+   *
+   * @see SelfMovable#checkTouchFrog()
+   * @see GameManager#handleLogTurtleTouched(SelfMovable)
+   */
   @Override
   public void checkAct(long now) {
     if (checkTouchFrog()) GameManager.INSTANCE.handleLogTurtleTouched(this);
