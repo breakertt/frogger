@@ -90,6 +90,8 @@ public enum SceneSwitch {
 
   /**
    * Switch scene to game view.
+   *
+   * @param playerName name of player
    */
   public void switchToGame(String playerName) {
     try {

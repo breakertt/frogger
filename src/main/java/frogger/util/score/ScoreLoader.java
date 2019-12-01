@@ -11,14 +11,35 @@ import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *
+ *
+ * <h1>ScoreLoader</h1>
+ *
+ * <p>A {@link ScoreLoader} is a object to load historical score of current user.
+ *
+ * @author Tianyi GAO
+ * @version 0.2
+ * @since 0.2
+ * @see ScoreManager
+ * @see ScoreSaver
+ */
 public class ScoreLoader {
-
+  /** list of scores played by previous players. **/
   private ArrayList<Score> scoreList;
 
+  /**
+   * Create a new score loader object.
+   */
   public ScoreLoader() {
     scoreList = new ArrayList<>();
   }
 
+  /**
+   * Load one score every line in file.
+   * @param line line which stores a score
+   * @return score stored in this line
+   */
   private Score loadLine(String line) {
     Pattern scorePattern = Pattern.compile("(.*?),(.*)");
     Matcher scoreMatcher = scorePattern.matcher(line);
@@ -32,6 +53,11 @@ public class ScoreLoader {
     return null;
   }
 
+  /**
+   * Choose one historical score with highest value.
+   *
+   * @return score with highest value
+   */
   public Score loadHighest() {
     if (scoreList.size() <= 0) {
       return null;
@@ -46,6 +72,11 @@ public class ScoreLoader {
     }
   }
 
+  /**
+   * Load scores from file in user directory.
+   *
+   * @return list of historical scores
+   */
   public ArrayList<Score> loadList() {
     File f = new File(FileName.SCORE_PATH);
     if (f.exists()) {
@@ -68,6 +99,11 @@ public class ScoreLoader {
     return scoreList;
   }
 
+  /**
+   * Convert base64 encoded string to decoded string.
+   * @param string string encoded
+   * @return string decoded
+   */
   private String stringBase64Decode(String string) {
     byte[] byteArray = Base64.getDecoder().decode(string.getBytes());
     return (new String(byteArray));

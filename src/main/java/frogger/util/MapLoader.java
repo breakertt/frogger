@@ -11,40 +11,42 @@ import frogger.model.selfMovable.Turtle;
 import frogger.model.selfMovable.WetTurtle;
 import java.util.ArrayList;
 
+/**
+ *
+ *
+ * <h1>MapRender</h1>
+ *
+ * <p>A {@link MapLoader} is a object to load elements to map.
+ *
+ * @author Tianyi GAO
+ * @version 0.2
+ * @since 0.2
+ * @see MapRender
+ * @see frogger.model.Map
+ */
 public class MapLoader {
-
+  /** File name of level config to add **/
   private String fileName;
 
+  /** Map to load **/
   private Map map;
 
+  /** Level of map to add **/
   private int level;
 
-  public int getLevel() {
-    return level;
-  }
-
-  public void setLevel(int level) {
-    this.level = level;
-  }
-
+  /** List of lanes with elements **/
   private ArrayList<Lane> laneListElement;
-
+  /** List of ends **/
   private ArrayList<End> ends;
-
-  public ArrayList<Lane> getLaneListElement() {
-    return laneListElement;
-  }
-
+  /** Frog to load **/
   private Frog frog;
 
-  public Frog getFrog() {
-    return frog;
-  }
-
-  public ArrayList<End> getEnds() {
-    return ends;
-  }
-
+  /**
+   * Create a new map loader object.
+   *
+   * @param fileName file name of level config to add
+   * @param map map to load
+   */
   public MapLoader(String fileName, Map map) {
     this.fileName = fileName;
     this.map = map;
@@ -57,6 +59,7 @@ public class MapLoader {
     this.initEnd();
   }
 
+  /** Initialize ends for this map. **/
   public void initEnd() {
     for (int i = 0; i < 5; i++) {
       End end = new End(22 + 150 * i);
@@ -65,12 +68,22 @@ public class MapLoader {
     }
   }
 
+  /**
+   * Add new element to lane with lane index and element.
+   *
+   * @param index land to add
+   * @param selfMovable new element
+   */
    public void laneAdd(int index, SelfMovable selfMovable) {
     this.laneListElement.get(index).add(selfMovable);
   }
 
+  /**
+   * Load elements.
+   */
   public void loadMap() {
     this.level = 1;
+
     laneAdd(1, new Log(0.75, 0, 2));
     laneAdd(1, new Log(0.75, 220, 2));
     laneAdd(1, new Log(0.75, 440, 2));
@@ -96,7 +109,48 @@ public class MapLoader {
     laneAdd(11, new Car(1, 300, 1));
     laneAdd(11, new Car(1, 600, 1));
 
-
     frog = new Frog();
+  }
+
+  /**
+   * Getter for {@link #level}
+   *
+   * @return level of map to add
+   */
+  public int getLevel() {
+    return level;
+  }
+
+  /**
+   * Setter for {@link #level}
+   *
+   * @param level level of map to add
+   */
+  public void setLevel(int level) {
+    this.level = level;
+  }
+
+  /**
+   * Getter for {@link #laneListElement}
+   * @return list of lanes with elements
+   */
+  public ArrayList<Lane> getLaneListElement() {
+    return laneListElement;
+  }
+
+  /**
+   * Getter for {@link #frog}
+   * @return list of lanes with elements
+   */
+  public Frog getFrog() {
+    return frog;
+  }
+
+  /**
+   * Getter for {@link #ends}
+   * @return list of ends
+   */
+  public ArrayList<End> getEnds() {
+    return ends;
   }
 }

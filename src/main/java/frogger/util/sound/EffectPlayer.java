@@ -28,8 +28,9 @@ import frogger.constant.FileName;
  * @see frogger.util.GameManager
  */
 public enum EffectPlayer {
-  /** Instance for global effect sound management. **/
+  /** Instance for global effect music management. **/
   INSTANCE;
+
   /** Music player instance for this effect player singleton **/
   private MusicPlayer musicPlayer;
 

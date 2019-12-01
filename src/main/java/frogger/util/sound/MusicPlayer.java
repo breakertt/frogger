@@ -48,7 +48,7 @@ public class MusicPlayer {
 
   /**
    * Switch media player to given one and not end back to default.
-   * @param mediaPlayer
+   * @param mediaPlayer new media player to switch
    */
   public void switchMediaPlayer(MediaPlayer mediaPlayer) {
     switchMediaPlayer(mediaPlayer, false);
