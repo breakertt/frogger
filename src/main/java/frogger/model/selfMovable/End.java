@@ -1,6 +1,5 @@
-package frogger.model.info;
+package frogger.model.selfMovable;
 
-import frogger.model.selfMovable.SelfMovable;
 import frogger.util.GameManager;
 import javafx.scene.image.Image;
 

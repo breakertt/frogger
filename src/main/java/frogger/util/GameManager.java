@@ -7,7 +7,7 @@ import frogger.model.Frog;
 import frogger.model.Map;
 import frogger.model.Lane;
 import frogger.model.Movable;
-import frogger.model.info.End;
+import frogger.model.selfMovable.End;
 import frogger.model.info.Time;
 import frogger.model.info.Life;
 import frogger.model.info.Score;
@@ -24,11 +24,11 @@ import javafx.scene.input.KeyEvent;
  * <h1>GameManager</h1>
  *
  * <p>A {@link GameManager} is an object of utility to manage the game status and events globally,
- * and update view of game.
+ * and update view of game.</p>
  *
- * <p> This class is implemented as {@link Enum} for singleton.</p>
+ * <p>This class is implemented as {@link Enum} for singleton.</p>
  *
- * <p>Usage:
+ * <p>Usage:</p>
  *
  * <blockquote>
  *
@@ -147,8 +147,8 @@ public enum GameManager {
    */
   private void updateInfo() {
     this.updateScore();
-    gameController.updateScore(this.currentScore, this.highestScore);
-    gameController.updateLife(this.life);
+    gameController.updateScore(this.currentScore.getValue(), this.highestScore.getValue());
+    gameController.updateLife(this.life.getCurrent());
   }
 
   /**
@@ -319,7 +319,7 @@ public enum GameManager {
    * <p>Set {@link End} to a frog exist status.</p>
    * <p>Add 200 points by calling {@link Score#gain(int)} and update to game view.</p>
    * <p>{@link #checkWin()} and send frog to home if not.</p>
-   * <p>Reset {@link #time}, {@link Frog#resetyPosSmallest()} and frog itself.</p>
+   * <p>Reset {@link #time}, {@link Frog#resetYPosSmallest()} and frog itself.</p>
    *
    * @param end the end touched
    *
@@ -340,7 +340,7 @@ public enum GameManager {
       ThemePlayer.INSTANCE.themeMusicFactory("HOMED");
     }
     time.reset();
-    map.getFrog().resetyPosSmallest();
+    map.getFrog().resetYPosSmallest();
     map.getFrog().reset();
   }
 
@@ -364,7 +364,9 @@ public enum GameManager {
       map.getFrog().setDeath(death);
       EffectPlayer.INSTANCE.effectMusicFactory("SQUASH");
     } else if (death == Death.TIMEOUT) {
-      map.getFrog().resetyPosSmallest();
+      map.getFrog().resetYPosSmallest();
+      map.getFrog().reset();
+    } else if (death == Death.OVERSCREEN) {
       map.getFrog().reset();
     }
     life.lose();
@@ -390,8 +392,8 @@ public enum GameManager {
     if (map.getFrog().getY() > 300 && map.getFrog().getY() < 350) {
       return;
     }
-    if (map.getFrog().getY() < map.getFrog().getyPosSmallest()) {
-      map.getFrog().setyPosSmallest(map.getFrog().getY());
+    if (map.getFrog().getY() < map.getFrog().getYPosSmallest()) {
+      map.getFrog().setYPosSmallest(map.getFrog().getY());
       currentScore.gain(10);
       updateInfo();
     }

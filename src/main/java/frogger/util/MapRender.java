@@ -8,6 +8,31 @@ import java.util.Set;
 
 import javafx.scene.layout.Pane;
 
+/**
+ *
+ *
+ * <h1>MapRender</h1>
+ *
+ * <p>A {@link SceneSwitch} is a object which helps switch scenes within
+ * and pop up.
+ *
+ * <p>This class is implemented as {@link Enum} for singleton.</p>
+ *
+ * <p>Usage:
+ *
+ * <blockquote>
+ *
+ * <pre>
+ *    SceneSwitch.INSTANCE.switchToHome();
+ * </pre>
+ *
+ * </blockquote>
+ *
+ * @author Tianyi GAO
+ * @version 0.2
+ * @since 0.2
+ * @see GameManager
+ */
 public class MapRender {
 
   private Pane root;

@@ -5,6 +5,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ *
+ * <h1>FileName</h1>
+ *
+ * <p>A {@link FileName} is a object with path to static files.
+ *
+ * @author Tianyi GAO
+ * @version 0.2
+ * @since 0.2
+ */
 public class FileName {
 
   public static final Map<Integer, String> IMAGE_LOGS = new HashMap<>() {{

@@ -2,7 +2,7 @@ package frogger.util;
 
 import frogger.model.Lane;
 import frogger.model.Map;
-import frogger.model.info.End;
+import frogger.model.selfMovable.End;
 import frogger.model.selfMovable.Car;
 import frogger.model.Frog;
 import frogger.model.selfMovable.Log;
@@ -59,7 +59,7 @@ public class MapLoader {
 
   public void initEnd() {
     for (int i = 0; i < 5; i++) {
-      End end = new End(22 + 150*i);
+      End end = new End(22 + 150 * i);
       this.ends.add(end);
       laneAdd(0, end);
     }
