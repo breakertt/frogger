@@ -38,53 +38,6 @@ public class Map {
   private ArrayList<Lane> laneListElement;
 
   /**
-   * Create a new {@link Map}.
-   *
-   * @param
-   */
-  public Map(int level) {
-    this.level = level;
-    // this.filename = FileName....
-    this.fileName = "/frogger/level/1.json";
-  }
-
-  /**
-   * Load lanes, level, frog and ends of this map file in current level.
-   *
-   * <p>Call {@link MapLoader#loadMap()} to set up elements for this map.</p>
-   *
-   * @see MapLoader
-   */
-  public void load() {
-    MapLoader mapLoader = new MapLoader(fileName, this);
-    mapLoader.loadMap();
-    frog = mapLoader.getFrog();
-    ends = mapLoader.getEnds();
-    laneListElement = mapLoader.getLaneListElement();
-  }
-
-  /**
-   * Draw elements to scene.
-   *
-   * <p>use {@link MapRender} to add elements loaded in scene.</p>
-   *
-   * @param root root of map pane in game view
-   * @param laneListPane list of lane panes in game view
-   */
-  public void draw(Pane root, ArrayList<Pane> laneListPane) {
-    load();
-    MapRender mapRender = new MapRender(root, laneListPane); // root to be deleted
-
-    try {
-      mapRender.drawFrog(frog);
-      mapRender.drawLanes(laneListElement);
-    }
-    catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  /**
    * Getter for {@link #getLaneListElement()}
    * @return list of lanes for movables
    */
@@ -155,4 +108,42 @@ public class Map {
   public void setFrog(Frog frog) {
     this.frog = frog;
   }
+
+  /**
+   * Load lanes, level, frog and ends of this map file in current level.
+   *
+   * <p>Call {@link MapLoader#loadMap()} to set up elements for this map.</p>
+   *
+   * @see MapLoader
+   */
+  public void load() {
+    MapLoader mapLoader = new MapLoader(fileName, this);
+    mapLoader.loadMap();
+    level = mapLoader.getLevel();
+    frog = mapLoader.getFrog();
+    ends = mapLoader.getEnds();
+    laneListElement = mapLoader.getLaneListElement();
+  }
+
+  /**
+   * Draw elements to scene.
+   *
+   * <p>use {@link MapRender} to add elements loaded in scene.</p>
+   *
+   * @param root root of map pane in game view
+   * @param laneListPane list of lane panes in game view
+   */
+  public void draw(Pane root, ArrayList<Pane> laneListPane) {
+    load();
+    MapRender mapRender = new MapRender(root, laneListPane); // root to be deleted
+
+    try {
+      mapRender.drawFrog(frog);
+      mapRender.drawLanes(laneListElement);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
 }

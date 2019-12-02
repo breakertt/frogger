@@ -1,7 +1,5 @@
 package frogger.util;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import frogger.model.Lane;
 import frogger.model.Map;
 import frogger.model.selfMovable.End;
@@ -11,10 +9,7 @@ import frogger.model.selfMovable.Log;
 import frogger.model.selfMovable.SelfMovable;
 import frogger.model.selfMovable.Turtle;
 import frogger.model.selfMovable.WetTurtle;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.text.Element;
 
 /**
  *
@@ -55,17 +50,17 @@ public class MapLoader {
   public MapLoader(String fileName, Map map) {
     this.fileName = fileName;
     this.map = map;
-    this.frog = null;
+    this.ends = new ArrayList<>(5);
     this.laneListElement = new ArrayList<Lane>(12);
     for (int i = 0; i < 13; i++) {
       laneListElement.add(new Lane());
     }
+    this.frog = null;
     this.initEnd();
   }
 
   /** Initialize ends for this map. **/
   public void initEnd() {
-    this.ends = new ArrayList<>(5);
     for (int i = 0; i < 5; i++) {
       End end = new End(22 + 150 * i);
       this.ends.add(end);
@@ -83,97 +78,15 @@ public class MapLoader {
     this.laneListElement.get(index).add(selfMovable);
   }
 
-  public class ElementLoader {
-    private String className;
-    private double speed;
-    private int xPos;
-    private int type = -1;
-    private int lane = -1;
-
-    public String getClassName() {
-      return className;
-    }
-
-    public double getSpeed() {
-      return speed;
-    }
-
-    public int getType() {
-      return type;
-    }
-
-    public int getXPos() {
-      return xPos;
-    }
-
-    public int getLane() {
-      return lane;
-    }
-
-    public void setSpeed(double speed) {
-      this.speed = speed;
-    }
-
-    public void setType(int type) {
-      this.type = type;
-    }
-
-    public void setXPos(int xPos) {
-      this.xPos = xPos;
-    }
-
-    public void setClassName(String className) {
-      this.className = className;
-    }
-
-    public void setLane(int lane) {
-      this.lane = lane;
-    }
-
-    public SelfMovable createNewElement() {
-      if (className.equals("Car")) {
-        return (new Car(speed, xPos, type));
-      } else if (className.equals("Log")) {
-        return (new Log(speed, xPos, type));
-      } else if (className.equals("WetTurtle")) {
-        return (new WetTurtle(speed, xPos));
-      } else if (className.equals("Turtle")) {
-        return (new Turtle(speed, xPos));
-      }
-      return null;
-    }
-  }
-
   /**
    * Load elements.
    */
   public void loadMap() {
+    this.level = 1;
 
-    Gson gson = new Gson();
-
-    System.out.println("["
-        + "{\"className\":\"Log\",\"speed\":0.75,\"xPos\":0,\"type\":2,\"lane\":1},"
-        + "{\"className\":\"Log\",\"speed\":0.75,\"xPos\":220,\"type\":2,\"lane\":1},"
-        + "{\"className\":\"Log\",\"speed\":0.75,\"xPos\":400,\"type\":2,\"lane\":1}"
-        + "]");
-
-    Type listType = new TypeToken<List<ElementLoader>>() {}.getType();
-    ArrayList<ElementLoader> elementLoaderArrayList = gson.fromJson("["
-        + "{\"className\":\"Log\",\"speed\":0.75,\"xPos\":0,\"type\":2,\"lane\":1},"
-        + "{\"className\":\"Log\",\"speed\":0.75,\"xPos\":220,\"type\":2,\"lane\":1},"
-        + "{\"className\":\"Log\",\"speed\":0.75,\"xPos\":400,\"type\":2,\"lane\":1}"
-        + "]", listType);
-
-    elementLoaderArrayList.forEach((ElementLoader elementLoader) -> {
-      SelfMovable selfMovable = elementLoader.createNewElement();
-      if (selfMovable != null && (elementLoader.getLane() >= 0) && elementLoader.getLane() < laneListElement.size()) {
-        laneAdd(elementLoader.getLane(), selfMovable);
-      }
-    });
-
-
-
-
+    laneAdd(1, new Log(0.75, 0, 2));
+    laneAdd(1, new Log(0.75, 220, 2));
+    laneAdd(1, new Log(0.75, 440, 2));
     laneAdd(2, new WetTurtle(-1, 0));
     laneAdd(2, new WetTurtle(-1, 200));
     laneAdd(2, new WetTurtle(-1,400));
@@ -197,6 +110,24 @@ public class MapLoader {
     laneAdd(11, new Car(1, 600, 1));
 
     frog = new Frog();
+  }
+
+  /**
+   * Getter for {@link #level}
+   *
+   * @return level of map to add
+   */
+  public int getLevel() {
+    return level;
+  }
+
+  /**
+   * Setter for {@link #level}
+   *
+   * @param level level of map to add
+   */
+  public void setLevel(int level) {
+    this.level = level;
   }
 
   /**

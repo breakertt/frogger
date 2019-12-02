@@ -60,7 +60,6 @@ public enum SceneSwitch {
 
   /**
    * Change scene for current primary stage
-   *
    * @param scene new scene for primary stage
    */
   private void setScene(Scene scene) {
@@ -102,7 +101,7 @@ public enum SceneSwitch {
       Scene gameScene = new Scene(root);
 
       // set up new map for this round of game and add elements to view
-      Map map = new Map(1);
+      Map map = new Map();
       Pane mapPane = (Pane) loader.getNamespace().get("map");
       ArrayList<Pane> laneListPane = (ArrayList<Pane>) loader.getNamespace().get("laneListPane");
       map.setPlayerName(playerName);
