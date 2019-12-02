@@ -29,7 +29,7 @@ public class Car extends SelfMovable {
 	 * @param type type of this car, deciding with image of car to be used.
 	 */
 	public Car(double speed, int xPos, int type) {
-		initSelfMovable(FileName.IMAGE_CARS.get(type), xPos, speed);
+		initSelfMovable(FileName.IMAGE_CARS.get(type), 40, xPos, speed);
 	}
 
 	/**

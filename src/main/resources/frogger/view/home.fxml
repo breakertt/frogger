@@ -49,9 +49,8 @@
                </VBox.margin>
             </TextField>
             <Button fx:id="startBtn" mnemonicParsing="false" styleClass="btn" onAction="#handleClickStart" text="START GAME" />
-           <Button fx:id="exitBtn" mnemonicParsing="false" styleClass="btn" onAction="#handleClickExit" text="EXIT GAME" />
-           <Button fx:id="helpBtn" mnemonicParsing="false" styleClass="helpBtn" onAction="#handleClickHelp" text="HELP" />
-
+            <Button fx:id="exitBtn" mnemonicParsing="false" styleClass="btn" onAction="#handleClickExit" text="EXIT GAME" />
+            <Button fx:id="helpBtn" mnemonicParsing="false" styleClass="helpBtn" onAction="#handleClickHelp" text="HELP" />
          </children>
          <BorderPane.margin>
             <Insets />

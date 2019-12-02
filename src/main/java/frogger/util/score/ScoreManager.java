@@ -113,9 +113,9 @@ public enum ScoreManager {
         return 1;
       }
     });
-    for (Score score : scoreList) {
-      System.out.println("Player: " + score.getPlayerName() + " Score: " + score.getValue());
-    }
+//    for (Score score : scoreList) {
+//      System.out.println("Player: " + score.getPlayerName() + " Score: " + score.getValue());
+//    }
     if (scoreList.size() >= 0) {
       this.highestScore = scoreList.get(0);
     }

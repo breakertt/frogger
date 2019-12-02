@@ -79,6 +79,7 @@ public abstract class SelfMovable extends Movable {
     } else {
       this.setFitHeight(height);
     }
+    if (speed < 0) setRotate(180);
     setX(xPos);
     setY(25 - getHeight() / 2);
     setSpeed(speed);

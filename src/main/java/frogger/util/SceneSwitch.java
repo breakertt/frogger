@@ -1,10 +1,12 @@
 package frogger.util;
 
 import frogger.Main;
+import frogger.constant.FileName;
 import frogger.controller.GameController;
 import frogger.controller.ScoreBoardController;
 import frogger.model.Map;
 import frogger.util.sound.ThemePlayer;
+import java.io.File;
 import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -75,7 +77,7 @@ public enum SceneSwitch {
       ThemePlayer.INSTANCE.themeMusicFactory("START");
 
       // load home fxml view and create new scene for this view
-      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/home.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FileName.VIEW_HOME));
       Pane root = loader.load();
       Scene homeScene = new Scene(root);
 
@@ -92,11 +94,12 @@ public enum SceneSwitch {
    * Switch scene to game view.
    *
    * @param playerName name of player
+   * @param level level of game to switch
    */
   public void switchToGame(String playerName, int level) {
     try {
         // load game fxml view and create new scene for this view
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FileName.VIEW_GAME));
         Pane root = loader.load();
         Scene gameScene = new Scene(root);
 
@@ -133,7 +136,7 @@ public enum SceneSwitch {
   public void showScoreBoard() {
     try {
       // load game fxml view and create new scene for this view, set a popup stage.
-      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/scoreboard.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FileName.VIEW_SCOREBOARD));
       Pane root = loader.load();
       Scene scoreBoardScene = new Scene(root);
 
@@ -156,10 +159,13 @@ public enum SceneSwitch {
     }
   }
 
+  /**
+   * Show help popup.
+   */
   public void showHelp() {
     try {
       // load game fxml view and create new scene for this view, set a popup stage.
-      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/help.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FileName.VIEW_HELP));
       Pane root = loader.load();
       Scene helpScene = new Scene(root);
 

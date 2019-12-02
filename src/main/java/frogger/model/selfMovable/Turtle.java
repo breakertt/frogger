@@ -38,7 +38,6 @@ public class Turtle extends SelfMovable {
       add(new Image(FileName.IMAGE_TURTLES.get(2)));
     }};
     initSelfMovable(FileName.IMAGE_TURTLES.get(0), xPos, speed);
-    System.out.println(getHeight());
   }
 
   /**
@@ -51,8 +50,8 @@ public class Turtle extends SelfMovable {
   @Override
   public void transformAct(long now) {
     int index = (int) ((now / 900000000) % 3);
-    if (getImage() != turtleImages.get(index)) {
-      setImage(turtleImages.get(index));
+    if (this.getImage() != turtleImages.get(index)) {
+      this.setImage(turtleImages.get(index));
     }
   }
 

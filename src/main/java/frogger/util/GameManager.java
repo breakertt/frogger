@@ -201,15 +201,14 @@ public enum GameManager {
    */
   private boolean checkWin() {
     boolean isFrogAllExist = true;
+    ArrayList<End> ends = map.getEnds();
+    for (End end : ends) {
+      if (!end.isFrogExist()) {
+        isFrogAllExist = false;
+        break;
+      }
+    }
     return isFrogAllExist;
-//    ArrayList<End> ends = map.getEnds();
-//    for (End end : ends) {
-//      if (!end.isFrogExist()) {
-//        isFrogAllExist = false;
-//        break;
-//      }
-//    }
-//    return isFrogAllExist;
   }
 
   /**

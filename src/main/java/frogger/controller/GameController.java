@@ -61,7 +61,7 @@ public class GameController {
    * @param lifeValue value of frog life in this game
    */
   @FXML public void updateLife(int lifeValue) {
-    System.out.println("LifeValue: " + lifeValue);
+//    System.out.println("LifeValue: " + lifeValue);
     if (lifeValue >= 0) {
       for (int i = 0; i < lifeValue; i++) {
         lifeList.get(i).setVisible(true);
