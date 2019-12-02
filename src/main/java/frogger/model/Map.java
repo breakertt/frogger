@@ -25,8 +25,6 @@ import javafx.scene.layout.Pane;
 public class Map {
   /** Level of current map **/
   private int level;
-  /** Filename of map for current level **/
-  private String fileName;
   /** Name of player **/
   private String playerName;
 
@@ -36,6 +34,10 @@ public class Map {
   private ArrayList<End> ends;
   /** List of lanes in current map **/
   private ArrayList<Lane> laneListElement;
+
+  public Map(int level) {
+    this.level = level;
+  }
 
   /**
    * Getter for {@link #getLaneListElement()}
@@ -51,14 +53,6 @@ public class Map {
    */
   public ArrayList<End> getEnds() {
     return ends;
-  }
-
-  /**
-   * Setter for {@link #fileName}.
-   * @param fileName filename for config of game in this level.
-   */
-  public void setFileName(String fileName) {
-    this.fileName = fileName;
   }
 
   /**
@@ -117,9 +111,8 @@ public class Map {
    * @see MapLoader
    */
   public void load() {
-    MapLoader mapLoader = new MapLoader(fileName, this);
+    MapLoader mapLoader = new MapLoader(this);
     mapLoader.loadMap();
-    level = mapLoader.getLevel();
     frog = mapLoader.getFrog();
     ends = mapLoader.getEnds();
     laneListElement = mapLoader.getLaneListElement();

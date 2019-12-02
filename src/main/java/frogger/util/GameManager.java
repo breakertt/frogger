@@ -2,6 +2,7 @@ package frogger.util;
 
 import frogger.constant.Death;
 import frogger.constant.GameStatus;
+import frogger.constant.MaxLevelNumber;
 import frogger.controller.GameController;
 import frogger.model.Frog;
 import frogger.model.Map;
@@ -81,8 +82,8 @@ public enum GameManager {
     this.gameController = gameController;
     this.gameStatus = GameStatus.START;
     this.updateAnimationStatus();
-    this.initInfo();
     ThemePlayer.INSTANCE.themeMusicFactory("MAIN");
+    this.initInfo();
   }
 
   /**
@@ -98,11 +99,13 @@ public enum GameManager {
    * @see #highestScore
    */
   private void initInfo() {
-    this.life = new Life();
+    if (map.getLevel() == 1) {
+      this.life = new Life();
+      this.currentScore = new Score(getMap().getPlayerName());
+      ScoreManager.INSTANCE.add(this.currentScore);
+      this.highestScore = ScoreManager.INSTANCE.getHighestScore();
+    }
     this.time = new Time();
-    this.currentScore = new Score(getMap().getPlayerName());
-    ScoreManager.INSTANCE.add(this.currentScore);
-    this.highestScore = ScoreManager.INSTANCE.getHighestScore();
     gameController.updateLevel(map.getLevel());
     updateInfo();
   }
@@ -198,14 +201,15 @@ public enum GameManager {
    */
   private boolean checkWin() {
     boolean isFrogAllExist = true;
-    ArrayList<End> ends = map.getEnds();
-    for (End end : ends) {
-      if (!end.isFrogExist()) {
-        isFrogAllExist = false;
-        break;
-      }
-    }
     return isFrogAllExist;
+//    ArrayList<End> ends = map.getEnds();
+//    for (End end : ends) {
+//      if (!end.isFrogExist()) {
+//        isFrogAllExist = false;
+//        break;
+//      }
+//    }
+//    return isFrogAllExist;
   }
 
   /**
@@ -218,8 +222,13 @@ public enum GameManager {
   private void winGame() {
     currentScore.gain(1000);
     updateInfo();
-    gameController.activateWinIndicator();
-    endGame();
+    if (map.getLevel() < MaxLevelNumber.getMaxLevelNumber()) {
+      switchNextLevel();
+    }
+    else {
+      gameController.activateWinIndicator();
+      endGame();
+    }
   }
 
   /**
@@ -242,6 +251,7 @@ public enum GameManager {
    * <p>Call {@link ScoreManager#update()} to save score.</p>
    */
   private void endGame() {
+
     ThemePlayer.INSTANCE.themeMusicFactory("OVER");
 
     gameStatus = GameStatus.END;
@@ -443,7 +453,7 @@ public enum GameManager {
         EffectPlayer.INSTANCE.effectMusicFactory("TIME");
       }
       gameController.updateTime(secondsLeft);
-    } else if (gameStatus == GameStatus.END) {
+    } else if (gameStatus == GameStatus.END ) {
       if (secondsLeft == 53) {
         time.stop();
         switchBack();
@@ -454,11 +464,19 @@ public enum GameManager {
   /**
    * Switch back to home screen and pop up score board.
    * 
-   * @see SceneSwitch#switchToGame(String)
+   * @see SceneSwitch#switchToHome()
    * @see SceneSwitch#showScoreBoard()
    */
   private void switchBack() {
     SceneSwitch.INSTANCE.switchToHome();
     SceneSwitch.INSTANCE.showScoreBoard();
+  }
+
+  private void switchNextLevel() {
+    System.out.println(map.getLevel());
+    time.stop();
+    gameStatus = GameStatus.END;
+    updateAnimationStatus();
+    SceneSwitch.INSTANCE.switchToGame(map.getPlayerName(), map.getLevel() + 1);
   }
 }

@@ -13,15 +13,26 @@
   -fx-font-size: 26px;
 }
 
-.homeBtn {
+.btn {
   -fx-font-family: "Press Start 2P";
   -fx-background-color: black;
   -fx-text-fill: red;
   -fx-font-size: 26px;
 }
 
-.homeBtn:pressed {
+.btn:pressed {
   -fx-text-fill: #00ff0b;
+}
+
+.helpBtn {
+  -fx-font-family: "Press Start 2P";
+  -fx-background-color: black;
+  -fx-text-fill: blue;
+  -fx-font-size: 26px;
+}
+
+.helpBtn:pressed {
+  -fx-text-fill: #a3f3ff;
 }
 
 .nameTextBox {

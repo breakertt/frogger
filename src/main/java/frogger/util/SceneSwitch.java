@@ -93,34 +93,35 @@ public enum SceneSwitch {
    *
    * @param playerName name of player
    */
-  public void switchToGame(String playerName) {
+  public void switchToGame(String playerName, int level) {
     try {
-      // load game fxml view and create new scene for this view
-      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("/frogger/view/game.fxml"));
-      Pane root = loader.load();
-      Scene gameScene = new Scene(root);
+        // load game fxml view and create new scene for this view
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/game.fxml"));
+        Pane root = loader.load();
+        Scene gameScene = new Scene(root);
 
-      // set up new map for this round of game and add elements to view
-      Map map = new Map();
-      Pane mapPane = (Pane) loader.getNamespace().get("map");
-      ArrayList<Pane> laneListPane = (ArrayList<Pane>) loader.getNamespace().get("laneListPane");
-      map.setPlayerName(playerName);
-      map.draw(mapPane, laneListPane);
+        // set up new map for this round of game and add elements to view
+        Map map = new Map(level);
+        Pane mapPane = (Pane) loader.getNamespace().get("map");
+        ArrayList<Pane> laneListPane = (ArrayList<Pane>) loader.getNamespace().get("laneListPane");
+        map.setPlayerName(playerName);
+        map.draw(mapPane, laneListPane);
 
-      // initialize game controller and game manager
-      GameController gameController = loader.getController();
-      GameManager.INSTANCE.init(map, gameController);
+        // initialize game controller and game manager
+        GameController gameController = loader.getController();
+        GameManager.INSTANCE.init(map, gameController);
 
-      // set keyboard event handle to bind on game manager
-      gameScene.addEventHandler(
-          KeyEvent.KEY_PRESSED, GameManager.INSTANCE::handleKeyPressed);
-      gameScene.addEventHandler(
-          KeyEvent.KEY_RELEASED, GameManager.INSTANCE::handleKeyReleased);
+        // set keyboard event handle to bind on game manager
+        gameScene.addEventHandler(
+            KeyEvent.KEY_PRESSED, GameManager.INSTANCE::handleKeyPressed);
+        gameScene.addEventHandler(
+            KeyEvent.KEY_RELEASED, GameManager.INSTANCE::handleKeyReleased);
 
-      // change new scene to primary stage
-      hideStage();
-      setScene(gameScene);
-      showStage();
+        // change new scene to primary stage
+        hideStage();
+        setScene(gameScene);
+        showStage();
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -132,7 +133,7 @@ public enum SceneSwitch {
   public void showScoreBoard() {
     try {
       // load game fxml view and create new scene for this view, set a popup stage.
-      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("/frogger/view/scoreboard.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/scoreboard.fxml"));
       Pane root = loader.load();
       Scene scoreBoardScene = new Scene(root);
 
@@ -155,6 +156,28 @@ public enum SceneSwitch {
     }
   }
 
+  public void showHelp() {
+    try {
+      // load game fxml view and create new scene for this view, set a popup stage.
+      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frogger/view/help.fxml"));
+      Pane root = loader.load();
+      Scene helpScene = new Scene(root);
+
+      // create a new pop up stage and set scene and properties of this stage
+      Stage popup = new Stage();
+      popup.setScene(helpScene);
+      popup.initModality(Modality.WINDOW_MODAL);
+      popup.initOwner(Main.getPrimaryStage().getScene().getWindow());
+      popup.setResizable(false);
+      popup.setTitle("Help");
+
+      // show this pop up
+      popup.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * Exit this game application.
    */
@@ -162,5 +185,4 @@ public enum SceneSwitch {
     Platform.exit();
     System.exit(0);
   }
-
 }

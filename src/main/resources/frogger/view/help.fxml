@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="400.0" styleClass="root" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+
+  <stylesheets>
+    <URL value="@../css/help.css" />
+  </stylesheets>
+   <bottom>
+    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <children>
+        <Label alignment="CENTER" contentDisplay="CENTER" styleClass="howToPlay" text="Point Table" textFill="WHITE">
+          <VBox.margin>
+            <Insets bottom="20.0" />
+          </VBox.margin>
+            </Label>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="104.0" lineSpacing="4.0" text="10 PTS FOR EACH STEP" textFill="#fcfc32" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="124.0" lineSpacing="4.0" text="200 PTS FOR EVERY FROG" textFill="#fcfc32">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="117.0" lineSpacing="4.0" text="ARRIVED HOME SAFELY" textFill="RED" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="124.0" lineSpacing="4.0" text="1000 PTS BY SAVING FROGS" textFill="#fcfc32">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="104.0" lineSpacing="4.0" text="INTO FIVE HOMES" textFill="RED" />
+      </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+   <top>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../image/background/help.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets top="25.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </top>
+   <center>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="howToPlay" text="How to Play" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="104.0" lineSpacing="4.0" text="1. Use keyboard move frog&#13;2. Escape cars on roads&#13;3. Not drop in water&#13;4. Arrive its home" textFill="#fcfc32" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></VBox>
+   </center>
+
+
+</BorderPane>

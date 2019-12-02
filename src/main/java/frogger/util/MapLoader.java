@@ -25,9 +25,6 @@ import java.util.ArrayList;
  * @see frogger.model.Map
  */
 public class MapLoader {
-  /** File name of level config to add **/
-  private String fileName;
-
   /** Map to load **/
   private Map map;
 
@@ -44,11 +41,10 @@ public class MapLoader {
   /**
    * Create a new map loader object.
    *
-   * @param fileName file name of level config to add
    * @param map map to load
    */
-  public MapLoader(String fileName, Map map) {
-    this.fileName = fileName;
+  public MapLoader(Map map) {
+    this.level = map.getLevel();
     this.map = map;
     this.ends = new ArrayList<>(5);
     this.laneListElement = new ArrayList<Lane>(12);
@@ -82,34 +78,50 @@ public class MapLoader {
    * Load elements.
    */
   public void loadMap() {
-    this.level = 1;
-
-    laneAdd(1, new Log(0.75, 0, 2));
-    laneAdd(1, new Log(0.75, 220, 2));
-    laneAdd(1, new Log(0.75, 440, 2));
-    laneAdd(2, new WetTurtle(-1, 0));
-    laneAdd(2, new WetTurtle(-1, 200));
-    laneAdd(2, new WetTurtle(-1,400));
-    laneAdd(3, new Log(-2, 0, 0));
-    laneAdd(3, new Log(-2, 400, 0));
-    laneAdd(4, new Log(0.75, 50, 1));
-    laneAdd(4, new Log(0.75, 270, 1));
-    laneAdd(4, new Log(0.75, 490, 1));
-    laneAdd(5, new Turtle(-1, 500));
-    laneAdd(5, new Turtle(-1, 300));
-    laneAdd(5, new WetTurtle(-1,700));
-    laneAdd(8, new Car(-5, 600, 0));
-    laneAdd(9, new Car(1, 0, 2));
-    laneAdd(9, new Car(1, 500, 2));
-    laneAdd(10, new Car(-1, 100, 0));
-    laneAdd(10, new Car(-1,250, 0));
-    laneAdd(10, new Car(-1,400, 0));
-    laneAdd(10, new Car(-1,550, 0));
-    laneAdd(11, new Car(1, 0, 1));
-    laneAdd(11, new Car(1, 300, 1));
-    laneAdd(11, new Car(1, 600, 1));
-
     frog = new Frog();
+
+    if (level == 1) {
+      laneAdd(1, new Log(0.75, 0, 2));
+      laneAdd(1, new Log(0.75, 220, 2));
+      laneAdd(1, new Log(0.75, 440, 2));
+      laneAdd(2, new WetTurtle(-1, 0));
+      laneAdd(2, new WetTurtle(-1, 200));
+      laneAdd(2, new WetTurtle(-1,400));
+      laneAdd(3, new Log(-2, 0, 0));
+      laneAdd(3, new Log(-2, 400, 0));
+      laneAdd(4, new Log(0.75, 50, 1));
+      laneAdd(4, new Log(0.75, 270, 1));
+      laneAdd(4, new Log(0.75, 490, 1));
+      laneAdd(5, new Turtle(-1, 500));
+      laneAdd(5, new Turtle(-1, 300));
+      laneAdd(5, new WetTurtle(-1,700));
+      laneAdd(8, new Car(-5, 600, 0));
+      laneAdd(9, new Car(1, 0, 2));
+      laneAdd(9, new Car(1, 500, 2));
+      laneAdd(10, new Car(-1, 100, 0));
+      laneAdd(10, new Car(-1,250, 0));
+      laneAdd(10, new Car(-1,400, 0));
+      laneAdd(10, new Car(-1,550, 0));
+      laneAdd(11, new Car(1, 0, 1));
+      laneAdd(11, new Car(1, 300, 1));
+      laneAdd(11, new Car(1, 600, 1));
+    } else if (level == 2) {
+      laneAdd(1, new Log(0.75, 0, 2));
+      laneAdd(1, new Log(0.75, 220, 2));
+      laneAdd(1, new Log(0.75, 440, 2));
+      laneAdd(2, new WetTurtle(-1.5, 0));
+      laneAdd(2, new WetTurtle(-1.5, 200));
+      laneAdd(2, new WetTurtle(-1.5,400));
+      laneAdd(3, new Log(-2, 0, 0));
+      laneAdd(3, new Log(-2, 400, 0));
+      laneAdd(4, new Log(0.75, 50, 1));
+      laneAdd(4, new Log(0.75, 270, 1));
+      laneAdd(4, new Log(0.75, 490, 1));
+      laneAdd(5, new WetTurtle(-1.5, 500));
+      laneAdd(5, new WetTurtle(-1.5, 300));
+      laneAdd(5, new WetTurtle(-1.5,700));
+    }
+
   }
 
   /**
