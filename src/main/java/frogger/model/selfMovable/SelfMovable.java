@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
  * <p>This class can set up a element in game with action, position and image.</p>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  */
 public abstract class SelfMovable extends Movable {
@@ -79,6 +79,7 @@ public abstract class SelfMovable extends Movable {
     } else {
       this.setFitHeight(height);
     }
+    if (speed < 0) setRotate(180);
     setX(xPos);
     setY(25 - getHeight() / 2);
     setSpeed(speed);

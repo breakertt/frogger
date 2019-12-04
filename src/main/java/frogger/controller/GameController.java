@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  * <p>A {@link GameController} is a controller for game view.
  *
  * @author Tinayi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class GameController {
@@ -61,7 +61,7 @@ public class GameController {
    * @param lifeValue value of frog life in this game
    */
   @FXML public void updateLife(int lifeValue) {
-    System.out.println("LifeValue: " + lifeValue);
+//    System.out.println("LifeValue: " + lifeValue);
     if (lifeValue >= 0) {
       for (int i = 0; i < lifeValue; i++) {
         lifeList.get(i).setVisible(true);

@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  * <p>A {@link ScoreLoader} is a object to load historical score of current user.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see ScoreManager
  * @see ScoreSaver

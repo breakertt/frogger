@@ -3,6 +3,7 @@ package frogger.controller;
 import frogger.util.SceneSwitch;
 import frogger.util.score.ScoreManager;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -15,7 +16,7 @@ import javafx.scene.text.Text;
  * <p>A {@link HomeController} is a controller for home view.
  *
  * @author Tinayi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class HomeController {
@@ -47,10 +48,17 @@ public class HomeController {
   @FXML
   protected void handleClickStart() {
     if (nameTextBox.getText().length() <= 0) {
-      SceneSwitch.INSTANCE.switchToGame("Unknown");
+      SceneSwitch.INSTANCE.switchToGame("Unknown", 1);
     } else {
-      SceneSwitch.INSTANCE.switchToGame(nameTextBox.getText());
+      SceneSwitch.INSTANCE.switchToGame(nameTextBox.getText(), 1);
     }
+  }
+
+  /**
+   * Pop up help.
+   */
+  public void handleClickHelp() {
+    SceneSwitch.INSTANCE.showHelp();
   }
 
   /**

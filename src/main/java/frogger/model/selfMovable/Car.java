@@ -14,7 +14,7 @@ import frogger.util.GameManager;
  * <p>This class extends {@link SelfMovable}, when {@link frogger.model.Frog} touches a {@link Car}, where will be some checking action and set frog to death possibly.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  * @see SelfMovable
  * @see GameManager#handleCarTouched()
@@ -29,7 +29,7 @@ public class Car extends SelfMovable {
 	 * @param type type of this car, deciding with image of car to be used.
 	 */
 	public Car(double speed, int xPos, int type) {
-		initSelfMovable(FileName.IMAGE_CARS.get(type), xPos, speed);
+		initSelfMovable(FileName.IMAGE_CARS.get(type), 40, xPos, speed);
 	}
 
 	/**

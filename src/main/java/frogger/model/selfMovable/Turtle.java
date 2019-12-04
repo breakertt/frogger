@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
  * <p>This class extends {@link SelfMovable}, when {@link frogger.model.Frog} touches a {@link Turtle}, where will be some checking action and make the frog move with turtle.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  * @see SelfMovable
  * @see GameManager#handleLogTurtleTouched(SelfMovable) ()
@@ -38,7 +38,6 @@ public class Turtle extends SelfMovable {
       add(new Image(FileName.IMAGE_TURTLES.get(2)));
     }};
     initSelfMovable(FileName.IMAGE_TURTLES.get(0), xPos, speed);
-    System.out.println(getHeight());
   }
 
   /**
@@ -51,8 +50,8 @@ public class Turtle extends SelfMovable {
   @Override
   public void transformAct(long now) {
     int index = (int) ((now / 900000000) % 3);
-    if (getImage() != turtleImages.get(index)) {
-      setImage(turtleImages.get(index));
+    if (this.getImage() != turtleImages.get(index)) {
+      this.setImage(turtleImages.get(index));
     }
   }
 

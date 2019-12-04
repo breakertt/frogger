@@ -24,7 +24,7 @@ import java.util.Collections;
  * </blockquote>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see Score
  * @see ScoreSaver
@@ -113,9 +113,9 @@ public enum ScoreManager {
         return 1;
       }
     });
-    for (Score score : scoreList) {
-      System.out.println("Player: " + score.getPlayerName() + " Score: " + score.getValue());
-    }
+//    for (Score score : scoreList) {
+//      System.out.println("Player: " + score.getPlayerName() + " Score: " + score.getValue());
+//    }
     if (scoreList.size() >= 0) {
       this.highestScore = scoreList.get(0);
     }

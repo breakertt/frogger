@@ -8,7 +8,7 @@ package frogger.constant;
  * <p>A {@link GameStatus} is an enum object to different game status..
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see frogger.util.GameManager
  */

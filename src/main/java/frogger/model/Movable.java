@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
  * action related methods to be implemented.</p>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see AnimationTimer
  * @see ImageView

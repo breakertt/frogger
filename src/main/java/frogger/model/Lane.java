@@ -12,7 +12,7 @@ import java.util.Set;
  * <p>A {@link Lane} is a object contains all objects in one lane of game view.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class Lane {

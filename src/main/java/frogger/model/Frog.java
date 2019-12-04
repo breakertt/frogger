@@ -18,7 +18,7 @@ import javafx.scene.input.KeyEvent;
  * <p>This class is originally "Animal" class in legacy code.</p>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  * @see Map
  * @see Movable
@@ -29,11 +29,11 @@ public class Frog extends Movable {
   /** Size of frog images **/
   private int imgSize = 40;
   /** Array for jump images **/
-  private Image jumpImg[][];
+  private Image[][] jumpImg;
   /** Array for water death images **/
-  private Image waterDeathImg[];
+  private Image[] waterDeathImg;
   /** Array for car death images **/
-  private Image carDeathImg[];
+  private Image[] carDeathImg;
 
   /** Distance for jump on Up or Down direction which is on X axis **/
   private double jumpX = 40;

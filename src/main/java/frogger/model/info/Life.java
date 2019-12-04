@@ -12,7 +12,7 @@ import frogger.util.GameManager;
  * <p>A {@link Life} is a class recording life for one game.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class Life {

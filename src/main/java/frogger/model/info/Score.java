@@ -8,7 +8,7 @@ package frogger.model.info;
  * <p>A {@link Score} is a class for score recording.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class Score {

@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
  * <p>When {@link frogger.model.Frog} touches a {@link WetTurtle}, if this wet turtle is not sunk, act like normal turtle; if not, set frog to death.</p>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  * @see SelfMovable
  * @see GameManager#handleLogTurtleTouched(SelfMovable)

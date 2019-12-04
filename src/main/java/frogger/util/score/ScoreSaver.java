@@ -17,7 +17,7 @@ import java.util.Base64;
  * <p>A {@link ScoreLoader} is a object to save scores.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see ScoreManager
  * @see ScoreLoader

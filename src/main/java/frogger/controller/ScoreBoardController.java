@@ -16,7 +16,7 @@ import javafx.scene.control.ListView;
  * <p>A {@link ScoreBoardController} is a controller for score board.
  *
  * @author Tinayi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class ScoreBoardController {
