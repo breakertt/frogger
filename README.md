@@ -22,8 +22,8 @@ This is a frogger game project written in JavaFX for *[COMP2013 CW2](https://pro
 
 ### Screentshots
 
-![](https://i.imgur.com/l7iTvAh.png)
-![](https://i.imgur.com/g1aEJyK.png)
+![primarystage](https://i.imgur.com/l7iTvAh.png)
+![popup](https://i.imgur.com/g1aEJyK.png)
 
 ### Video
 
@@ -62,7 +62,13 @@ You can launch the app either by running that `frogger.Main.main()` method insid
 ### Project Management by Trello (In Progress Screenshot)
 
 ![trello](https://i.imgur.com/GwF9HS9.png)
- 
+
+### Levels
+
+> This project once tried to use json to store level files, please refer to [Commit: 9ce18920a8462d48479de300804cd65762be133e](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/commit/9ce18920a8462d48479de300804cd65762be133e)
+
+Levels are store in [`MapLoader.java`](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/util/MapLoader.java) with three levels now.
+
 ### Souce File Structure
 
 ```
