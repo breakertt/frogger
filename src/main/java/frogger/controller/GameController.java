@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  * <p>A {@link GameController} is a controller for game view.
  *
  * @author Tinayi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class GameController {

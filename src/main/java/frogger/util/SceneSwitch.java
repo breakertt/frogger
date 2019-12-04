@@ -6,7 +6,6 @@ import frogger.controller.GameController;
 import frogger.controller.ScoreBoardController;
 import frogger.model.Map;
 import frogger.util.sound.ThemePlayer;
-import java.io.File;
 import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +36,7 @@ import javafx.stage.Stage;
  * </blockquote>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see Main#getPrimaryStage()
  * @see GameManager

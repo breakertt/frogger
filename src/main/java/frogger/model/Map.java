@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
  * <p>A {@link Map} is a object with key information in a round of game.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see Lane
  * @see Frog

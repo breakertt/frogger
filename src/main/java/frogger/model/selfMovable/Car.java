@@ -14,7 +14,7 @@ import frogger.util.GameManager;
  * <p>This class extends {@link SelfMovable}, when {@link frogger.model.Frog} touches a {@link Car}, where will be some checking action and set frog to death possibly.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  * @see SelfMovable
  * @see GameManager#handleCarTouched()

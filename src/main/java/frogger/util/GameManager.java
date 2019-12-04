@@ -40,7 +40,7 @@ import javafx.scene.input.KeyEvent;
  * </blockquote>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see Map
  * @see GameController
@@ -471,6 +471,11 @@ public enum GameManager {
     SceneSwitch.INSTANCE.showScoreBoard();
   }
 
+  /**
+   * Switch to next level of game view.
+   *
+   * @see SceneSwitch#switchToGame(String, int)
+   */
   private void switchNextLevel() {
     System.out.println(map.getLevel());
     time.stop();

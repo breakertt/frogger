@@ -22,7 +22,7 @@ import frogger.constant.FileName;
  * </blockquote>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see MusicPlayer
  * @see frogger.util.GameManager

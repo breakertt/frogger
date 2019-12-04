@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
  * <p>This class extends {@link SelfMovable}, when {@link frogger.model.Frog} touches a {@link Turtle}, where will be some checking action and make the frog move with turtle.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  * @see SelfMovable
  * @see GameManager#handleLogTurtleTouched(SelfMovable) ()

@@ -15,7 +15,7 @@ import javafx.scene.media.MediaPlayer;
  * <p>A {@link MusicPlayer} is a object which plays a music and can end back to play default one.</p>
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see EffectPlayer
  * @see ThemePlayer

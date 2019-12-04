@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * <p>A {@link MapLoader} is a object to load elements to map.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see MapRender
  * @see frogger.model.Map

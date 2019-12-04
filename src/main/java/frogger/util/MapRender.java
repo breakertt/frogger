@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
  * <p>A {@link MapRender} is a object to render elements to game view.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see MapLoader
  * @see frogger.model.Map

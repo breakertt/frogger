@@ -8,7 +8,7 @@ package frogger.constant;
  * <p>A {@link Death} is an enum object to store different type of frog death.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  * @see frogger.model.Frog
  */

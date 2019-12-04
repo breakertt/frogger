@@ -11,7 +11,7 @@ import javafx.animation.AnimationTimer;
  * <p>A {@link Time} is a class for track seconds past in every life in game.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class Time {

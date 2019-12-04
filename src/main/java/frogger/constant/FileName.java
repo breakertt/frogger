@@ -13,7 +13,7 @@ import java.util.Map;
  * <p>A {@link FileName} is a object with path to static files.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.2
  */
 public class FileName {
@@ -73,8 +73,8 @@ public class FileName {
 
   public static final String SCORE_PATH = USER_PATH + "score.csv";
 
-  public static final String VIEW_HOME = "/frogger/view/home.fxml";
-  public static final String VIEW_GAME = "/frogger/view/game.fxml";
-  public static final String VIEW_HELP = "/frogger/view/help.fxml";
-  public static final String VIEW_SCOREBOARD = "/frogger/view/scoreboard.fxml";
+  public static final String VIEW_HOME = "frogger/view/home.fxml";
+  public static final String VIEW_GAME = "frogger/view/game.fxml";
+  public static final String VIEW_HELP = "frogger/view/help.fxml";
+  public static final String VIEW_SCOREBOARD = "frogger/view/scoreboard.fxml";
 }

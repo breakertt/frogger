@@ -14,7 +14,7 @@ import frogger.util.GameManager;
  * <p>This class extends {@link SelfMovable}, when {@link frogger.model.Frog} touches a {@link Log}, where will be some checking action and make the frog move with log.
  *
  * @author Tianyi GAO
- * @version 0.2
+ * @version 0.3
  * @since 0.1
  * @see SelfMovable
  * @see GameManager#handleLogTurtleTouched(SelfMovable) ()
