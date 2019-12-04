@@ -47,7 +47,8 @@ This is a frogger game project written in JavaFX for *[COMP2013 CW2](https://pro
 
 ### Compiling & Running
 
-You can launch the app either by running that `frogger.Main.main()` method inside IntelliJ via click <kbd>Run</kbd>  -> <kbd>Run 'Main()'</kbd> (JDK 10 only), or type `mvn clean compile package exec:java`  command  if and maven is installed.
+1. Open the folder of project directly in IntelliJ, then wait IntelliJ download denpendencies.
+2. For JDK 10: You can launch the app either by running that `frogger.Main.main()` method inside IntelliJ via click <kbd>Run</kbd>  -> <kbd>Run 'Main()'</kbd> (JDK 10 only). For JDK 10+, run `mvn clean compile package exec:java` command.
 
 ## Project Details
 
