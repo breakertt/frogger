@@ -45,20 +45,23 @@ You can launch the app either by running that `frogger.Main.main()` method insid
 
 ## Project Details
 
-### Unit test
+### Unit Test
 
 - The [CI config](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/.gitlab-ci.yml) of GitLab for this project.
-- Unit tests are implemented to some models.
+- [Unit Test](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/tree/dev/src/test/java/frogger/model/info) is implemented to some models.
 
 ### Javadoc
 
 - Javadoc for this project is published via [Gitlab Pages](https://docs.gitlab.com/ee/user/project/pages/) on https://tianyigao.gitlab.io/frogger/
-- complied Javadoc is also provided inside [`docs`](docs) directory of repository
+- Complied Javadoc is also provided inside [`docs`](docs) directory of repository
 
-### Versions and Project Management
+### Versions
 
 - [Version by tags](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/-/tags) in git
-- [Trello board]() for this project
+
+### Project Management by Trello (In Progress Screenshot)
+
+![trello](https://i.imgur.com/GwF9HS9.png)
  
 ### Souce File Structure
 
@@ -103,12 +106,20 @@ src
 
 #### Factory
 
-- [Example 1](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/controller/ScoreBoardController.java)
-- [Example 2](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/util/sound/ThemePlayer.java)
+- [Score Board](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/controller/ScoreBoardController.java)
+- [Theme Music](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/util/sound/ThemePlayer.java)
+
+### Singleton
+
+- [Game Manager](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/util/GameManager.java)
 
 ### Class Diagram
 
 ![uml](https://i.imgur.com/dhkpqd3.jpg)
+
+### File Storage
+
+This project stores historical scores in user's home directory: `~/.frogger`.
 
 ## About G52SWM CW2
 
