@@ -10,11 +10,17 @@ This is a frogger game project written in JavaFX for *[COMP2013 CW2](https://pro
     + [Video](#video)
 * [Develop](#develop)
     + [Prerequisite](#prerequisite)
-    + [Compiling & Running](#compiling---running)
+    + [Compiling & Running](#compiling-&-running)
 * [Project Details](#project-details)
+    + [Unit Test](#unit-test)
+    + [Javadoc](#javadoc)
+    + [Versions](#versions)
+    + [Project Management](#project-management)
+    + [Levels](#levels)
     + [Souce File Structure](#souce-file-structure)
     + [Design Patterns](#design-patterns)
     + [Class Diagram](#class-diagram)
+    + [File Storage](#file-storage)
 * [About G52SWM CW2](#about-g52swm-cw2)
 * [Credits](#credits)
 
@@ -59,8 +65,8 @@ You can launch the app either by running that `frogger.Main.main()` method insid
 
 - [Version by tags](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/-/tags) in git
 
-### Project Management by Trello (In Progress Screenshot)
-
+### Project Management
+Trello board is used to manage development, in progress screenshot is provided.
 ![trello](https://i.imgur.com/GwF9HS9.png)
 
 ### Levels
@@ -115,7 +121,7 @@ src
 - [Score Board](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/controller/ScoreBoardController.java)
 - [Theme Music](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/util/sound/ThemePlayer.java)
 
-### Singleton
+#### Singleton
 
 - [Game Manager](https://projects.cs.nott.ac.uk/scytg1/G52SWM_CW2_scytg1/blob/master/src/main/java/frogger/util/GameManager.java)
 
