@@ -42,13 +42,17 @@ This is a frogger game project written in JavaFX for *[COMP2013 CW2](https://pro
 * IntelliJ
 * JDK
     * JAVA 10
-    * JAVA 11 or later & Maven
+    * JAVA 11 or later & Maven Imported JavaFX
     (As [JavaFX](https://openjfx.io/index.html) is dropped from JDK 11, it is recommended that using [Maven](https://maven.apache.org/) to help mange required sources.)
 
-### Compiling & Running
+### Compiling & Running & Testint
 
 1. Open the folder of project directly in IntelliJ, then wait IntelliJ download denpendencies.
-2. For JDK 10: You can launch the app either by running that `frogger.Main.main()` method inside IntelliJ via click <kbd>Run</kbd>  -> <kbd>Run 'Main()'</kbd> (JDK 10 only). For JDK 10+, run `mvn clean compile package exec:java` command.
+2. Run
+    - For JDK 10 ONLY: You can launch the app either by running that `frogger.Main.main()` method inside IntelliJ via click <kbd>Run</kbd>  -> <kbd>Run 'Main()'</kbd> (JDK 10 only). 
+    - For JDK 10 and later, run `mvn clean compile package exec:java` command.
+3. Test
+    Need Maven for unit test, run `mvn clean test` command.
 
 ## Project Details
 
