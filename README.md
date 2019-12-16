@@ -28,7 +28,7 @@ This is a frogger game project written in JavaFX for *[COMP2013 CW2](https://pro
 
 ### Screentshots
 
-![primarystage](https://i.imgur.com/l7iTvAh.png)
+![primarystage](https://i.imgur.com/IiFWaVW.png)
 ![popup](https://i.imgur.com/g1aEJyK.png)
 
 ### Video
