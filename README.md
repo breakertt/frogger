@@ -28,7 +28,19 @@ This is a frogger game project written in JavaFX for *[COMP2013 CW2](https://pro
 
 ### Screentshots
 
-![primarystage](https://i.imgur.com/IiFWaVW.png)
+#### Primary Stage
+
+1. Normal Game Screen - with frog drop water animation
+2. Start Screen
+3. Normal Game Screen - with time indicator for seconds left frogging arrived home last time
+
+![primarystage](https://i.imgur.com/UDcaXGH.png)
+
+### Popup Stages
+
+1. Score Board Popup
+2. Help Popup
+
 ![popup](https://i.imgur.com/g1aEJyK.png)
 
 ### Video
